@@ -1,0 +1,1 @@
+<a href="/finish-join-group">Finish</a>

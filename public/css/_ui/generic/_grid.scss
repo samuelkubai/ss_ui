@@ -1,0 +1,44 @@
+.Grid {
+	&.fullpage {
+		flex: 1;
+		display: flex;
+		margin: 0;
+		height: 100vh;
+
+		.Grid-cell {
+//			flex: 1;
+			position: relative;
+		}
+		&.colGrid {
+			flex-flow: row wrap;
+			position: relative;
+		}
+		&.rowGrid {
+			flex-flow: column wrap;
+		}
+	}
+	.gridNav {
+		flex: auto;
+		display: flex;
+
+		&.Back {
+			flex: 0 0 100px;
+			width: 100px;
+			margin: 0;
+			align-items: center;
+			justify-content: center;
+			background-color: #222;
+			color: #fff;
+			font-size: 36px;
+			border: none;
+
+			&:hover {
+				border: none;
+			}
+		}
+
+		&.Current {
+			flex-basis: main-size;
+		}
+	}
+}

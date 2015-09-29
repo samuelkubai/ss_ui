@@ -1,0 +1,32 @@
+.tabs {
+	display: flex;
+	flex-flow: row nowrap;
+	height: 50px;
+	margin-bottom: 0;
+	
+	.tab {
+		flex: 1;
+		display: block;
+		line-height: 20px;
+		border-bottom: 3px solid transparent;
+		padding: 15px;
+		text-align: center;
+		text-decoration: none;
+		letter-spacing: 1px;
+		
+		&:hover, &.slick-current {
+			border-bottom-color: $brand-primary;
+		}
+	}
+}
+
+// When used with slick slider
+.slick-slider {
+	.slick-list, .slick-track {
+		width: 100%;
+	}
+	.slick-track {
+		display: flex;
+		flex-flow: row nowrap;
+	}
+}

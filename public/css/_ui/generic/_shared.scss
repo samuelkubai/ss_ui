@@ -1,0 +1,18 @@
+blockquote {
+	font-size: $h4-size;
+	line-height: 2;
+	text-indent: 0;
+	margin: 0 auto;
+	width: 75%;
+
+	&:after, &:before {
+		content: "∗∗∗∗";
+		font-family: $base-font-family;
+		font-size: $base-font-size;
+		font-weight: normal;
+		line-height: 100px;
+		letter-spacing: 1em;
+		display: block;
+		text-align: center;
+	}
+}
