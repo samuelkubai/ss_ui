@@ -1,0 +1,1 @@
+<a href="#" class="btn btn-sm btn-white follow-btn pull-right"><i class="fa fa-plus"></i> Join</a>

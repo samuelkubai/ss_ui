@@ -1,0 +1,1 @@
+<a href="#" class="btn btn-sm btn-primary view-btns pull-right">Joined</a>

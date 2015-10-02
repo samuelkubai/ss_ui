@@ -12,35 +12,85 @@
 */
 
 get('/', function () {
-    return view('ss.home.index');
+    $title = 'Home';
+    return view('ss.home.index', compact('title'));
 });
+
+get('/profile', function () {
+    $title = 'My Profile';
+    return view('ss.profile.index', compact('title'));
+});
+
+get('/backpack', function () {
+    $title = 'BackPack';
+    return view('ss.backpack.index', compact('title'));
+});
+
 
 get('/groups', function () {
-    return view('ss.groups.index');
+    $title = 'Groups';
+    return view('ss.groups.index', compact('title'));
 });
 
-get('/forums', function () {
-    return view('ss.forums.index');
+get('/group', function () {
+    $title = 'Groups';
+    return view('ss.groups.activity', compact('title'));
+});
+
+get('/group/update', function () {
+    $title = 'Group Update';
+    return view('ss.groups.update', compact('title'));
+});
+
+get('/group/files', function () {
+    $title = 'Group  File';
+    return view('ss.groups.files', compact('title'));
+});
+
+get('/group/members', function () {
+    $title = 'Group  Members';
+    return view('ss.groups.members', compact('title'));
+});
+
+get('/group/member', function () {
+    $title = 'John Goe';
+    return view('ss.groups.member', compact('title'));
+});
+
+get('/discussions', function () {
+    $title = "Discussions";
+    return view('ss.discussions.index', compact('title'));
+});
+
+get('/discussion', function () {
+    $title = "Discussion";
+    return view('ss.discussions.discussion', compact('title'));
+});
+
+get('/share', function () {
+    $title = "Share 'specific file'";
+    return view('ss.groups.share', compact('title'));
 });
 
 get('/noticeboard', function () {
-    return view('ss.noticeboards.index');
+    $title = "NoticeBoard";
+    return view('ss.noticeboards.index', compact('title'));
 });
 
 
 
 //Route to search a new file in both mysql-db and elastic-search
-Route::get('/search-file', 'SearchController@searchFile');
+get('/search-file', 'SearchController@searchFile');
 //Route to search a person using both sql and elasticsearch
-Route::get('/search-people', 'SearchController@searchPeople');
+get('/search-people', 'SearchController@searchPeople');
 //Route to create a new file in both mysql-db and elasticsearch
-Route::get('/create-file', 'FilesController@store');
+get('/create-file', 'FilesController@store');
 //Route to create a new person in both mysql-db and elasticsearch
-Route::get('/create-people', 'PeopleController@store');
+get('/create-people', 'PeopleController@store');
 //Route to search all people form the mysql-db or elasticsearch
-Route::get('/search-all-people', 'SearchController@searchAllPeople');
+get('/search-all-people', 'SearchController@searchAllPeople');
 //Route to search all files from the mysql-db or elastic search
-Route::get('/search-all-files', 'SearchController@searchAllFiles');
+get('/search-all-files', 'SearchController@searchAllFiles');
 
 
 
@@ -55,10 +105,9 @@ get('auth/register', 'Auth\AuthController@getRegister');
 post('auth/register', 'Auth\AuthController@postRegister');
 
 //Redirect routes after user registration
+get('finish-join-group', 'Dashboard\DashboardController@finishJoinGroup');
+
+get('join-group/student', 'Dashboard\DashboardController@joinInitialGroup');
+get('dashboard/student', 'Dashboard\DashboardController@getStudentDashboard');
 
 get('dashboard/lecturer', 'Dashboard\DashboardController@getLecturerDashboard');
-
-get('dashboard/student', 'Dashboard\DashboardController@getStudentDashboard');
-get('join-group/student', 'Dashboard\DashboardController@joinInitialGroup');
-
-get('finish-join-group', 'Dashboard\DashboardController@finishJoinGroup');

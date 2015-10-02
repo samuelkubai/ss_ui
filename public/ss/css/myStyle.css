@@ -1,0 +1,313 @@
+/** User defined styles  **/
+/* Member profile */
+.member-group-name{
+    background-color: yellowgreen;
+    color: white;
+}
+/* Group's Profile */
+.group-navigation{
+    padding-left: 10px;
+}
+.mobile-group-navigation{
+    display: none;
+}
+.group-navigation li{
+    list-style-type: none;
+    display: block;
+    padding-bottom: 20px;
+    margin-left: -40px;
+}
+.activity-group-pic{
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    margin-top: -8px;
+}
+.activity-group-title{
+    background-color: seagreen;
+    color: white;
+}
+/* Discussions page */
+.discussion-group-pic{
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+}
+/* Noticeboard Page */
+.notice-group-pic{
+    width: 30px;
+    height: 30px;
+    border-radius: 100px;
+}
+.notice-group-name{
+    padding-left: 5px;
+}
+/* Group Search Page */
+.group-search-picture{
+    width: 55px;
+    height: 55px;
+    border-radius: 50px;
+}
+.group-search-institution{
+    padding-bottom: 1px;
+}
+.group-search-title{
+    padding-bottom: 5px;
+}
+.search-result{
+    overflow: auto;
+}
+.group-actions-list{
+    float: right;
+    margin-bottom: 0;
+}
+.group-statistics-list{
+    padding-left: 0;
+    margin-bottom: 0;
+}
+.group-actions-list li{
+    list-style-type: none;
+    display: inline;
+}
+.group-statistics-list li{
+    padding-right: 10px;
+    list-style-type: none;
+    display: inline;
+}
+.group-search-divider{
+    margin: 8px;
+}
+.group-search-tagline {
+    padding-bottom: 5px;
+}
+/* Backpack */
+.file-owner-pic{
+    width: 12px;
+    height: 12px;
+}
+.tag-list .active a{
+    background-color: dimgrey !important;
+    color: white;
+}
+.file-options-option{
+    padding-left: 10px;
+}
+/* Homepage */
+.home-search-list li{
+    overflow: auto;
+}
+.home-search-title{
+    margin-bottom: 3px;
+}
+.home-search-description{
+    width: 175px;
+    font-size: x-small;
+    font-weight: 400;
+}
+.home-search-follow-btn{
+    padding-left: 30px;
+}
+.home-search-list{
+    list-style-type: none;
+    display: block;
+    margin-left: -53px;
+}
+.home-search-stats .stat{
+    padding-right: 10px;
+}
+.home-search-pic{
+    width: 100px;
+    height: 65px;
+    border-width: 0;
+    padding-right: 10px;
+    padding-top: 8px;
+}
+.home-search-divider{
+    margin-top: 9px;
+    margin-bottom: 9px;
+}
+.switchery{
+    margin-top: -6px!important;
+}
+.feed-actions {
+    padding-top: 10px;
+}
+.feed-actions-list{
+    list-style-type: none;
+    display: block;
+}
+.small-user-pic {
+    width: 35px;
+    display: none;
+}
+.small-group-pic{
+    width: 30px;
+}
+.small-group-name{
+    padding-left: 8px;
+    font-size: small;
+    font-weight: 100;
+}
+.mobile-nav{
+    display: none;
+}
+.mobile-nav .btn{
+    margin-left: 5px;
+}
+.group-list-label{
+    cursor: default;
+    background-color: grey;
+}
+.more-posts-btn{
+    margin-left: 0;
+}
+.wrapper{
+    padding-top: 10px !important;
+}
+/* General Styles */
+.nav-btn{
+    margin-bottom: 10px;
+}
+.navbar-brand{
+    height: 55px;
+}
+.follow-btn{
+    color: green;
+}
+.view-btn{
+    color: white;
+}
+.menu-item {
+    padding-left: 0;
+}
+.nav-search{
+    width: 550px!important;
+}
+.nav-search-group{
+    padding-left: 70px;
+}
+
+.nav-pushpin {
+    font-size: 16px;
+}
+.update-form{
+    color: white;
+    background-color: lightseagreen;
+}
+@media only screen and (max-width: 750px){
+
+    .feed-actions-list li{
+        display: inline;
+        margin-left: 3px;
+    }
+    
+    .user-profile{
+        display: none;
+    }
+    .feed-date{
+        display: none;
+    }
+    .small-user-pic{
+        display: inline;
+    }
+    .mobile-nav{
+        display: inline;
+    }
+    .group-list{
+        display: none;
+    }
+    .notice-group-filter{
+        display: none;
+    }
+    .group-navigation{
+        display: none;
+    }
+    .mobile-group-navigation{
+        padding-left: 10px!important;
+    }
+    .mobile-group-navigation li{
+        list-style-type: inline;
+        display: inline;
+        padding-bottom: 5px!important;
+        padding-right: 1px!important;
+    }
+}
+
+/** Pre-defined styles for Inspina **/
+.nav-prof-pic{
+    width: 25px;
+    height: 25px;
+    padding-bottom: 0;
+    padding-top: 0;
+}
+.navbar-top-links .navbar-right li a{
+    padding-bottom: 0;
+}
+.group-list-item{
+    padding-left: 1px;
+}
+
+.samtooltip {
+    position:relative;
+}
+.samtooltip .txt:before {
+    width:0px;
+    padding:0px;
+    position:absolute;
+    content:'';
+}
+/* Top */
+.samtooltip.top .txt {
+    bottom:20px;
+    left:-10px;
+}
+
+.samtooltip.top .txt:before {
+    bottom:-5px;
+    left:10px;
+    border-left:5px solid transparent;
+    border-right:5px solid transparent;
+    border-top:5px solid rgba(0,0,0,0.75);
+}
+
+/* Right */
+.samtooltip.right .txt {
+    top:-10px;
+    left:20px;
+}
+
+.samtooltip.right .txt:before {
+    top:10px;
+    left:-5px;
+    border-top:5px solid transparent;
+    border-bottom:5px solid transparent;
+    border-right:5px solid rgba(0,0,0,0.75);
+}
+
+/* Bottom */
+.samtooltip.bottom .txt {
+    top:20px;
+    left:-10px;
+}
+
+.samtooltip.bottom .txt:before {
+    top:-5px;
+    left:10px;
+    border-left:5px solid transparent;
+    border-right:5px solid transparent;
+    border-bottom:5px solid rgba(0,0,0,0.75);
+}
+
+/* Left */
+.samtooltip.left .txt {
+    top:-10px;
+    right:20px;
+}
+
+.samtooltip.left .txt:before {
+    top:10px;
+    right:-5px;
+    border-top:5px solid transparent;
+    border-bottom:5px solid transparent;
+    border-left:5px solid rgba(0,0,0,0.75);
+}

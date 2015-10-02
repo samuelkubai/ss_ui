@@ -1,27 +1,31 @@
 @extends('layout')
 
 @section('content')
-	<header class="global-header">
-		<img src="{{ asset('/img/covers/cover-1.jpg') }}" class="global-header__background">
-		<h2 class="global-header__title">Home</h2>
-	</header>
+    <div class="wrapper wrapper-content" style="padding-top: 2px;">
+        <div class="row animated fadeInRight">
+            <div class="col-md-8">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title"
+                         data-toggle="tooltip"
+                         data-placement="bottom"
+                         title="Compiled activities from all your groups.">
+                        <h5 style="text-align: center">Activity Feed</h5>
+                        <span class="pull-right mobile-nav">
+                            <a href="{{ url('groups') }}" class="btn btn-xs btn-white"><i class="fa fa-group"></i></a>
+                            <a href="{{ url('backpack') }}" class="btn btn-xs btn-info"><i class="fa fa-briefcase"></i></a>
+                        </span>
 
-    <div class="activity" id="activity" role="tabpanel">
-		<time class="activity__date">
-			Monday, Feb 8, 2015
-		</time>
-		<div class="activity-switcher">
-			<div class="activity-list">
-				@include('ss.activity.activity')
-			</div>
-			<div class="activity-list">
-				@include('ss.activity.files')
-			</div>
-		</div>
-		<footer class="activity-footer">
-			<a href="#" class="activity__cta">
-				<i class="ion-plus-round activity__cta-icon"></i>
-			</a>
-		</footer>
-	</div>
+                    </div>
+                    <div class="ibox-content">
+                       @include('ss.activity.statuses.index')
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-4 user-profile">
+                @include('ss.home.partials._groups_list')
+            </div>
+        </div>
+    </div>
 @stop
