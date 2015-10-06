@@ -7,7 +7,21 @@
     </div>
     <div class="ibox-content forum-post-container">
         <div class="forum-post-info">
-            <h4><span class="text-navy"><i class="fa fa-comments-o"></i> What It a long established fact that a reader ?</span></h4>
+            <h4><span class="text-navy"><i class="fa fa-comments-o"></i> What It a long established fact that a reader ?</span>
+            <span class="pull-right">
+                <span class="discussion-group-profile">
+                    <a href="{{'/group' }}">
+                        <span class="">
+                                <img src="{{ asset('/ss/img/p2.jpg') }}"
+                                     alt="Group profile picture"
+                                     class="img-circle discussion-group-pic">
+                        </span>
+                        <small class="text-center muted"><b>IBM Cyber Security</b></small>
+                    </a>
+
+                </span>
+            </span>
+            </h4>
         </div>
         <div class="media">
             <a class="forum-avatar" href="forum_post.html#">

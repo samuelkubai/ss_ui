@@ -17,10 +17,8 @@ class CreateGroupsTable extends Migration
             $table->integer('user_id');
             $table->string('username')->unique();
             $table->string('name');
-            $table->string('email');
             $table->text('description');
-            $table->string('school_affiliation');
-            $table->integer('type')->default('0');
+            $table->string('institution_id');
             $table->timestamps();
         });
     }

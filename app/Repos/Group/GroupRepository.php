@@ -18,13 +18,13 @@ class GroupRepository
      * @param User $user
      * @return \Illuminate\Database\Eloquent\Model
      */
-    public function createGroup($name, $username, $description, $institutionId,User $user)
+    public function createGroup($name, $username, $description, $institution_id,User $user)
     {
         return $user->groups()->create([
             'name' => $name,
             'username' => $username,
             'description' => $description,
-            'institution_id' => $institutionId
+            'institution_id' => $institution_id
         ]);
     }
 
@@ -79,7 +79,7 @@ class GroupRepository
      */
     public function allGroupsPaginated($howMany = 10)
     {
-        return Group::all()->simplePaginate($howMany);
+        return Group::simplePaginate($howMany);
     }
 
     /**

@@ -1,0 +1,20 @@
+$(function(){
+    $("#hideNoticeCreatorBtn").click(function(){
+        $("#createNoticeForm").fadeOut("normal");
+        $("#creatorSpace").hide();
+    });
+    $("#showNoticeCreatorBtn").click(function(){
+        $("#creatorSpace").fadeIn("normal");
+        $("#uploadFilesForm").hide();
+        $("#createNoticeForm").fadeIn("normal");
+    });
+    $("#hideFileCreatorBtn").click(function(){
+        $("#uploadFilesForm").fadeOut("normal");
+        $("#creatorSpace").hide();
+    });
+    $("#showFilesCreatorBtn").click(function(){
+        $("#creatorSpace").fadeIn("normal");
+        $("#createNoticeForm").hide();
+        $("#uploadFilesForm").fadeIn("normal");
+    });
+});

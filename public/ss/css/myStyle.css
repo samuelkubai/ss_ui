@@ -28,6 +28,10 @@
     color: white;
 }
 /* Discussions page */
+.discussion-group-profile{
+    margin-top: -8px;
+    padding-top: 0;
+}
 .discussion-group-pic{
     border-radius: 50%;
     width: 32px;
@@ -42,11 +46,25 @@
 .notice-group-name{
     padding-left: 5px;
 }
+.notice-creation-section{
+    overflow: auto;
+}
+.notice-group-select{
+    width: 90%;
+}
 /* Group Search Page */
+.group-search-picture-container{
+    width: 10%;
+    padding-right: 0;
+}
+.group-search-info-container{
+    width: 90%;
+}
 .group-search-picture{
-    width: 55px;
-    height: 55px;
-    border-radius: 50px;
+    width: 105px;
+    height: 85px;
+    border-radius: 5px;
+    margin-top: 10px;
 }
 .group-search-institution{
     padding-bottom: 1px;
@@ -81,6 +99,10 @@
     padding-bottom: 5px;
 }
 /* Backpack */
+.fileFilters li{
+    list-style-type: none;
+    display: inline !important;
+}
 .file-owner-pic{
     width: 12px;
     height: 12px;
@@ -119,8 +141,8 @@
     width: 100px;
     height: 65px;
     border-width: 0;
-    padding-right: 10px;
     padding-top: 8px;
+    padding-right: 10px;
 }
 .home-search-divider{
     margin-top: 9px;
@@ -186,7 +208,9 @@
 .nav-search-group{
     padding-left: 70px;
 }
+.modal-group-selector{
 
+}
 .nav-pushpin {
     font-size: 16px;
 }
@@ -219,6 +243,12 @@
     .notice-group-filter{
         display: none;
     }
+    .notice-group-select-group{
+        display: none !important;
+    }
+    .notice-creation-section{
+        display: none !important;
+    }
     .group-navigation{
         display: none;
     }
@@ -230,6 +260,9 @@
         display: inline;
         padding-bottom: 5px!important;
         padding-right: 1px!important;
+    }
+    .discussion-group-profile{
+        display: none;
     }
 }
 

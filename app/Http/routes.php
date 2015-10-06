@@ -1,5 +1,6 @@
 <?php
 
+//\Auth::login(\App\User::find(1));
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -11,9 +12,29 @@
 |
 */
 
+
 get('/', function () {
     $title = 'Home';
     return view('ss.home.index', compact('title'));
+});
+
+get('/institution', function () {
+    $title = 'Home';
+    return view('ss.institutions.create', compact('title'));
+});
+post('/institution/create', function (\Illuminate\Http\Request $request) {
+    \App\Institution::create($request->all());
+    return redirect()->back();
+});
+
+get('/home', function () {
+    $title = 'Home';
+    return view('ss.home.index', compact('title'));
+});
+
+get('/logout', function () {
+    \Auth::logout();
+    return redirect('/auth/login');
 });
 
 get('/profile', function () {
@@ -26,21 +47,46 @@ get('/backpack', function () {
     return view('ss.backpack.index', compact('title'));
 });
 
+/*
+|--------------------------------------------------------------------------
+| Group Routes
+|--------------------------------------------------------------------------
+|
+| Here is where route related to groups are.
+| 1.CRUD
+| 2.Search
+| 3.API
+| 4.Joining and Leaving
+| 4.Group Members
+|
+*/
 
-get('/groups', function () {
-    $title = 'Groups';
-    return view('ss.groups.index', compact('title'));
-});
+/* 1. Group CRUD */
+get('/groups/','GroupController@index');
 
-get('/group', function () {
-    $title = 'Groups';
-    return view('ss.groups.activity', compact('title'));
-});
+post('/group/create', 'GroupController@store');
 
-get('/group/update', function () {
-    $title = 'Group Update';
-    return view('ss.groups.update', compact('title'));
-});
+get('/group/{group}', 'GroupController@show');
+
+get('/group/{group}/update', 'GroupController@edit');
+
+post('/group/{group}/update', 'GroupController@update');
+
+get('/group/{group}/delete', 'GroupController@edit');
+
+/* 2. Search */
+get('/groups/search','GroupController@search');
+
+/* 3. API */
+
+/* 4. Joining and leaving */
+get('/group/{group}/join','GroupController@join');
+
+get('/group/{group}/leave','GroupController@leave');
+
+/* 5. Group members */
+get('/group/{group}/members','GroupController@members');
+
 
 get('/group/files', function () {
     $title = 'Group  File';
@@ -56,6 +102,8 @@ get('/group/member', function () {
     $title = 'John Goe';
     return view('ss.groups.member', compact('title'));
 });
+/* Group API routes */
+
 
 get('/discussions', function () {
     $title = "Discussions";
@@ -72,10 +120,9 @@ get('/share', function () {
     return view('ss.groups.share', compact('title'));
 });
 
-get('/noticeboard', function () {
-    $title = "NoticeBoard";
-    return view('ss.noticeboards.index', compact('title'));
-});
+get('/noticeboard', 'NoticeController@index');
+
+post('/noticeboard/create', 'NoticeController@create');
 
 
 
@@ -95,14 +142,14 @@ get('/search-all-files', 'SearchController@searchAllFiles');
 
 
 // Authentication routes...
-get('auth/login', 'Auth\AuthController@getLogin');
-post('auth/login', 'Auth\AuthController@postLogin');
-get('auth/logout', 'Auth\AuthController@getLogout');
+get('login', 'Auth\AuthController@getLogin');
+post('login', 'Auth\AuthController@postLogin');
+get('logout', 'Auth\AuthController@getLogout');
 
 
 // Registration routes...
-get('auth/register', 'Auth\AuthController@getRegister');
-post('auth/register', 'Auth\AuthController@postRegister');
+get('register', 'Auth\AuthController@getRegister');
+post('register', 'Auth\AuthController@postRegister');
 
 //Redirect routes after user registration
 get('finish-join-group', 'Dashboard\DashboardController@finishJoinGroup');

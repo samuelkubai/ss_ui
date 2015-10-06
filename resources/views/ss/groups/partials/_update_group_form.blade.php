@@ -8,9 +8,8 @@
     </div>
 
     <div class="ibox-content">
-        <form action="http://app.skoolspace.com/ss/update" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="_token" value="SGRBWChxOYbjaqIF8RoWzIvb46mHlOdANnSJkhBR">
-
+        <form action="{{ url('/group/'.$group->id.'/update/') }}" method="POST" enctype="multipart/form-data">
+            {!! csrf_field() !!}
             <div>
                 <div class=" row form-group ">
                     <div class="col-md-12">
@@ -22,23 +21,16 @@
                 <div class="row form-group">
                     <div class="col-md-12">
                         <input name="username" type="text" class="form-control" disabled="true"
-                               placeholder="Unique Username" value="ss" required="required">
+                               placeholder="Unique Username" value="{{ $group->username }}" required="required">
                     </div>
                 </div>
                 <div class="row form-group">
                     <div class="col-md-6">
                         <input name="name" type="text" class="form-control" placeholder="Group Name"
-                               value="skoolspace group" required="required">
+                               value="{{ $group->name }}" required="required">
                     </div>
                     <div class="col-md-6">
-                        <select name="school_affiliation" id="school"
-                                class="pull-right col-md-12 form-control" tabindex="-1" aria-hidden="true">
-                            <option value="Jomo Kenyatta University of Agriculture and Technology"> JKUAT</option>
-                            <option value="Kenyatta University"> Kenyatta University</option>
-                            <option value="University of Nairobi"> University of Nairobi</option>
-                            <option value="Moi University"> Moi University</option>
-                            <option value="Other Institution" selected=""> Other Institution</option>
-                        </select>
+                        @include('partials._single_institution_select')
                     </div>
                 </div>
                 <div class="row form-group">
@@ -47,8 +39,9 @@
                             <div class="form-group">
                                 <textarea class="form-control message-input" name="description"
                                           placeholder="Brief Description"
-                                          value="Here you get updates on new features and any news from the skoolspace team. You should also create or join your own groups to enjoy the full features of skoolspace."
-                                          required="required">Here you get updates on new features and any news from the skoolspace team. You should also create or join your own groups to enjoy the full features of skoolspace.</textarea>
+                                          required="required">
+                                    {{ $group->description }}
+                                </textarea>
                             </div>
                         </div>
                     </div>

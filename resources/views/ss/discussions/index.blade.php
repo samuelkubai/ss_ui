@@ -28,20 +28,14 @@
                         <a data-toggle="collapse" href="faq.html#faq1" class="faq-question">What It a long established fact that a reader ?</a>
                         <small>Added by <strong>Alex Smith</strong> <i class="fa fa-clock-o"></i> Today 2:40 pm</small>
                     </div>
-                    <div class="col-md-3">
-                        <span class="small font-bold">Groups</span>
+                    <div class="col-md-3 pull-left">
                         <div class="tag-list">
-                            <span class="">
-                                <img src="{{ asset('/ss/img/p2.jpg') }}"
-                                     alt="Group profile picture"
-                                     class="discussion-group-pic">
-                            </span>
                             <span class="">
                                 <img src="{{ asset('/ss/img/p2.jpg') }}"
                                      alt="Group profile picture"
                                      class="img-circle discussion-group-pic">
                             </span>
-                            <span class=""><a href="#" class="btn btn-sm btn-white" title="Add a group"><i class="fa fa-plus"></i></a></span>
+                            <small class="text-center muted"><b>Group Name one class of 2014</b></small>
                         </div>
                     </div>
                     <div class="col-md-2 text-right">
@@ -61,39 +55,6 @@
         @endfor
     </div>
     <!-- Create discussion Modal -->
-    <div class="modal inmodal in" id="createDiscussion" tabindex="-1" role="dialog" aria-hidden="false" style="display: none;"><div class="modal-backdrop  in"></div>
-        <div class="modal-dialog">
-            <div class="modal-content animated bounceInRight">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"><i class="glyphicon glyphicon-remove-circle"></i></span><span class="sr-only">Close</span></button>
-                    <i class="fa fa-comments modal-icon"></i>
-                    <h4 class="modal-title">Create Discussion</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label>Title</label>
-                        <input type="text" placeholder="Discussion title..." class="form-control">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="message">Question</label>
-                        <textarea name="message" id="message" cols="30" rows="3" class="form-control"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="topic">Groups</label>
-                        <select name="topic" id="topic" class="form-control">
-                            <option value="">Select groups to involve in the discussion.</option>
-                            <option value=""></option>
-                        </select>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Create Discussion</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('ss.discussions.partial._create_discussion_modal')
     <!-- End Create Discussion Modal -->
 @endsection

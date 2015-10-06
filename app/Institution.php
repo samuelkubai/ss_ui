@@ -23,4 +23,13 @@ class Institution extends Model
         return $this->hasMany('App\Course');
     }
 
+    /**
+     * Gets the groups associated with the institution.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function groups()
+    {
+        return $this->hasMany('App\Group');
+    }
 }

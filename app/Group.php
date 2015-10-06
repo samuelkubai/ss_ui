@@ -16,8 +16,7 @@ class Group extends Model
         'username',
         'name',
         'description',
-        'school_affiliation',
-        'type'
+        'institution_id',
     ];
 
     /**

@@ -4,6 +4,9 @@
     <div class="wrapper wrapper-content" style="padding-top: 2px;">
         <div class="row animated fadeInRight">
             <div class="col-md-8">
+                @include('ss.home.partials._shortcut_activities')
+                <br>
+
                 <div class="ibox float-e-margins">
                     <div class="ibox-title"
                          data-toggle="tooltip"
@@ -17,7 +20,7 @@
 
                     </div>
                     <div class="ibox-content">
-                       @include('ss.activity.statuses.index')
+                        @include('ss.activity.statuses.index')
                     </div>
                 </div>
 
@@ -28,4 +31,8 @@
             </div>
         </div>
     </div>
+@stop
+
+@section('jquery_scripts')
+    <script src="{{ asset('ss/js/scripts/home.js') }}"></script>
 @stop

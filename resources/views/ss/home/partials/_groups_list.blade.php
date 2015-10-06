@@ -25,7 +25,7 @@
                                 <span class="pull-left home-search-description">
                                     Aliquid ex excepturi illum in tenetur! Et facere harum labore possimus recusandae vitae...
                                 </span>
-                                @if($i%3 != 0)
+                                @if($i%2 != 0)
                                     @include('partials._follow_btn')
                                 @else
                                     @include('partials._joined_leave_btn')

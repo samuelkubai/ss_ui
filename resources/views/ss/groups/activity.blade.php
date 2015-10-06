@@ -12,7 +12,7 @@
                          data-toggle="tooltip"
                          data-placement="bottom"
                          title="Compiled activities from all your groups.">
-                        <h5 style="text-align: center">Group class second 2013</h5>
+                        <h5 style="text-align: center">{{ $group->name }}</h5>
                         <span class="pull-right">
                             <a href="#">
                                 <img

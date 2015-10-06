@@ -2359,6 +2359,7 @@ label.error {
   padding: 9px 12px 6px 12px;
   background: #f9f9f9;
   border: 1px solid #f1f1f1;
+  overflow: auto;
 }
 .media-body > .media {
   background: #f9f9f9;

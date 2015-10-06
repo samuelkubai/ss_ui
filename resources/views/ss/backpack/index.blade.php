@@ -22,3 +22,7 @@
         });
     </script>
 @endsection
+
+@section('jquery_scripts')
+    <script src="{{ asset('/ss/js/scripts/backpack.js') }}"></script>
+@endsection

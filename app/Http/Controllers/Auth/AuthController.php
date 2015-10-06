@@ -42,13 +42,6 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            /* To be used when we have different types of user. */
-            //'userCategory' => 'required',
-
-            /** Optional for the user during registration. */
-            'telNumber' => 'required|numeric',
-
-            /** Required from the user during registration. */
             'firstName' => 'required|max:255',
             'lastName' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
@@ -64,20 +57,11 @@ class AuthController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            /* To be used when we have different types of user. */
-            //'userCategory' => $data['userCategory'],
-
-            /** Optional for the user during registration. */
-            'telNumber' => $data['telNumber'],
-
-            /** Required from the user during registration. */
             'firstName' => $data['firstName'],
             'lastName' => $data['lastName'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
 
-            /** Automatically set during registration. */
-            'newUser' => 1
         ]);
     }
 }
