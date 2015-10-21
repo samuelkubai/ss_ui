@@ -1,11 +1,11 @@
-var groupModule = angular.module('groupModule');
+var ssModule = angular.module('skoolspace');
 
-groupModule.factory('groupService', ['httpService',function(httpService){
+ssModule.factory('groupService', ['httpService',function(httpService){
 
-    var getGroups = function(){
-        return httpService.get('ss/dataTest/groups.json')
+    var getAllGroups = function(){
+        return httpService.get('all/groups')
     };
     return{
-        getGroups: getGroups
+        getAllGroups: getAllGroups
     };
 }]);

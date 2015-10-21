@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Repos\Group\GroupRepository;
 use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
@@ -22,15 +23,20 @@ class AuthController extends Controller
     */
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+    /**
+     * @var GroupRepository
+     */
+    private $groupRepository;
 
     /**
      * Create a new authentication controller instance.
      *
-     * @return \App\Http\Controllers\Auth\AuthController
+     * @param GroupRepository $groupRepository
      */
-    public function __construct()
+    public function __construct(GroupRepository $groupRepository)
     {
         $this->middleware('guest', ['except' => 'getLogout']);
+        $this->groupRepository = $groupRepository;
     }
 
     /**
@@ -45,7 +51,11 @@ class AuthController extends Controller
             'firstName' => 'required|max:255',
             'lastName' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
+            'password' => 'required|confirmed|min:5',
+            'institution' => 'required',
+            'course' => 'required',
+            'year' => 'required',
+            'intake' => 'required',
         ]);
     }
     /**
@@ -57,11 +67,27 @@ class AuthController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'firstName' => $data['firstName'],
-            'lastName' => $data['lastName'],
+            'first_name' => $data['firstName'],
+            'last_name' => $data['lastName'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-
+            'institution_id' => $data['institution'],
+            'course_id' => $data['course'],
+            'year' => $data['year'],
+            'intake' => $data['intake'],
+            'code' => str_random(24),
+            'active' => 0,
         ]);
+    }
+
+    /**
+     * Assigns a user the group they belong to.
+     *
+     * @param User $user
+     * @return User
+     */
+    protected function assignGroupTo(User $user)
+    {
+        return $this->groupRepository->assignGroupTo($user);
     }
 }

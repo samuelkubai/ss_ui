@@ -7,6 +7,30 @@
 <script src="{{ asset('/ss/js/plugins/jeditable/jquery.jeditable.js') }}"></script>
 <script src="{{ asset('/ss/js/scripts/basic.js') }}"></script>
 
+<!-- Angular -->
+<script src="{{ asset('/ss/angular/vendor/angular/angular.min.js') }}"></script>
+<script src="{{ asset('/ss/angular/vendor/animate/angular-animate.min.js') }}"></script>
+<script src="{{ asset('/ss/js/jcs-auto-validate.min.js') }}"></script>
+<script src="{{ asset('ss/angular/vendor/toaster-master/toaster.min.js') }}"></script>
+<script src="{{ asset('ss/angular/vendor/pagination/dirPagination.js') }}"></script>
+
+
+
+    <!--Angular scripts -->
+    <script src="{{ asset('/ss/angular/mainApp.js') }}"></script>
+    <script src="{{ asset('/ss/angular/controllers/homeCtrl.js') }}"></script>
+    <script src="{{ asset('/ss/angular/controllers/widgetCtrl.js') }}"></script>
+    <script src="{{ asset('/ss/angular/controllers/groupCtrl.js') }}"></script>
+    <script src="{{ asset('/ss/angular/controllers/noticeCtrl.js') }}"></script>
+    <script src="{{ asset('/ss/angular/controllers/backpackCtrl.js') }}"></script>
+    <script src="{{ asset('/ss/angular/controllers/singleGroupActivitiesCtrl.js') }}"></script>
+    <script src="{{ asset('/ss/angular/controllers/singleGroupFilesCtrl.js') }}"></script>
+    <script src="{{ asset('/ss/angular/services/httpService.js') }}"></script>
+    <script src="{{ asset('/ss/angular/services/fileService.js') }}"></script>
+    <script src="{{ asset('/ss/angular/services/groupService.js') }}"></script>
+    <script src="{{ asset('/ss/angular/services/activityService.js') }}"></script>
+    <script src="{{ asset('/ss/angular/services/noticeService.js') }}"></script>
+
 @yield('jquery_scripts')
 <!-- Custom and plugin javascript -->
 <script src="{{ asset('/ss/js/inspinia.js') }}"></script>
@@ -40,7 +64,11 @@
 <script src="{{ asset('/ss/js/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
 
 <!-- Toastr -->
-<script src="{{ asset('/ss/js/plugins/toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('ss/js/toastr.min.js') }}"></script>
+{!! Toastr::render() !!}
+
+<!-- Parsley -->
+<script src="{{ asset('ss/js/parsley.min.js') }}"></script>
 
 
 <!-- Input Mask-->

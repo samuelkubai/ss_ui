@@ -16,10 +16,14 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('first_name');
             $table->string('last_name');
-            $table->text('code')->nullable();
-            $table->integer('active')->nullable();
+            $table->text('code');
+            $table->integer('active');
             $table->string('email')->unique();
             $table->string('password', 60);
+            $table->integer('institution_id');
+            $table->integer('course_id');
+            $table->integer('year');
+            $table->integer('intake');
             $table->rememberToken();
             $table->timestamps();
         });

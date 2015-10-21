@@ -1,11 +1,16 @@
-var skoolspace = angular.module('skoolspace');
+var ssModule = angular.module('skoolspace');
 
-skoolspace.factory('httpService' ,['$http' ,function($http){
+ssModule.factory('httpService' ,['$http' ,function($http){
 
-        var baseUrl = "http://localhost:8000/";
+        var baseUrl = "/api/ss/";
 
-        var get = function(url){
-          return $http.get(baseUrl + url);
+        var get = function(url, param){
+            var stringUrl = String(url);
+          return $http({
+              url: baseUrl + stringUrl,
+              method: "GET",
+              params: param
+          });
         };
 
         var post = function(url, object){

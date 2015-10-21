@@ -147,7 +147,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Search\SearchServiceProvider::class,
-        App\Providers\ObserversServiceProvider::class,
         App\Providers\RepositoriesServiceProvider::class,
         Laracasts\Utilities\JavaScript\JavaScriptServiceProvider::class,
         Kamaln7\Toastr\ToastrServiceProvider::class,

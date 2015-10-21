@@ -10,6 +10,16 @@ use App\User;
 class UserRepository
 {
     /**
+     * Finds the user with the specified id.
+     *
+     * @param $userId
+     * @return mixed
+     */
+    public function findUser($userId)
+    {
+        return User::find($userId);
+    }
+    /**
      * Set the user to a normal user.
      *
      * @return User

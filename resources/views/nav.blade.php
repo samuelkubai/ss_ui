@@ -5,50 +5,57 @@
             <span class="fa fa-bars"></span>
         </button>
         <a href="{{ url('/') }}" class="navbar-brand">SS+</a>
+        <form role="search" class="navbar-form-custom" action="search_results.html">
+            <div class="form-group">
+                <input type="text" placeholder="Search your backpack..." class="top-search form-control" name="top-search" id="top-search">
+            </div>
+        </form>
+
     </div>
     <div class="navbar-collapse collapse" id="navbar">
-        <ul class="nav navbar-nav nav-menu">
-            <li class="">
-                <a class="nav-icon" aria-expanded="false" role="button" href="{{ url('/') }}">
-                    <i class="fa fa-home fa-lg"></i>
-                    Home
+
+
+
+
+        <ul class="nav navbar-top-links navbar-right">
+
+            <li>
+                <a class="nav-icon" aria-expanded="false" role="button" href="{{ url("/ ") }}">
+                     Home
                 </a>
             </li>
+
             <li>
-                <a class="nav-icon" aria-expanded="false" role="button"  style="padding-left: 6px; padding-right: 6px" href="{{ url("/backpack ") }}">
+                <a class="nav-icon" aria-expanded="false" role="button" href="{{ url("/backpack ") }}">
                     <i class="fa fa-briefcase fa-lg"></i> Backpack
                 </a>
             </li>
-        </ul>
-        <form class="navbar-form navbar-left" role="search">
-            <div class="nav-search-group form-group">
-                <input type="text" class="nav-search form-control" placeholder="Search files in your backpack...">
-                <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
-            </div>
-        </form>
-        <ul class="nav navbar-top-links navbar-right">
             <li>
-                <a class="nav-icon" aria-expanded="false" role="button" href="{{ url("/groups ") }}"> <i class="fa fa-group fa-lg"></i></a>
-            </li>
-
-            <li>
-                <a class="nav-icon" aria-expanded="false" role="button" href="{{ url("/noticeboard ") }}"> <i class="glyphicon glyphicon-pushpin nav-pushpin"></i></a>
-            </li>
-
-            <li>
-                <a class="nav-icon" aria-expanded="false" role="button" href="{{ url("/discussions ") }}"> <i class="fa fa-comments fa-lg"></i></a>
-            </li>
-
-
-            <li>
-                <a class="nav-icon" aria-expanded="false" role="button" href="{{ url("/profile/") }}" >
-                    <img src="{{asset('ss/img/profile.jpg')}}"
-                         alt="User's Profile Picture"
-                         class="img-circle nav-prof-pic">
+                <a class="nav-icon" aria-expanded="false" role="button" href="{{ url("/groups ") }}">
+                    <i class="fa fa-group fa-lg"></i> Groups
                 </a>
             </li>
+
             <li>
-                <a class="nav-icon" aria-expanded="false" role="button" href="{{ url("/logout ") }}"> <i class="fa fa-sign-out fa-lg"></i></a>
+                <a class="nav-icon" aria-expanded="false" role="button" href="{{ url("/noticeboard ") }}">
+                    <i class="glyphicon glyphicon-pushpin nav-pushpin"></i> Board
+                </a>
+            </li>
+
+            <li class="dropdown">
+                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="tabs_panels.html#" aria-expanded="false">
+                    <i class="fa fa-ellipsis-v fa-lg"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li>
+                        <a class="nav-icon" aria-expanded="false" role="button" href="{{ url("/profile ") }}">
+                            Profile
+                        </a>
+                        <a class="nav-icon" aria-expanded="false" role="button" href="{{ url("/logout ") }}">
+                            Logout
+                        </a>
+                    </li>
+                </ul>
             </li>
         </ul>
     </div>

@@ -3,27 +3,59 @@
 namespace App\Repos\Notice;
 
 use App\Group;
+use App\Http\Requests\PinNoticeRequest;
 use App\Notice;
+use App\Repos\Group\GroupRepository;
+use App\Search\Search;
+use App\Traits\Postable;
+use App\User;
+use Illuminate\Support\Facades\Input;
 
 class NoticeRepository
 {
+    use Postable;
+    /**
+     * @var GroupRepository
+     */
+    private $groupRepository;
+    /**
+     * @var Search
+     */
+    private $search;
+
+    /**
+     * Initialize variables for use in the repository.
+     *
+     * @param Search $search
+     * @param GroupRepository $groupRepository
+     */
+    function __construct(GroupRepository $groupRepository, Search $search)
+    {
+
+        $this->groupRepository = $groupRepository;
+        $this->search = $search;
+    }
+
     /**
      * Creates a new notice(s).
      *
-     * @param $title
-     * @param $message
-     * @param Array $groupIds
+     * @param PinNoticeRequest $request
+     * @param User $user
      * @return \Illuminate\Database\Eloquent\Model
      */
 
-    public function storeNotices($title, $message, Array $groupIds)
+    public function storeNotices(PinNoticeRequest $request, User $user)
     {
-        $groups = Group::whereIn('id', $groupIds)->get();
+        // Gets the group the notice is to be pinned to.
+        $group = $this->groupRepository->findGroupWithUsername($request->group);
 
-        foreach($groups as $group)
-        {
-            $this->persistNotice($title, $message, $group);
-        }
+        // Pin the notice.
+        $notice = $this->persistNotice($request->get('title'), $request->get('message'), $group);
+
+        $this->post($notice, 'add_notice', $group, $user);
+
+        return $notice;
+
     }
 
     /**
@@ -48,6 +80,20 @@ class NoticeRepository
     }
 
     /**
+     * Gets the notices from the groups the user belongs to.
+     *
+     * @param User $user
+     * @return mixed
+     */
+    public function getUserNotices(User $user)
+    {
+        if(!Input::get('q'))
+        return Notice::whereIn('group_id', $user->joinedGroupIds())->latest()->simplePaginate();
+
+        return $this->search->notices(Input::get('q'), Input::get('f'), Input::get('group'));
+    }
+
+    /**
      * Retrieve a single notice.
      *
      * @param $noticeId
@@ -62,13 +108,16 @@ class NoticeRepository
     /**
      * Deletes a notice.
      *
-     * @param Notice $notice
+     * @param int $noticeId
      * @return bool
-     * @throws \Exception
      */
-    public function deleteNotice(Notice $notice)
+    public function deleteNotice($noticeId)
     {
+        $notice = Notice::find($noticeId);
+        $notice->activity()->delete();
+
         $notice->delete();
+
         return true;
     }
 
@@ -80,7 +129,7 @@ class NoticeRepository
      * @param Group $group
      * @return \Illuminate\Database\Eloquent\Model
      */
-    public function persistNotice ($title, $message, Group $group)
+    protected function persistNotice ($title, $message, Group $group)
     {
 
         $notice = $group->notices()->create(

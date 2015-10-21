@@ -1,8 +1,11 @@
-var noticeModule = angular.module('noticeModule');
+var ssModule = angular.module('skoolspace');
 
-noticeModule.factory('noticeService', function(){
+ssModule.factory('noticeService', ['httpService',function(httpService){
 
-    return{
-
+    var getAllNotices = function(){
+        return httpService.get('all/board/notices')
     };
-});
+    return{
+        getAllNotices : getAllNotices
+    }
+}]);

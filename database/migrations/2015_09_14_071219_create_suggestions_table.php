@@ -14,9 +14,10 @@ class CreateSuggestionsTable extends Migration
     {
         Schema::create('suggestions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('intake_type');
-            $table->string('intake_year');
+            $table->string('intake');
+            $table->string('year');
             $table->integer('course_id');
+            $table->integer('institution_id');
             $table->integer('group_id');
             $table->timestamps();
         });

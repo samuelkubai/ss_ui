@@ -2,7 +2,7 @@
 <html lang="en" ng-app="skoolspace">
     @include('head')
 <body class="top-navigation">
-
+<toaster-container toaster-options="{'close-button': true, 'progress-bar': true}"></toaster-container>
 <div id="wrapper">
     <div id="page-wrapper" class="gray-bg">
         <div class="row border-bottom white-bg">

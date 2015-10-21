@@ -1,3 +1,2 @@
-<a href="#" class="btn btn-sm btn-primary view-btns pull-right" id="following-btn">Joined</a>
-<a href="#" class="btn btn-sm btn-danger view-btns pull-right" id="leave-btn" style="display: none;">Leave</a>
+<a href="@{{ group.group.leaving_url  }}" ng-show="group.group.joined " class="btn btn-sm btn-default view-btns pull-right following-btn" id="following-btn">Leave</a>
 

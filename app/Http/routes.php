@@ -1,6 +1,5 @@
 <?php
 
-//\Auth::login(\App\User::find(1));
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -12,149 +11,223 @@
 |
 */
 
+/*
+|--------------------------------------------------------------------------
+| User authenticated routes
+|--------------------------------------------------------------------------
+|
+*/
+Route::group(['middleware' => 'auth'], function () {
 
-get('/', function () {
-    $title = 'Home';
-    return view('ss.home.index', compact('title'));
+    /*
+    |--------------------------------------------------------------------------
+    | Group Routes
+    |--------------------------------------------------------------------------
+    |
+    | Here is where route related to groups are.
+    | 1.CRUD
+    | 2.Search
+    | 3.API
+    | 4.Joining and Leaving
+    | 4.Group Members
+    |
+    */
+
+    /* Test routes */
+
+    /* 1. Group CRUD */
+    get('/groups/', 'GroupController@index');
+
+    post('/group/create', 'GroupController@store');
+
+    get('/group/{group}', 'GroupController@show');
+
+    get('/group/{group}/update', 'GroupController@edit');
+
+    post('/group/{group}/update', 'GroupController@update');
+
+    get('/group/{group}/delete', 'GroupController@destroy');
+
+    /* 3. API */
+    get('api/groups/search/{filter}/{query}', 'GroupController@search');
+
+    /* 4. Joining and leaving */
+    get('/group/{group}/join', 'MemberController@store');
+
+    get('/group/{group}/leave', 'MemberController@destroy');
+
+
+    /* 5. Group members */
+    get('/group/{group}/members', 'MemberController@index');
+
+    get('/group/{group}/member/{user}', 'MemberController@show');
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | File Routes
+    |--------------------------------------------------------------------------
+    |
+    | Here is where route related to groups are.
+    |
+    | Actions to achieve are:
+    |
+    | 1.Upload
+    | 2.Share
+    | 3.Delete
+    | 4.Download
+    | 5.Group Files
+    | 6.Backpack
+    |
+    */
+
+    /* 1. Upload */
+    post('upload/file', 'FileController@store');
+
+    /* 3. Delete */
+    get('/file/{file}/delete', 'FileController@destroy');
+
+    /* 5. Group Files */
+    get('/group/{group}/files', 'FileController@groupFiles');
+
+    /* 6.BackPack */
+    get('/backpack', 'FileController@backpack');
+
+
+    get('/discussions', function () {
+        $title = "Discussions";
+        return view('ss.discussions.index', compact('title'));
+    });
+
+    get('/discussion', function () {
+        $title = "Discussion";
+        return view('ss.discussions.discussion', compact('title'));
+    });
+
+    get('/share', function () {
+        $title = "Share 'specific file'";
+        return view('ss.groups.share', compact('title'));
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Notice Routes
+    |--------------------------------------------------------------------------
+    |
+    | Here is where route related to the notices are.
+    |
+    | Actions to achieve are:
+    |
+    | 1.Pin
+    | 2.View
+    | 2.Delete
+    | 3.Search and Filter
+    |
+    */
+
+
+    /* 1. Pin a notice */
+    post('noticeboard/create', 'NoticeboardController@store');
+
+    /* 2. View Notices */
+    get('/noticeboard', 'NoticeboardController@index');
+
+    /* 3. Delete Notice */
+    get('/noticeboard/{notice}/delete', 'NoticeboardController@destroy');
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | User Routes
+    |--------------------------------------------------------------------------
+    |
+    | Here is where route related to the notices are.
+    |
+    | Actions to achieve are:
+    |
+    | 1.Home
+    | 2.User Profile
+    | 3.Logout
+    |
+    */
+
+    /* 1.Home */
+    get('/', 'HomeController@index');
+
+    /* 2.User Profile */
+    get('/profile', function () {
+        $title = 'My Profile';
+        return view('ss.profile.index', compact('title'));
+    });
+
+    /* 2. Logout Routes */
+    get('logout', 'Auth\AuthController@getLogout');
+
 });
 
-get('/institution', function () {
-    $title = 'Home';
-    return view('ss.institutions.create', compact('title'));
-});
-post('/institution/create', function (\Illuminate\Http\Request $request) {
-    \App\Institution::create($request->all());
-    return redirect()->back();
-});
-
-get('/home', function () {
-    $title = 'Home';
-    return view('ss.home.index', compact('title'));
-});
-
-get('/logout', function () {
-    \Auth::logout();
-    return redirect('/auth/login');
-});
-
-get('/profile', function () {
-    $title = 'My Profile';
-    return view('ss.profile.index', compact('title'));
-});
-
-get('/backpack', function () {
-    $title = 'BackPack';
-    return view('ss.backpack.index', compact('title'));
-});
 
 /*
 |--------------------------------------------------------------------------
-| Group Routes
+| Guest routes
 |--------------------------------------------------------------------------
-|
-| Here is where route related to groups are.
-| 1.CRUD
-| 2.Search
-| 3.API
-| 4.Joining and Leaving
-| 4.Group Members
 |
 */
 
-/* 1. Group CRUD */
-get('/groups/','GroupController@index');
+Route::group(['middleware' => 'guest'], function () {
 
-post('/group/create', 'GroupController@store');
+    /*
+    |--------------------------------------------------------------------------
+    | User Routes
+    |--------------------------------------------------------------------------
+    |
+    | Here is where route related to the notices are.
+    |
+    | Actions to achieve are:
+    |
+    | 1.Login
+    | 2.Register
+    |
+    */
+    /* 1. Login Routes */
+    get('login', 'Auth\AuthController@getLogin');
+    post('login', 'Auth\AuthController@postLogin');
 
-get('/group/{group}', 'GroupController@show');
-
-get('/group/{group}/update', 'GroupController@edit');
-
-post('/group/{group}/update', 'GroupController@update');
-
-get('/group/{group}/delete', 'GroupController@edit');
-
-/* 2. Search */
-get('/groups/search','GroupController@search');
-
-/* 3. API */
-
-/* 4. Joining and leaving */
-get('/group/{group}/join','GroupController@join');
-
-get('/group/{group}/leave','GroupController@leave');
-
-/* 5. Group members */
-get('/group/{group}/members','GroupController@members');
+    /* 2. Registration routes */
+    get('register', 'Auth\AuthController@getRegister');
+    post('register', 'Auth\AuthController@postRegister');
 
 
-get('/group/files', function () {
-    $title = 'Group  File';
-    return view('ss.groups.files', compact('title'));
 });
 
-get('/group/members', function () {
-    $title = 'Group  Members';
-    return view('ss.groups.members', compact('title'));
+
+/*
+   |--------------------------------------------------------------------------
+   | Api Routes
+   |--------------------------------------------------------------------------
+   |
+   | Here is where route related to Api.
+   |
+   | Actions to achieve are:
+   |
+   | 1.User Activities
+   | 2.All Group
+   | 3.User Group
+   | 4.User Files
+   | 5.User NoticeBoard
+   | 6.Group Activities
+   | 7.Group Files
+   | 8.Group Members
+   |
+   */
+
+Route::group(['prefix' => 'api/ss/'], function () {
+    get('all/groups', 'GroupApiController@all');
+    get('user/groups/{userId}', 'GroupApiController@userGroups');
+    get('/all/board/notices', 'NoticeboardApiController@allNotices');
+    get('/group/files/{groupUsername}', 'GroupApiController@groupFiles');
+    get('/group/topics/{groupUsername}', 'GroupApiController@groupTopics');
+    get('/all/backpack/files', 'BackpackApiController@backpackFiles');
+    get('/all/backpack/topics', 'BackpackApiController@backpackTopics');
+    get('user/activities/{userId}', 'ActivityApiController@userActivities');
+    get('group/activities/{groupUsername}', 'ActivityApiController@groupActivities');
 });
-
-get('/group/member', function () {
-    $title = 'John Goe';
-    return view('ss.groups.member', compact('title'));
-});
-/* Group API routes */
-
-
-get('/discussions', function () {
-    $title = "Discussions";
-    return view('ss.discussions.index', compact('title'));
-});
-
-get('/discussion', function () {
-    $title = "Discussion";
-    return view('ss.discussions.discussion', compact('title'));
-});
-
-get('/share', function () {
-    $title = "Share 'specific file'";
-    return view('ss.groups.share', compact('title'));
-});
-
-get('/noticeboard', 'NoticeController@index');
-
-post('/noticeboard/create', 'NoticeController@create');
-
-
-
-//Route to search a new file in both mysql-db and elastic-search
-get('/search-file', 'SearchController@searchFile');
-//Route to search a person using both sql and elasticsearch
-get('/search-people', 'SearchController@searchPeople');
-//Route to create a new file in both mysql-db and elasticsearch
-get('/create-file', 'FilesController@store');
-//Route to create a new person in both mysql-db and elasticsearch
-get('/create-people', 'PeopleController@store');
-//Route to search all people form the mysql-db or elasticsearch
-get('/search-all-people', 'SearchController@searchAllPeople');
-//Route to search all files from the mysql-db or elastic search
-get('/search-all-files', 'SearchController@searchAllFiles');
-
-
-
-// Authentication routes...
-get('login', 'Auth\AuthController@getLogin');
-post('login', 'Auth\AuthController@postLogin');
-get('logout', 'Auth\AuthController@getLogout');
-
-
-// Registration routes...
-get('register', 'Auth\AuthController@getRegister');
-post('register', 'Auth\AuthController@postRegister');
-
-//Redirect routes after user registration
-get('finish-join-group', 'Dashboard\DashboardController@finishJoinGroup');
-
-get('join-group/student', 'Dashboard\DashboardController@joinInitialGroup');
-get('dashboard/student', 'Dashboard\DashboardController@getStudentDashboard');
-
-get('dashboard/lecturer', 'Dashboard\DashboardController@getLecturerDashboard');

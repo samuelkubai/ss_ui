@@ -38,6 +38,9 @@
     height: 32px;
 }
 /* Noticeboard Page */
+.notice-card{
+    overflow: auto;
+}
 .notice-group-pic{
     width: 30px;
     height: 30px;
@@ -53,6 +56,13 @@
     width: 90%;
 }
 /* Group Search Page */
+.group-search-filter-section{
+    margin-top: 4px;
+}
+.group-update-pic{
+    width: 100%;
+    height: 50%;
+}
 .group-search-picture-container{
     width: 10%;
     padding-right: 0;
@@ -111,20 +121,30 @@
     background-color: dimgrey !important;
     color: white;
 }
+
 .file-options-option{
-    padding-left: 10px;
+    padding-left: 5px;
+    margin-right: 4px;
 }
 /* Homepage */
+.home-search-switch{
+    margin-top: -4px;
+}
 .home-search-list li{
     overflow: auto;
 }
 .home-search-title{
-    margin-bottom: 3px;
+    margin-bottom: 0;
 }
 .home-search-description{
     width: 175px;
     font-size: x-small;
     font-weight: 400;
+}
+.home-search-institution{
+
+    font-size: x-small;
+    padding-top: 0;
 }
 .home-search-follow-btn{
     padding-left: 30px;
@@ -147,6 +167,16 @@
 .home-search-divider{
     margin-top: 9px;
     margin-bottom: 9px;
+}
+.pager{
+    margin-bottom: -15px;
+}
+.home-search-switch input[type="checkbox"]{
+    width: 20px; /*Desired width*/
+    height: 20px; /*Desired height*/
+}
+.home-search-switch-text{
+    font-size: small;
 }
 .switchery{
     margin-top: -6px!important;
@@ -186,15 +216,70 @@
 .wrapper{
     padding-top: 10px !important;
 }
+/* Activity feed styles */
+.activity-file-pic{
+    width: 100px;
+    height: 75px;
+    border-width: 0;
+    padding-top: 0;
+    padding-right: 20px;
+    margin-top: -5px !important;
+}
+.activity-body{
+    padding-left: 8px;
+}
+.activity-file-description-block{
+
+}
+.activity-file-block{
+    padding-top: 10px;
+}
+
+.activity-file-title{
+    color:black ;
+    font-size: medium;
+    font-weight: 700;
+    margin-top: 10px !important;
+    margin-bottom: 0;
+}
+.activity-file-topic{
+    font-size: x-small;
+    padding-top: 0;
+}
+.activity-file-size{
+    font-size: x-small;
+ }
+.activity-notice{
+    background: #ffc;
+}
 /* General Styles */
+.navbar{
+    width: 100%;
+    position: fixed!important;
+    border-bottom: solid 1px #1ab394;
+}
+.wrapper-content{
+    padding-top: 35px!important;
+}
+.group-list-container{
+    position: fixed!important;
+    top: 0;
+}
 .nav-btn{
     margin-bottom: 10px;
 }
 .navbar-brand{
     height: 55px;
+    font-size:medium;
+}
+.top-search{
+    height: 55px!important;
 }
 .follow-btn{
     color: green;
+}
+.following-btn{
+
 }
 .view-btn{
     color: white;
@@ -254,12 +339,14 @@
     }
     .mobile-group-navigation{
         padding-left: 10px!important;
+        display: inline;
     }
     .mobile-group-navigation li{
         list-style-type: inline;
         display: inline;
         padding-bottom: 5px!important;
         padding-right: 1px!important;
+        font-size: larger;
     }
     .discussion-group-profile{
         display: none;

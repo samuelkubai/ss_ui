@@ -6,42 +6,40 @@
                 <i class="fa fa-group modal-icon"></i>
                 <h4 class="modal-title">Create Group</h4>
             </div>
-            <form action="{{ url('group/create') }}" method="post">
+            <form action="{{ url('group/create') }}" method="post" data-parsley-validate>
                 {!! csrf_field() !!}
                 <div class="modal-body">
                         <div class="form-group">
                             <input type="text"
                                    placeholder="Enter your group's name"
                                    name="name" class="form-control"
-                                   ng-model="name">
+                                   required>
                         </div>
 
                         <div class="form-group">
                             <input type="text"
                                    placeholder="Enter your group's unique username"
                                    name="username" class="form-control"
-                                   ng-model="username">
+                                   required>
                         </div>
 
-                        @include('partials._single_institution_select')
-
                         <div class="form-group">
-                            <label for="message">Brief Description</label>
                             <textarea
                                     name="description"
                                     id="message"
                                     cols="30" rows="3"
                                     class="form-control"
-                                    ng-model="description">
-                            </textarea>
+                                    placeholder="Enter group's brief description..." required></textarea>
                         </div>
+
+                        @include('partials._single_institution_select')
+
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                    <button type="button"
-                            class="btn btn-primary"
-                            ng-click="addGroup">
+                    <button type="submit"
+                            class="btn btn-primary">
                        <i class="fa fa-group"></i> Create Group
                     </button>
                 </div>

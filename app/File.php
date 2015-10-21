@@ -2,15 +2,35 @@
 
 namespace App;
 
+use App\Interfaces\PostableInterface;
 use Illuminate\Database\Eloquent\Model;
 
-class File extends Model
+class File extends Model Implements PostableInterface
 {
     /**
      * List the fields that can be mass assigned.
      * @var array
      */
-    protected $fillable = ['name', 'path', 'type', 'mime', 'user_id'];
+    protected $fillable = ['name', 'path', 'type', 'mime', 'topic_id','user_id'];
+
+    /**
+     * Return the appropriate picture
+     *
+     * @return string
+     */
+    public function picture()
+    {
+        return 'ss/icons/excel1.png';
+    }
+    /**
+     * Links to the object's activity.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function activity()
+    {
+        return $this->morphMany('App\Activity', 'subject');
+    }
 
     /**
      * Links to the user that created the document.
@@ -28,6 +48,16 @@ class File extends Model
     public function documentable()
     {
         return $this->morphTo();
+    }
+
+    /**
+     * Gets the topic of the file.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function topic()
+    {
+        return $this->belongsTo('App\Topic');
     }
 
     /**

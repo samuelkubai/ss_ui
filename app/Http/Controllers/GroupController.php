@@ -1,30 +1,20 @@
 <?php namespace App\Http\Controllers;
 
-use App\Facade\Search;
+use App\Search\Search;
 use App\Http\Requests;
+use App\Http\Requests\CreateGroupRequest;
+use App\Http\Requests\UpdateGroupRequest;
 use App\Institution;
+use App\Traits\GroupSearchable;
 use Illuminate\Http\Request;
 use App\Repos\Group\GroupRepository;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
+use Kamaln7\Toastr\Facades\Toastr;
 
 class GroupController extends Controller
 {
-    /**
-     * @var GroupRepository
-     */
-    private $groupRepository;
-
-    /**
-     * Initialize variables for the class.
-     *
-     * @param GroupRepository $groupRepository
-     */
-    function __construct(GroupRepository $groupRepository)
-    {
-
-        $this->groupRepository = $groupRepository;
-    }
+    use GroupSearchable;
     /**
      * Display a listing of the resource.
      *
@@ -34,15 +24,16 @@ class GroupController extends Controller
     {
         if(Input::get('q') == '')
         {
-            $title = 'Groups';
+            $title = 'All Groups';
 
             $groups = $this->groupRepository->allGroupsPaginated();
 
         } else {
 
-            $title= 'Group Search Results';
 
-            $groups = Search::groups(Input::get('q'));
+            $groups = $this->searchGroups();
+
+            $title= $groups->count(). ' groups found for "'. Input::get('q') . '"';
         }
 
         $institutions = Institution::all();
@@ -51,57 +42,48 @@ class GroupController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param CreateGroupRequest|Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateGroupRequest $request)
     {
         $group = $this->groupRepository
-            ->createGroup($request->name, $request->username, $request->description, $request->institution_id, \Auth::user());
-
-        return redirect('/groups?q='.$group->name);
+            ->createGroup($request, \Auth::user());
+        Toastr::success($group->name.' has been successfully created.');
+        return redirect('/group/'.$group->username);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param $group
+     * @param $groupUsername
      * @return \Illuminate\Http\Response
+     * @internal param $group
      * @internal param int $id
      */
-    public function show($group)
+    public function show($groupUsername)
     {
         $group = $this->groupRepository
-            ->findGroupWith($group);
+            ->findGroupWithUsername($groupUsername);
 
         $title = $group->name;
 
-        return view('ss.groups.activity', compact('group', 'title'));
+        return view('ss.groups.activity', compact('group', 'groups','title'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param $group
+     * @param $groupUsername
      * @return \Illuminate\Http\Response
      * @internal param int $id
      */
-    public function edit($group)
+    public function edit($groupUsername)
     {
         $group = $this->groupRepository
-            ->findGroupWith($group);
+            ->findGroupWithusername($groupUsername);
 
         $title = $group->name . ' Update';
         $institutions = Institution::all();
@@ -112,23 +94,46 @@ class GroupController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param CreateGroupRequest|UpdateGroupRequest|Request $request
+     * @param $groupUsername
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateGroupRequest $request, $groupUsername)
     {
-        //
+        $targetGroup = $this->groupRepository
+            ->findGroupWithUsername($groupUsername);
+
+        $group = $this->groupRepository
+            ->updateGroup($request, $targetGroup);
+
+        Toastr::success($group->name. ' has been successfully updated');
+        return redirect()->back();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param $groupUsername
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($groupUsername)
     {
-        //
+        $targetGroup = $this->groupRepository
+            ->findGroupWithUsername($groupUsername);
+        $this->groupRepository
+            ->deleteGroup($targetGroup);
+
+        Toastr::success($targetGroup->name . ' successfully deleted.');
+        return redirect('/');
+    }
+
+
+    public function files($groupUsername)
+    {
+        $group = $this->groupRepository
+            ->findGroupWithUsername($groupUsername);
+
+        $title = 'Group  File';
+        return view('ss.groups.files', compact('title', 'group'));
     }
 }

@@ -22,7 +22,7 @@ class CreateFilesTable extends Migration
 
             $table->integer('user_id');
             $table->integer('documentable_id');
-            $table->integer('documentable_type');
+            $table->string('documentable_type');
 
             $table->timestamps();
         });

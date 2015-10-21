@@ -16,7 +16,6 @@ class CreateCoursesTable extends Migration
             $table->increments('id');
             $table->string('slug');
             $table->string('name');
-            $table->integer('institution_id');
             $table->timestamps();
         });
     }

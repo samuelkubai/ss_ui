@@ -11,7 +11,7 @@ class Course extends Model
      *
      * @var array
      */
-    protected $fillable = ['slug', 'name', 'institution_id'];
+    protected $fillable = ['slug', 'name'];
 
     /**
      * Gets the institution that the course belongs to.
@@ -21,5 +21,15 @@ class Course extends Model
     public function institution()
     {
         return $this->belongsTo('App\Institution');
+    }
+
+    /**
+     * Returns the users that belong to the course.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function users()
+    {
+        return $this->hasMany('App\User');
     }
 }

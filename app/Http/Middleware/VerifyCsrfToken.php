@@ -16,5 +16,7 @@ class VerifyCsrfToken extends BaseVerifier
         'institution/create',
         'group/create',
         'auth/register',
+        'register',
+        'upload/file',
     ];
 }

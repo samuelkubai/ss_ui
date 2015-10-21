@@ -29,13 +29,16 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $fillable = [
-        'userCategory',
-        'firstName',
-        'lastName',
-        'telNumber',
+        'first_name',
+        'last_name',
         'email',
         'password',
-        'newUser'
+        'institution_id',
+        'course_id',
+        'year',
+        'intake',
+        'active',
+        'code'
     ];
 
     /**
@@ -46,13 +49,63 @@ class User extends Model implements AuthenticatableContract,
     protected $hidden = ['password', 'remember_token'];
 
     /**
+     * Returns the institution the user belongs to.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function institution()
+    {
+        return $this->belongsTo('App\Institution');
+    }
+
+    /**
+     * Returns the course the user belongs to.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function course()
+    {
+        return $this->belongsTo('App\Course');
+    }
+    /**
      * Returns all the ids of the groups the user belongs to.
      *
      * @return mixed
      */
-    public function followedGroupIds()
+    public function joinedGroupIds()
     {
-        return $this->groups()->lists('id');
+        return $this->joinedGroups()->lists('id');
+    }
+
+    /**
+     * Links to all the groups the user is following
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+
+    public function joinedGroups()
+    {
+        return $this->belongsToMany('App\Group');
+    }
+
+    /**
+     * Checks if a user is a member of the group.
+     *
+     * @param Group $group
+     * @return bool
+     */
+    public function isAMemberOf(Group $group)
+    {
+        $membersId = $group->members()->lists('user_id');
+
+        foreach ($membersId as $memberId)
+        {
+            if($this->id == $memberId)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -60,9 +113,9 @@ class User extends Model implements AuthenticatableContract,
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function profile()
+    public function profilePicture()
     {
-        return $this->hasOne('App\Profile');
+        return $this->morphMany('App\ProfilePicture', 'profilable');
     }
 
     /**
@@ -70,15 +123,15 @@ class User extends Model implements AuthenticatableContract,
      *
      * @return string
      */
-    public function profileSource()
+    public function profilePictureSource()
     {
 
-        $profile = $this->profile()->first();
+        $profile = $this->profilePicture()->first();
 
         if($profile != null)
             return $profile->source;
 
-        return 'uploads/images/default/avatar.png';
+        return '/ss/img/a3.jpg';
     }
 
     /**
@@ -89,7 +142,7 @@ class User extends Model implements AuthenticatableContract,
     public function getActivity()
     {
         return Activity::with('group', 'user', 'subject')
-            ->whereIn('group_id', $this->followedGroupIds())
+            ->whereIn('group_id', $this->joinedGroupIds())
             ->get();
     }
 
@@ -104,66 +157,33 @@ class User extends Model implements AuthenticatableContract,
     }
 
     /**
-     * Links to the personal folders for the user.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function personalFolders()
-    {
-        return $this->hasMany('App\PersonalFolder');
-    }
-
-    /**
-     * Links to the personal folders for the user.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function groupFolders()
-    {
-        return $this->hasMany('App\GroupFolder');
-    }
-
-    /**
-     * Links to the actual files the user created.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function myFiles()
-    {
-        return $this->hasMany('App\File');
-    }
-
-    /**
      * Links to all of the user's files.
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
-    public function files()
+    public function myFiles()
     {
         return $this->morphMany('App\File', 'documentable');
     }
 
     /**
-     * Returns all the user's files.
-     *
-     * @return mixed
+     * Checks if the file is in the user's backpack.
+     * @param $fileId
+     * @return bool
      */
-    public function getMyFiles()
+    public function inMyBackPack($fileId)
     {
-        return $this->files;
-    }
+        $myFilesIds = $this->myfiles()->lists('id');
 
-    /**
-     * Gets all the files that pertain to groups the user is part of.
-     *
-     * @return mixed
-     */
-    public function getAllFiles()
-    {
-        return File::with('user')
-            ->whereIn('documentable_id', $this->followedGroupIds())
-            ->where('documentable_type', 'group')
-            ->get();
+        foreach ($myFilesIds as $myFileId)
+        {
+            if($myFileId == $fileId)
+            {
+                return true;
+            }
+        }
+        return false;
+
     }
     /**
      * Links to the notices the user has created.
@@ -229,5 +249,6 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->hasMany('App\Activity');
     }
+
 }
 

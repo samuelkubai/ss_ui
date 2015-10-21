@@ -1,53 +1,158 @@
-<?php
+<?php namespace App\Repos\Group;
 
-namespace App\Repos\Group;
-
-
+use App\Http\Requests\UpdateGroupRequest;
+use App\Suggestion;
 use App\User;
 use App\Group;
+use App\Traits\Profilable;
+use App\Http\Requests\CreateGroupRequest;
+use Kamaln7\Toastr\Facades\Toastr;
 
 class GroupRepository
 {
+    use Profilable;
 
-     /** Creates a new group for the specified user.
+    /** Creates a new group for the specified user.
      *
-     * @param $name
-     * @param $username
-     * @param $description
-     * @param $institutionId
+     * @param $request
      * @param User $user
      * @return \Illuminate\Database\Eloquent\Model
      */
-    public function createGroup($name, $username, $description, $institution_id,User $user)
+    public function createGroup(CreateGroupRequest $request,User $user)
     {
-        return $user->groups()->create([
-            'name' => $name,
-            'username' => $username,
-            'description' => $description,
-            'institution_id' => $institution_id
+        $group =  $user->groups()->create([
+            'name' => $request->name,
+            'username' => $request->username,
+            'description' => $request->description,
+            'institution_id' => $request->institution_id
         ]);
+
+        $this->joinGroup($group, $user);
+
+        return $group;
     }
 
     /**
+     * Assigns a user to a specific group.
+     *
+     * @param User $user
+     * @return User
+     */
+    public function assignGroupTo(User $user)
+    {
+        $assignment = Suggestion::where('intake', $user->intake)
+            ->where('course_id', $user->course->id)
+            ->where('institution_id', $user->institution->id)
+            ->where('year', $user->year)
+            ->first();
+
+        if($assignment != null)
+        {
+            $this->joinGroup($assignment->group, $user);
+            return $user;
+        }
+
+        $this->createGroupAssignmentFor($user);
+
+        return $user;
+
+    }
+    /**
      * Updates a group with new details.
      *
-     * @param $name
-     * @param $username
-     * @param $description
-     * @param $institutionId
+     * @param $request
      * @param Group $group
      * @return Group
      */
-    public function updateGroup($name, $username, $description, $institutionId, Group $group)
+    public function updateGroup(UpdateGroupRequest $request, Group $group)
     {
-        $group->fill([
-            'name' => $name,
-            'username' => $username,
-            'description' => $description,
-            'institution_id' => $institutionId
+        $group->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'institution_id' => $request->institution_id
         ]);
 
+        if($request->hasFile('profilePicture'))
+        {
+            $this->saveProfilePicture($group, $request->file('profilePicture'));
+        }
+
         return $group;
+    }
+
+    /**
+     * Joins the user to a specific group
+     *
+     * @param User $user
+     * @param Group $group
+     * @return Group
+     */
+    public function joinGroup(Group $group, User $user)
+    {
+        if(!$group->isAMember(\Auth::user()))
+        {
+            if($group->members()->get()->count() < 1 || ($group->user->id == 0))
+            {
+                $group->update([
+                   'user_id' => $user->id,
+                ]);
+
+                Toastr::info('You are the new group admin of the group '. $group->name);
+            }
+            $group->members()->attach(\Auth::user()->id);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * The user leaves a specific group
+     *
+     * @param User $user
+     * @param Group $group
+     * @return Group
+     */
+    public function leaveGroup(Group $group, User $user)
+    {
+        if($group->isAMember(\Auth::user()))
+        {
+            if($group->user->id == $user->id)
+            {
+                $group->members()->detach(\Auth::user()->id);
+
+                if($group->members()->get()->count() < 1)
+                {
+                    $group->update([
+                        'user_id' => 0,
+                    ]);
+
+                } else {
+
+                    $newAdmin = $group->members()->first();
+
+                    $group->update([
+                        'user_id' => $newAdmin->id,
+                    ]);
+                }
+
+                return true;
+            }
+
+            $group->members()->detach(\Auth::user()->id);
+        }
+
+        return false;
+    }
+
+    /**
+     * Delete a group
+     *
+     * @param Group $group
+     * @throws \Exception
+     */
+    public function deleteGroup(Group $group)
+    {
+        $group->delete();
     }
 
     /**
@@ -62,24 +167,51 @@ class GroupRepository
     }
 
     /**
+     * Finds a group by the group username.
+     *
+     * @param $groupUsername
+     * @return mixed
+     */
+    public function findGroupWithUsername($groupUsername)
+    {
+        return Group::where('username', $groupUsername)->first();
+    }
+
+    /**
      * Gets all the groups in the system.
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function allGroups()
+    public function allGroups($howMany = 5)
     {
-        return Group::all();
+        return Group::with('user','institution')
+            ->latest()
+            ->paginate($howMany);
     }
 
     /**
-     * Gets all the groups in the system paginated.
+     * Returns a list of paginated lists.
      *
      * @param int $howMany
-     * @return mixed
+     * @return \Illuminate\Contracts\Pagination\Paginator
      */
     public function allGroupsPaginated($howMany = 10)
     {
-        return Group::simplePaginate($howMany);
+        return Group::with('user','institution')->simplePaginate($howMany);
+    }
+
+    /**
+     * Gets all the groups the user belongs to(has joined).
+     *
+     * @param User $user
+     * @return mixed
+     */
+    public function allJoinedGroupsFor(User $user)
+    {
+        return Group::with('user','institution')
+            ->whereIn('id', $user->joinedGroupIds())
+            ->latest()
+            ->get();
     }
 
     /**
@@ -101,15 +233,17 @@ class GroupRepository
 
         return false;
     }
+
     /**
      * Gets all the members of a group ordered by their first name.
      *
-     * @param $group
+     * @param Group $group
+     * @param int $howMany
      * @return mixed
      */
-    public function membersOfGroup(Group $group)
+    public function membersOfGroup(Group $group, $howMany = 10)
     {
-        return $group->followers()->orderBy('firstName')->get();
+        return $group->members()->orderBy('first_name')->simplePaginate($howMany);
     }
 
     /**
@@ -121,7 +255,7 @@ class GroupRepository
      */
     public function paginatedMembersOfGroup($group, $howMany = 9)
     {
-        return $group->followers()->orderBy('firstName')->paginate($howMany);
+        return $group->followers()->orderBy('first_name')->paginate($howMany);
     }
 
 
@@ -135,5 +269,40 @@ class GroupRepository
     public function searchGroupsFor($value, $field = 'name')
     {
         return Group::searchFor($field, $value)->get();
+    }
+
+    /**
+     * Create group assignment for a user.
+     *
+     * @param User $user
+     */
+    protected function createGroupAssignmentFor(User $user)
+    {
+        $name = $user->institution->slug.
+            $user->course->slug.
+            $user->intake.
+            'Class of '.
+            $user->year;
+        $username = $user->institution->slug.
+            $user->course->slug.
+            $user->intake.
+            $user->year;
+        $description = 'This is the group for the '.$name;
+
+        $group = $user->groups()->create([
+            'name' => $name,
+            'username' => $username,
+            'description' => $description,
+            'institution_id' => $user->institution->id
+        ]);
+
+        $this->joinGroup($group, $user);
+
+        $group->suggestion()->create([
+            'intake' => $user->intake,
+            'course_id' => $user->course->id,
+            'institution_id' => $user->institution->id,
+            'year' => $user->year,
+        ]);
     }
 } 

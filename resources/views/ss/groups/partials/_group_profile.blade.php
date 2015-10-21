@@ -4,7 +4,7 @@
     </div>
     <div>
         <div class="ibox-content no-padding border-left-right">
-            <img alt="image" class="img-responsive" src="{{ asset('ss/img/profile_big.jpg') }}">
+            <img alt="image" class="img-responsive group-update-pic" src="{{ asset($group->profilePictureSource()) }}">
         </div>
         <div class="ibox-content profile-content">
             <h4><strong>{{ $group->name }}</strong></h4>

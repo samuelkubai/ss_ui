@@ -10,6 +10,10 @@
     <link href="{{ asset('ss/select/css/select2.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('ss/css/plugins/iCheck/custom.css') }}" rel="stylesheet">
     <link href="{{ asset('ss/css/plugins/switchery/switchery.css') }}" rel="stylesheet">
+    <link href="{{ asset('ss/css/toastr.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('ss/css/parsley.css') }}" rel="stylesheet">
+    <link href="{{ asset('ss/angular/vendor/ladda/ladda-themeless.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('ss/angular/vendor/toaster-master/toaster.min.css') }}" rel="stylesheet">
 
     @yield('styles')
 

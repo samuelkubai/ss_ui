@@ -26,7 +26,7 @@ class CreateGroupRequest extends Request
         return [
             'name' => 'required',
             'username' => 'required | unique:groups',
-            'institution' => 'required',
+            'institution_id' => 'required',
             'description' => 'required',
         ];
     }

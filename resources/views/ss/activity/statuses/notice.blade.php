@@ -8,7 +8,7 @@
         <strong><a href="#">Janet Rosowski</a></strong> created a new pin on <strong><a href="#">Bsc. IT 2nd Class of 2015</a></strong>. <br>
         <small class="text-muted">2 days ago at 8:30am</small>
 
-        <div class="well">
+        <div class="well activity-notice">
             <small>12:03:28 12-04-2014</small>
             <h4>Long established fact</h4>
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the

@@ -2,116 +2,108 @@
 
 namespace App\Repos\File;
 
+use App\User;
 use App\File;
-use App\Traits\File\FileSharing;
-use App\Traits\File\FileDownload;
-use App\Interfaces\File\FileRepositoryInterface;
+use App\Group;
+use App\Topic;
+use App\Traits\Postable;
+use App\Traits\File\StoreFile;
+use App\Repos\Group\GroupRepository;
+use App\Http\Requests\UploadFileRequest;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
-class FileRepository implements FileRepositoryInterface
+class FileRepository
 {
-    use FileSharing;
-    use FileDownload;
+    use StoreFile, Postable;
+
 
     /**
-     * Path to which all files will be saved in.
-     *
-     * @var string
+     * @var
      */
-    protected $destination = 'uploads/';
+    private $groupRepository;
+
+    /**
+     * Initialize fileds for the repo.
+     *
+     * @param GroupRepository $groupRepository
+     */
+    function __construct(GroupRepository $groupRepository)
+    {
+
+        $this->groupRepository = $groupRepository;
+    }
 
     /**
      * Stores a an uploaded file.
      *
-     * @param UploadedFile $file
-     * @param $name
-     * @param $groups
+     * @param UploadFileRequest $request
+     * @param User $user
      * @return UploadedFile
      */
-    public function store(UploadedFile $file, $name, $groups)
+    public function store(UploadFileRequest $request, User $user)
     {
-        $type = $file->getClientOriginalExtension();
-        $mime = $file->getClientMimeType();
+        $group = $this->groupRepository->findGroupWithUsername($request->get('group'));
 
-        //Get the name for the file
-        $name = $this->sanitizeName($name).'.'.$type;
-
-        $actualName = time(). $name;
-
-        // Set the destination for the uploaded files.
-
-        $path = $this->destination . $actualName;
-
-        // Move the file to the destination.
-
-        if (!$file->move($path)) {
-            return false;
-        }
-
-        //Persist the files to the database.
-
-        $details = [
-            'name' => $name,
-            'path' => $path,
-            'type' => $type,
-            'mime' => $mime
-        ];
-
-        $file = $this->persist($details, \Auth::user());
-
-        //Share file with the selected groups.
-
-        if(count($groups) >= 1)
+        if($this->storeFile($request, $user, $group))
         {
-            foreach($groups as $group)
-            {
-                $this->shareFileToGroup($group, $file);
-            }
+            return true;
         }
 
-        return $file;
+        return false;
+    }
+
+    /**
+     *
+     * Retrieves all the files for the user's backpack
+     * @param User $user
+     * @return mixed
+     */
+    public function getBackpackFilesForUser(User $user)
+    {
+        return $user->myFiles()
+            ->with('user','topic')
+            ->latest()
+            ->get();
+    }
+
+    /**
+     *
+     * Retrieves all the files for the specific group.
+     * @param Group $group
+     * @param int $howMany
+     * @return mixed
+     */
+    public function groupFilesForGroup(Group $group, $howMany = 12)
+    {
+        return $group->files()
+            ->with('user','topic')
+            ->latest()
+            ->get();
     }
 
     /**
      * Deletes a file from the database.
      *
      * @param $file
+     * @return bool
      */
     public function deleteFile(File $file)
     {
+        $file->activity()->delete();
         $file->delete();
+        return true;
     }
 
     /**
-     * Sanitizes the file name.
+     * Finds a file by its id.
      *
-     * @param $requestName
+     * @param $fileId
      * @return mixed
      */
-    protected function sanitizeName($requestName)
+    public function findFileById($fileId)
     {
-        $fileName = preg_replace("([^\w\s\d\-_~,;:\[\]\(\].]|[\.]{2,})", '', $requestName);
-        $fileName = filter_var($fileName, FILTER_SANITIZE_URL);
-        return $fileName;
-    }
-
-    /**
-     * Save the file details to the database.
-     *
-     * @param array $details
-     * @param $model
-     * @return mixed
-     * @internal param $user
-     */
-    protected function persist(Array $details, $model)
-    {
-        return $model->files()->create([
-            'name' => $details['name'],
-            'path' => $details['path'],
-            'type' => $details['type'],
-            'mime' => $details['mime']
-        ]);
+        return File::find($fileId);
     }
 
     /**
@@ -131,13 +123,54 @@ class FileRepository implements FileRepositoryInterface
             ->get();
     }
 
+
     /**
+     * Retrieves all the topics for the user.
      *
-     * Retrieves all the files
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function getAllTopics()
+    {
+        return Topic::all();
+    }
+
+    /**
+     * Returns a list of all the topics used in the backpack.
+     *
+     * @param User $user
      * @return mixed
      */
-    public function all()
+    public function getBackpackTopicsForUser(User $user)
     {
-        return File::all();
+        $topicIds = $user->myFiles()
+            ->select('topic_id')
+            ->distinct()
+            ->latest()
+            ->get()
+            ->toArray();
+
+        return Topic::whereIn('id',$topicIds )
+            ->latest()
+            ->get();
+    }
+
+    /**
+     * Returns a collection of all the topics used in the group.
+     *
+     * @param Group $group
+     * @return mixed
+     */
+    public function getGroupTopicsForGroup(Group $group)
+    {
+        $topicIds = $group->files()
+            ->select('topic_id')
+            ->distinct()
+            ->latest()
+            ->get()
+            ->toArray();
+
+        return Topic::whereIn('id',$topicIds )
+            ->latest()
+            ->get();
     }
 }

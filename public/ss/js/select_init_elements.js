@@ -1,47 +1,39 @@
 $(document).ready(function() {
-
-
-    /* Configuration for the notice group filtering */
-    function formatState (state) {
-        if (state.id == 0) { return  state.text; }
-        var $state = $(
-            '<span><img src="/ss/img/' + state.pic + '" class="notice-group-pic" /> ' + state.text + '</span>'
-        );
-        return $state;
-    }
-    function formatInsitutions (state) {
-        if (state.id == 0) { return  state.text; }
-        var $state = $(
-            '<span>' + state.name + ' <small class="muted"> - ' + state.slug + '</small></span>'
-        );
-        return $state;
-    }
-    var data = [
-        { id: 0, text: 'Select a group to share to', value: 1, pic: 'p1.jpg'},
-        { id: 1, text: 'bug' , value: 1, pic: 'p3.jpg'},
-        { id: 2, text: 'duplicate' , value: 1, pic: 'p2.jpg'},
-        { id: 3, text: 'invalid' , value: 1, pic: 'p1.jpg' },
-        { id: 4, text: 'wontfix' , value: 1, pic: 'p3.jpg' }
-    ];
-
-    var groupFilter = [
-        { id: 0, text: 'All groups', value: 1, pic: 'p1.jpg'},
-        { id: 1, text: 'bug' , value: 1, pic: 'p3.jpg'},
-        { id: 2, text: 'duplicate' , value: 1, pic: 'p2.jpg'},
-        { id: 3, text: 'invalid' , value: 1, pic: 'p1.jpg' },
-        { id: 4, text: 'wontfix' , value: 1, pic: 'p3.jpg' }
-    ];
-
-    $(".modal-group-selector").select2({
-        placeholder: 'Select groups to share to...',
-        data: data,
-        templateResult: formatState
+    $(".single-university-selector").select2({
+        placeholder: 'Please select your university..',
+        tokenSeparators: [',', ' ','    ']
+    });
+    $(".single-course-selector").select2({
+        placeholder: 'Please select your course...',
+        tokenSeparators: [',', ' ','    ']
+    });
+    $(".single-year-selector").select2({
+        placeholder: 'Please select the year you joined the univeristy...',
+        tokenSeparators: [',', ' ','    ']
+    });
+    $(".single-intake-selector").select2({
+        placeholder: 'Please select your intake...',
+        tokenSeparators: [',', ' ','    ']
     });
 
-    $(".notice-group-select").select2({
-        data: groupFilter,
-        templateResult: formatState
+    $(".single-group-selector").select2({
+        placeholder: 'Select group to share to...',
+        tokenSeparators: [',', ' ','    ']
     });
 
-    $(".single-institution-select").select2();
+    $(".single-group-filter").select2({
+        placeholder: 'Select group to filter by',
+        tokenSeparators: [',', ' ','    ']
+    });
+
+    $(".single-institution-select").select2({
+        placeholder: 'Select your institutions.',
+        tokenSeparators: [',', ' ','    ']
+    });
+
+    $(".topic-selector").select2({
+        placeholder: 'Select or create a topic...',
+        tags: true,
+        tokenSeparators: [',', ' ','    ']
+    });
 });

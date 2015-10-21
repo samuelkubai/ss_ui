@@ -1,53 +1,26 @@
-var noticeModule = angular.module('noticeModule', []);
+var ssModule = angular.module('skoolspace');
 
-    noticeModule.controller('NoticeCtrl', ['$scope', function($scope){
+ssModule.controller('NoticeController', ['$scope', 'noticeService', function($scope, noticeService){
 
-        $scope.creating = false;
+    //Controller variables
+    $scope.search = {};
+    $scope.pageSize = 6;
+    $scope.currentPage = 1;
+    $scope.allNotices = [];
+    $scope.noticeToBeDeleted = {};
 
-        $scope.notices = [
-            {
-                date: '12:03:28 12-04-2014',
-                title: 'Long established fact',
-                body: 'The years, sometimes by accident, sometimes on purpose (injected humour and the like).'
-            },
-            {
-                date: '12:03:28 12-04-2014',
-                title: 'Long established fact',
-                body: 'The years, sometimes by accident, sometimes on purpose (injected humour and the like).'
-            },
-            {
-                date: '12:03:28 12-04-2014',
-                title: 'Long established fact',
-                body: 'The years, sometimes by accident, sometimes on purpose (injected humour and the like).'
-            },
-            {
-                date: '12:03:28 12-04-2014',
-                title: 'Long established fact',
-                body: 'The years, sometimes by accident, sometimes on purpose (injected humour and the like).'
-            },
-            {
-                date: '12:03:28 12-04-2014',
-                title: 'Long established fact',
-                body: 'The years, sometimes by accident, sometimes on purpose (injected humour and the like).'
-            },
-            {
-                date: '12:03:28 12-04-2014',
-                title: 'Long established fact',
-                body: 'The years, sometimes by accident, sometimes on purpose (injected humour and the like).'
-            },
-            {
-                date: '12:03:28 12-04-2014',
-                title: 'Long established fact',
-                body: 'The years, sometimes by accident, sometimes on purpose (injected humour and the like).'
-            }
+    //Controller functions
+    $scope.deleteNotice = function(notice){
+      $scope.noticeToBeDeleted = notice;
+    };
 
+    $scope.noticeInit = function()
+    {
+        noticeService.getAllNotices().success(function(data){
+            $scope.allNotices = data.data;
+        });
+    };
 
-
-        ];
-
-        $scope.toggleCreationForm = function()
-        {
-          $scope.creating = !$scope.creating;
-        }
-
-    }]);
+    //Controller Initialization calls
+    $scope.noticeInit();
+}]);

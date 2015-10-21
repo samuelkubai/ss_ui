@@ -16,11 +16,12 @@ class CreateActivitiesTable extends Migration
             $table->increments('id');
 
             $table->string('type');
+
             $table->string('subject_type');
+            $table->integer('subject_id');
 
             $table->integer('user_id');
             $table->integer('group_id');
-            $table->integer('subject_id');
 
             $table->timestamps();
         });

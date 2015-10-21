@@ -2,17 +2,13 @@
     <h3>Upload Files</h3>
 
     <div class="hr-line-dashed"></div>
-    <form action="{{ url('#') }}" method="post">
+    <form action="{{ url('upload/file') }}" method="post" enctype="multipart/form-data" data-parsley-validate>
+        {!! csrf_field() !!}
         <div class="form-group">
-            <input type="file" multiple placeholder="Enter your email" class="form-control">
+            <input type="file" name="files[]" multiple placeholder="Enter your email" class="form-control" required>
         </div>
 
-        <div class="form-group">
-            <select name="topic" id="topic" class="form-control">
-                <option value="">Select a topic</option>
-                <option value=""></option>
-            </select>
-        </div>
+        @include('partials._single_topic_selector')
 
         @include('partials._single_group_selector')
         <button type="submit" class="btn btn-sm btn-primary pull-right"><i

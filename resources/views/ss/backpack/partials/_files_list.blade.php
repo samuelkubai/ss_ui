@@ -1,51 +1,65 @@
 <div class="col-lg-9 animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
-            @for($i=1; $i<21; $i++)
+            <span  dir-paginate="file in allFiles | filter:search | itemsPerPage: pageSize">
+
+
                 <div class="file-box">
                     <div class="file">
                         <a href="#">
                             <span class="corner"></span>
 
-                            <div class="icon">
-                                <i class="fa fa-file"></i>
+                            <div class="image">
+                                <img ng-src="@{{ file.path }}" alt="@{{ file.name }}' image."
+                                     class="img-responsive">
                             </div>
                             <div class="file-name">
-                                Document_20{{ $i }}
+                                @{{ file.name }}
                                 <br>
-                                <small>Added: Jan 11, 20{{ $i }}</small>
+                                <small>Topic: <b>@{{ file.topic }}</b></small>
                                 <br>
-                                <small>Topic: Tag{{ $i }}</small>
-                                <br>
-                                <small>By </small>
-                                <img src="{{ asset('ss/img/p1.jpg') }}"
-                                     alt=""
-                                     class="img-circle file-owner-pic">
-                                @if($i%3 == 0)
-                                    <small> <strong> You</strong></small>
-                                    <span class="pull-right">
-                                                <a href="{{ url('/share') }}" class="file-options-option pull-right">
-                                                    <i class="glyphicon glyphicon-share"></i>
-                                                </a>
-
-                                                <a href="#" class="file-options-option pull-right">
-                                                    <i class="glyphicon glyphicon-remove-circle"></i>
-                                                </a>
-                                            </span>
-                                @else
-                                    <small> <strong> Samuel Kubai</strong></small>
-                                    <span class="pull-right">
-                                                <a href="{{ url('/share') }}" class="file-options-option pull-right">
-                                                    <i class="glyphicon glyphicon-share"></i>
-                                                </a>
-
-                                            </span>
-                                @endif
+                                <span ng-show="moreIndex == $index">
+                                    <small>Added: <b>@{{ file.created_at }}</b></small>
+                                    <br>
+                                    <small>By: <b>@{{ file.user.name }}</b></small>
+                                    <br>
+                                </span>
+                                <small>
+                                    <button class="btn btn-xs btn-white"
+                                            ng-hide="moreIndex == $index"
+                                            ng-click="showMoreDetails($index)">
+                                        <i class="fa fa-chevron-down"></i>
+                                    </button>
+                                </small>
+                                <small>
+                                    <button class="btn btn-xs btn-white"
+                                            ng-show="moreIndex == $index"
+                                            ng-click="showLessDetails()">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </button>
+                                </small>
+                                <button type="button"
+                                        data-toggle="modal"
+                                        data-target="#share_file"
+                                        ng-click="setFileToBeShared(file)"
+                                        class="file-options-option btn btn-xs btn-white pull-right">
+                                    <i class="glyphicon glyphicon-share"></i>
+                                </button>
+                                <button type="button"
+                                        data-toggle="modal"
+                                        data-target="#delete_file"
+                                        ng-click="deleteFile(file)"
+                                        class="file-options-option btn btn-xs btn-white pull-right">
+                                    <i class="glyphicon glyphicon-remove-circle"></i>
+                                </button>
                             </div>
                         </a>
                     </div>
                 </div>
-            @endfor
+
+            </span>
         </div>
     </div>
+    <dir-pagination-controls boundary-links="true"
+                             template-url="/ss/angular/vendor/pagination/longPagination.tpl.html"></dir-pagination-controls>
 </div>

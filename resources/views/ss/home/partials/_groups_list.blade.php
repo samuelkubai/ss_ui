@@ -1,42 +1,64 @@
 <div class="col-lg-12">
-    <div class="ibox float-e-margins">
-        <div class="ibox-title">
-            <h5>Groups</h5>
-            <div class="ibox-tools">
-                <input type="checkbox" class="js-switch home-search-switch" checked />
-            </div>
-        </div>
-        <div class="ibox-content">
+    <div class="ibox float-e-margins group-list-container" ng-controller="GroupWidgetController">
+        <form action="" method="get">
+            <div class="ibox-title">
+                <h5>All Groups</h5>
 
-            <div class="input-group">
-                <input type="text" placeholder="Search" class="input-sm form-control">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-sm btn-primary"> Search</button>
-                    </span>
-            </div>
-            <ul class="home-search-list">
-                @for($i=1; $i<=6; $i++)
-                    <li>
-                        <a href="{{ url('group/') }}"><img class="home-search-pic col-md-4" src="{{ asset('/ss/img/p3.jpg') }}" alt="Group profile picture"></a>
-                         <span class="home-search-item">
-                             <a href="{{ url('group/') }}"><h5 class="home-search-title">Group search one class</h5></a>
+                <div class="ibox-tools">
+                    <div class="home-search-switch checkbox">
+                        <small class="home-search-switch-text">My Groups</small>
 
-                            <div class="home-search-follow-btn ">
-                                <span class="pull-left home-search-description">
-                                    Aliquid ex excepturi illum in tenetur! Et facere harum labore possimus recusandae vitae...
-                                </span>
-                                @if($i%2 != 0)
-                                    @include('partials._follow_btn')
-                                @else
-                                    @include('partials._joined_leave_btn')
-                                @endif
-                            </div>
+                        <label>
+                            <input type="checkbox" ng-model="search.group.joined"
+                                   ng-true-value="true" ng-false-value="">
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+            <div class="ibox-content">
+
+                <div class="input-group">
+                    <input type="text"
+                           name="q"
+                           placeholder="Search for a group..."
+                           ng-model="search.group.$"
+                           class="input-sm form-control">
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-sm btn-primary"> <i class="fa fa-search"></i></button>
                         </span>
+                </div>
 
-                    </li>
-                    <div class="hr-line-dashed home-search-divider"></div>
-                @endfor
-            </ul>
-        </div>
+                <ul class="home-search-list">
+                    <span dir-paginate="group in allGroups | filter:search | itemsPerPage: pageSize">
+                        <li >
+                            <a href="@{{ group.group.url }}">
+                                <img class="home-search-pic col-md-4"
+                                     ng-src="@{{ group.group.picture }}"
+                                     alt="@{{ group.group.name }}'s profile picture"></a>
+                             <span class="home-search-item">
+                                 <a href="@{{ group.group.url }}"><h5
+                                             class="home-search-title">@{{ group.group.name }}</h5></a>
+                                    <span class="text-navy home-search-institution"> @{{ group.group.institution }}</span>
+                                <div class="home-search-follow-btn ">
+                                    <span class="pull-left home-search-description">
+                                        @{{ group.group.description +  '...' }}
+                                    </span>
+                                    <span ng-show="group.group.joined">
+                                        @include('partials._joined_leave_btn')
+                                    </span>
+                                    <span ng-hide="group.group.joined">
+                                        @include('partials._follow_btn')
+                                    </span>
+                                </div>
+                            </span>
+                        </li>
+                        <div class="hr-line-dashed home-search-divider"></div>
+                    </span>
+                    <dir-pagination-controls boundary-links="true"
+                                             template-url="/ss/angular/vendor/pagination/dirPagination.tpl.html"></dir-pagination-controls>
+                </ul>
+            </div>
+        </form>
     </div>
 </div>

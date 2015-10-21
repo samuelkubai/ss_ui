@@ -12,9 +12,9 @@ class Group extends Model
      * @var array
      */
     protected $fillable = [
+        'name',
         'user_id',
         'username',
-        'name',
         'description',
         'institution_id',
     ];
@@ -29,17 +29,62 @@ class Group extends Model
         return $this->belongsTo('App\User');
     }
 
+    /**
+     * Links to the group's profile picture.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function profilePicture()
+    {
+        return $this->morphMany('App\ProfilePicture', 'profilable');
+    }
 
     /**
-     * Links to the group's followers.
+     * Retrieves the path to the group's profile picture.
+     *
+     * @return string
+     */
+    public function profilePictureSource()
+    {
+
+        $profile = $this->profilePicture()->first();
+
+        if($profile != null)
+            return $profile->path;
+
+        return '/ss/img/profile_big.jpg';
+    }
+
+    /**
+     * Links to the group's members.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function followers()
+    public function members()
     {
-        return $this->belongsToMany('App\User', 'follows', 'group_id', 'user_id')->withTimestamps();
+        return $this->belongsToMany('App\User')->withTimestamps();
     }
 
+    /**
+     * Checks if a user is a member of the group.
+     *
+     * @param User $user
+     * @return bool
+     */
+    public function isAMember(User $user)
+    {
+        $membersId = $this->members()->lists('id');
+
+        foreach ($membersId as $memberId)
+        {
+            if($user->id == $memberId)
+            {
+
+                return true;
+            }
+        }
+        return false;
+    }
     /**
      * Gets the number of members of the group.
      *

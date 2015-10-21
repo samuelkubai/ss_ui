@@ -32,4 +32,14 @@ class Institution extends Model
     {
         return $this->hasMany('App\Group');
     }
+
+    /**
+     * Returns the users that belong to the institution.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function users()
+    {
+        return $this->hasMany('App\User');
+    }
 }

@@ -8,13 +8,13 @@
     </div>
 
     <div class="ibox-content">
-        <form action="{{ url('/group/'.$group->id.'/update/') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ url('/group/'.$group->username.'/update/') }}" method="POST" enctype="multipart/form-data">
             {!! csrf_field() !!}
             <div>
                 <div class=" row form-group ">
                     <div class="col-md-12">
                         <label class="">Change Group Profile Picture:</label>
-                        <input type="file" name="profile" class="form-control">
+                        <input type="file" name="profilePicture" class="form-control">
                     </div>
                 </div>
 
@@ -38,10 +38,8 @@
                         <div class="chat-message-form">
                             <div class="form-group">
                                 <textarea class="form-control message-input" name="description"
-                                          placeholder="Brief Description"
-                                          required="required">
-                                    {{ $group->description }}
-                                </textarea>
+                                          placeholder="Brief Description of the group..."
+                                          required="required">{{ $group->description }}</textarea>
                             </div>
                         </div>
                     </div>
@@ -63,8 +61,7 @@
 
     <div class="ibox-content">
         <form action="http://app.skoolspace.com/ss/update/administrator" method="POST">
-            <input type="hidden" name="_token" value="SGRBWChxOYbjaqIF8RoWzIvb46mHlOdANnSJkhBR">
-
+            {!! csrf_field() !!}
             <div>
                 <div class="row form-group">
                     <div class="col-md-12">
@@ -80,6 +77,6 @@
     </div>
 </div>
 <div class="col-md-12">
-    <a href="http://app.skoolspace.com/ss/delete" class="btn btn-danger btn-sm btn-block"
+    <a href="{{ url('/group/'.$group->username.'/delete') }}" class="btn btn-danger btn-sm btn-block"
        onclick="return confirm_deletion(this);"><i class="fa fa-"></i> Delete Group</a>
 </div>

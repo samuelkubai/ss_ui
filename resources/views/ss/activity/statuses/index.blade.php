@@ -1,18 +1,36 @@
 <div>
-    <div class="feed-activity-list">
-        @for($i = 1; $i < 7; $i++)
-            @if($i%2 == 0)
-                @include('ss.activity.statuses.file')
-            @endif
-
-            @if($i%2 != 0)
-                @include('ss.activity.statuses.notice')
-            @endif
-
-            @if($i%3 == 0)
-                @include('ss.activity.statuses.forum')
-            @endif
-        @endfor
+    <div class="feed-activity-list" >
+        <div class="feed-element" ng-repeat="activity in activities">
+            <span ng-show="fileActivity(activity)">
+                @include('ss.activity.statuses.add_file')
+            </span>
+            <span ng-hide="fileActivity(activity)">
+                @include('ss.activity.statuses.add_notice')
+            </span>
+        </div>
     </div>
-    <button class="btn btn-primary btn-block m more-posts-btn"><i class="fa fa-arrow-down"></i> Show More</button>
+    <button
+            class="btn btn-primary btn-block m more-posts-btn"
+            ladda="loadingPosts"
+            data-style="expand-left"
+            ng-show="hasMoreActivities"
+            ng-click="loadMore()">
+        <span ng-hide="loadingPosts">
+            <i class="fa fa-arrow-down" ></i> Show More
+        </span>
+        <span ng-show="loadingPosts">
+            <i class="fa fa-spinner fa-spin"></i> Loading Posts
+        </span>
+
+    </button>
+    <button
+            disabled
+            class="btn btn-primary btn-block m more-posts-btn"
+            ladda="loadingPosts"
+            data-style="expand-left"
+            ng-hide="hasMoreActivities">
+        <span ng-hide="loadingPosts">
+             No More Posts
+        </span>
+    </button>
 </div>

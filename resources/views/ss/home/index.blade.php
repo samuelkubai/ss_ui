@@ -13,13 +13,8 @@
                          data-placement="bottom"
                          title="Compiled activities from all your groups.">
                         <h5 style="text-align: center">Activity Feed</h5>
-                        <span class="pull-right mobile-nav">
-                            <a href="{{ url('groups') }}" class="btn btn-xs btn-white"><i class="fa fa-group"></i></a>
-                            <a href="{{ url('backpack') }}" class="btn btn-xs btn-info"><i class="fa fa-briefcase"></i></a>
-                        </span>
-
                     </div>
-                    <div class="ibox-content">
+                    <div class="ibox-content" ng-controller="HomeController">
                         @include('ss.activity.statuses.index')
                     </div>
                 </div>
