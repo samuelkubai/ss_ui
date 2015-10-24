@@ -1,6 +1,6 @@
 <div>
-    <div class="feed-activity-list" >
-        <div class="feed-element" ng-repeat="activity in activities">
+    <div class="feed-activity-list" ng-hide="loading == true">
+        <div class="feed-element fx-fade-down fx-speed-800" ng-repeat="activity in activities">
             <span ng-show="fileActivity(activity)">
                 @include('ss.activity.statuses.add_file')
             </span>
@@ -13,6 +13,9 @@
             <h4 class="text-center">you can try out skoolspace features and enjoy various activities </h4>
         </span>
 
+    </div>
+    <div class="feed-activity-list" ng-show="loading == true">
+        @include('partials._circular_loader')
     </div>
     <button
             class="btn btn-primary btn-block m more-posts-btn"

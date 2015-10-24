@@ -67,10 +67,7 @@
             <h4 class="text-center" ng-show="filteredFiles.length == 0 && loading">...feel free to upload more files.</h4>
         </div>
         <div class="col-lg-12" ng-show="loading == true">
-                <h1 class="text-center">
-                    <img src="{{ asset('ss/icons/loading.GIF') }}" alt="LOADER" class="image-responsive">
-                    loading...
-                </h1>
+                @include('partials._colorful_loader')
         </div>
     </div>
 

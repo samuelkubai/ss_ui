@@ -4,12 +4,13 @@ ssModule.controller('HomeController', ['$scope', 'activityService', 'fileService
     function ($scope, activityService, fileService, toaster) {
 
         //Controller variables.
-        $scope.activities = [];
+        $scope.userId = '';
         $scope.lastPage = 1;
+        $scope.loading = true;
+        $scope.activities = [];
         $scope.addingIndex = null;
         $scope.loadingPosts = false;
         $scope.hasMoreActivities = true;
-        $scope.userId = '';
 
         //Controller functions.
         $scope.addToBackpack = function (file, index) {
@@ -28,6 +29,7 @@ ssModule.controller('HomeController', ['$scope', 'activityService', 'fileService
         };
 
         $scope.init = function () {
+            $scope.loading = true;
             $scope.lastpage = 1;
             var params = {page: $scope.lastpage};
             var userId = $('#user').data('id');
@@ -35,6 +37,7 @@ ssModule.controller('HomeController', ['$scope', 'activityService', 'fileService
                 $scope.activities = data.data;
                 $scope.currentpage = data.paginator.current_page;
                 $scope.hasMoreActivities = data.paginator.has_more;
+                $scope.loading = false;
             });
         };
 

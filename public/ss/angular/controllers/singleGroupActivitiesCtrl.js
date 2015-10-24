@@ -3,15 +3,17 @@ var ssModule = angular.module('skoolspace');
 ssModule.controller('SingleGroupActivitiesController', ['$scope','activityService', function($scope, activityService){
 
     //Controller variables.
-    $scope.activities = [];
     $scope.lastPage = 1;
+    $scope.loading = true;
+    $scope.activities = [];
+    $scope.groupUsername = '';
+    $scope.groupUsername = '';
     $scope.loadingPosts = false;
-    $scope.groupUsername = '';
     $scope.hasMoreActivities = true;
-    $scope.groupUsername = '';
 
     //Controller functions
     $scope.init = function() {
+        $scope.loading = true;
         $scope.lastpage=1;
         var params = {page:  $scope.lastpage};
         var groupUsername = $('#group').data('name');
@@ -19,6 +21,7 @@ ssModule.controller('SingleGroupActivitiesController', ['$scope','activityServic
             $scope.activities = data.data;
             $scope.currentpage = data.paginator.current_page;
             $scope.hasMoreActivities = data.paginator.has_more;
+            $scope.loading = false;
         });
     };
 

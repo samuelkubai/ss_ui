@@ -72,6 +72,7 @@ class ActivityApiController extends Controller
      */
     public function groupActivities($groupUsername)
     {
+        sleep(5);
         $group = $this->groupRepository->findGroupWithUsername($groupUsername);
         $activities = $this->activityRepository->getGroupActivitiesFor($group);
         return response([
