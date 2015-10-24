@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateAdministratorRequest;
 use App\Search\Search;
 use App\Http\Requests;
 use App\Http\Requests\CreateGroupRequest;
@@ -110,6 +111,33 @@ class GroupController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * Update the group's administrator.
+     *
+     * @param $groupUsername
+     * @param UpdateAdministratorRequest $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function updateAdministrator($groupUsername, UpdateAdministratorRequest $request)
+    {
+        if(Input::get('email') == '')
+        {
+            Toastr::success("Please fill in the email of the member you want to be administrator.");
+            return redirect()->back();
+        }
+        $targetGroup = $this->groupRepository
+            ->findGroupWithUsername($groupUsername);
+
+        $response = $this->groupRepository
+            ->updateAdministratorOf($targetGroup, Input::get('email'));
+
+        if($response)
+        {
+            Toastr::success($targetGroup->name. "'administrator has been successfully changed.");
+            return redirect('/group/'.$targetGroup->username);
+        }
+        return redirect()->back();
+    }
     /**
      * Remove the specified resource from storage.
      *

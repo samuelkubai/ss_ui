@@ -37,7 +37,7 @@ class ActivityTransformer extends BaseTransformer
                     'id' => $activity->user->id,
                     'picture' => asset($activity->user->profilePictureSource()),
                     'name' => $activity->user->first_name. ' '.$activity->user->last_name,
-                    'url' => asset('group/'.$activity->group->username.'/member/'.$activity->user->id),
+                    'url' => asset('/'.$activity->group->username.'/'.$activity->user->id.'/member/'),
                 ],
                 'group' => [
                     'id' => $activity->group->id,
@@ -62,7 +62,7 @@ class ActivityTransformer extends BaseTransformer
                     'id' => $activity->user->id,
                     'picture' => asset($activity->user->profilePictureSource()),
                     'name' => $activity->user->first_name. ' '.$activity->user->last_name ,
-                    'url' => asset('group/'.$activity->group->username.'/member/'.$activity->user->id),
+                    'url' => asset('/'.$activity->group->username.'/'.$activity->user->id.'/member/'),
                 ],
                 'group' => [
                     'id' => $activity->group->id,

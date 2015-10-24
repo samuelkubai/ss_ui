@@ -60,8 +60,7 @@
     </div>
 
     <div class="ibox-content">
-        <form action="http://app.skoolspace.com/ss/update/administrator" method="POST">
-            {!! csrf_field() !!}
+        <form action="{{ url('/group/'.$group->username.'/update/administrator') }}" method="get">
             <div>
                 <div class="row form-group">
                     <div class="col-md-12">
@@ -76,7 +75,4 @@
         </form>
     </div>
 </div>
-<div class="col-md-12">
-    <a href="{{ url('/group/'.$group->username.'/delete') }}" class="btn btn-danger btn-sm btn-block"
-       onclick="return confirm_deletion(this);"><i class="fa fa-"></i> Delete Group</a>
-</div>
+

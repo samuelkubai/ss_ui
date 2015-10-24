@@ -4,6 +4,7 @@ ssModule.controller('NoticeController', ['$scope', 'noticeService', function($sc
 
     //Controller variables
     $scope.search = {};
+    $scope.loading = true;
     $scope.pageSize = 6;
     $scope.currentPage = 1;
     $scope.allNotices = [];
@@ -16,8 +17,10 @@ ssModule.controller('NoticeController', ['$scope', 'noticeService', function($sc
 
     $scope.noticeInit = function()
     {
+        $scope.loading = true;
         noticeService.getAllNotices().success(function(data){
             $scope.allNotices = data.data;
+            $scope.loading = false;
         });
     };
 

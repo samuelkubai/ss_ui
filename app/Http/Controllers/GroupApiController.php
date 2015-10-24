@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Api\ActivityTransformer;
 use App\Api\BackPackTransformer;
 use App\Api\FileTransformer;
 use App\Api\GroupTransformer;
@@ -7,6 +8,7 @@ use App\Api\MemberTransformer;
 use App\Api\TopicTransformer;
 use App\Repos\File\FileRepository;
 use App\Repos\Group\GroupRepository;
+use App\Repos\User\UserRepository;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -38,6 +40,14 @@ class GroupApiController extends Controller
      * @var MemberTransformer
      */
     private $memberTransformer;
+    /**
+     * @var ActivityTransformer
+     */
+    private $activityTransformer;
+    /**
+     * @var UserRepository
+     */
+    private $userRepository;
 
     /**
      * Initializes all the controller variables.
@@ -46,11 +56,14 @@ class GroupApiController extends Controller
      * @param GroupTransformer $transformer
      * @param FileRepository $fileRepository
      * @param FileTransformer $fileTransformer
+     * @param ActivityTransformer $activityTransformer
+     * @param UserRepository $userRepository
      * @param TopicTransformer $topicTransformer
      * @param MemberTransformer $memberTransformer
      */
     function __construct(GroupRepository $groupRepository, GroupTransformer $transformer,
                          FileRepository $fileRepository, FileTransformer $fileTransformer,
+                         ActivityTransformer $activityTransformer,UserRepository $userRepository,
                          TopicTransformer $topicTransformer, MemberTransformer $memberTransformer)
     {
         $this->transformer = $transformer;
@@ -59,6 +72,8 @@ class GroupApiController extends Controller
         $this->groupRepository = $groupRepository;
         $this->topicTransformer = $topicTransformer;
         $this->memberTransformer = $memberTransformer;
+        $this->activityTransformer = $activityTransformer;
+        $this->userRepository = $userRepository;
     }
     /**
      * Display a listing of the resource.
@@ -134,20 +149,4 @@ class GroupApiController extends Controller
         ], 200, []);
     }
 
-    /**
-     * Gets the members of a specific group.
-     *
-     * @param $groupUsername
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
-     */
-    public function groupMembers($groupUsername)
-    {
-        $group = $this->groupRepository->findGroupWithUsername($groupUsername);
-        $members = $this->groupRepository
-            ->membersOfGroup($group);
-
-        return response([
-            'data' => $this->memberTransformer->transform($members->toArray()),
-        ], 200, []);
-    }
 }

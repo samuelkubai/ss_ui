@@ -93,7 +93,7 @@ trait StoreFile {
             'user_id' => $file->user->id
         ]);
 
-         $this->linkToSource($savedFile, $file->source->id);
+         $this->linkToSource($savedFile, isset($file->source->id)?$file->source->id:null);
 
         return true;
     }

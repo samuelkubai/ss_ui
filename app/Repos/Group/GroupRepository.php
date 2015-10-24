@@ -1,5 +1,6 @@
 <?php namespace App\Repos\Group;
 
+use App\Activity;
 use App\Http\Requests\UpdateGroupRequest;
 use App\Suggestion;
 use App\User;
@@ -235,15 +236,32 @@ class GroupRepository
     }
 
     /**
-     * Gets all the members of a group ordered by their first name.
+ * Gets all the members of a group ordered by their first name.
+ *
+ * @param Group $group
+ * @param int $howMany
+ * @return mixed
+ */
+    public function membersOfGroup(Group $group, $howMany = 10)
+    {
+        return $group->members()->with('institution', 'course')->orderBy('first_name')->paginate($howMany);
+    }
+
+    /**
+     * Gets activities for a certain group member.
      *
+     * @param User $user
      * @param Group $group
      * @param int $howMany
      * @return mixed
      */
-    public function membersOfGroup(Group $group, $howMany = 10)
+    public function activitiesForMember(User $user, Group $group, $howMany = 9)
     {
-        return $group->members()->with('institution', 'course')->orderBy('first_name')->get();
+        return Activity::with('user', 'group', 'subject')
+            ->where('group_id', $group->id)
+            ->where('user_id', $user->id)
+            ->latest()
+            ->simplePaginate($howMany);
     }
 
     /**
@@ -304,5 +322,26 @@ class GroupRepository
             'institution_id' => $user->institution->id,
             'year' => $user->year,
         ]);
+    }
+
+    /**
+     * Change the group's administrator.
+     *
+     * @param Group $group
+     * @param $email
+     * @return bool
+     */
+    public function updateAdministratorOf(Group $group, $email)
+    {
+        $user = User::where('email', $email)->first();
+        if($group->isAMember($user))
+        {
+            $group->update([
+                'user_id' => $user->id,
+            ]);
+            return true;
+        }
+        Toastr::error('The user is not a member of the group.');
+        return false;
     }
 } 

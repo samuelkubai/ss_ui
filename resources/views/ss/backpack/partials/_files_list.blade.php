@@ -63,8 +63,8 @@
                         </a>
                     </div>
                 </div>
-            <h1 class="text-center" ng-show="filteredFiles.length == 0 && loading">No Files found</h1>
-            <h4 class="text-center" ng-show="filteredFiles.length == 0 && loading">...feel free to upload more files.</h4>
+            <h1 class="text-center" ng-show="filteredFiles.length == 0 && loading == false">No Files found</h1>
+            <h4 class="text-center" ng-show="filteredFiles.length == 0 && loading == false">...feel free to upload more files.</h4>
         </div>
         <div class="col-lg-12" ng-show="loading == true">
                 @include('partials._colorful_loader')

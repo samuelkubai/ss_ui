@@ -12,6 +12,6 @@ class MemberTransformer extends BaseTransformer
      */
     public function transform($member)
     {
-        return $member;
+        return $member->id;
     }
 }

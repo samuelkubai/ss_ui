@@ -297,8 +297,7 @@ a:hover.back-to-top {
     padding-top: 35px!important;
 }
 .group-list-container{
-    position: fixed!important;
-    top: 0;
+
 }
 .nav-btn{
     margin-bottom: 10px;
@@ -338,7 +337,7 @@ a:hover.back-to-top {
     color: white;
     background-color: lightseagreen;
 }
-@media only screen and (max-width: 750px){
+@media only screen and (max-width: 989px){
 
     .feed-actions-list li{
         display: inline;

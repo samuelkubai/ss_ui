@@ -95,26 +95,6 @@ class Group extends Model
         return $this->followers()->get()->count();
     }
 
-    /**
-     * Checks if the user is a member of the group.
-     *
-     * @param $user
-     * @return bool
-     */
-    public function isFollowedBy($user)
-    {
-        $followersId = $this->followers()->lists('user_id');
-
-        foreach($followersId as $followerId)
-        {
-            if($user->id == $followerId)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
 
     /**
      * Checks if the user is the group's administrator.

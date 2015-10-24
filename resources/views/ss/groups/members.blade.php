@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <div class="wrapper wrapper-content" style="padding-top: 2px;" ng-controller="SingleGroupMembersController">
+    <div class="wrapper wrapper-content" style="padding-top: 2px;">
         <div class="row animated fadeInRight">
             <div class="col-md-1">
                 @include('ss.groups.partials._menu_nav')

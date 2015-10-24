@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <div class="wrapper wrapper-content" style="padding-top: 2px;">
+    <div class="wrapper wrapper-content" style="padding-top: 2px;" ng-controller="SingleGroupMemberController">
         <div class="row animated fadeInRight">
             <div class="col-md-1">
                 @include('ss.groups.partials._menu_nav')
@@ -16,7 +16,7 @@
                         <span class="pull-right">
                             <a href="#">
                                 <img
-                                        src="{{ asset('ss/img/p2.jpg') }}"
+                                        src="{{ asset(asset($member->profilePictureSource())) }}"
                                         alt="Group class second 2013's picture"
                                         class="activity-group-pic">
                             </a>
@@ -24,6 +24,9 @@
 
                     </div>
                     <div class="ibox-content">
+                        <input type="hidden"
+                               id="user"
+                               data-id="{{ $member->id }}">
                         @include('ss.activity.statuses.index')
                     </div>
                 </div>

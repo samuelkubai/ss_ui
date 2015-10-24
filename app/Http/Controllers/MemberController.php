@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Repos\Group\GroupRepository;
+use App\Repos\User\UserRepository;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -15,15 +17,21 @@ class MemberController extends Controller
      * @var GroupRepository
      */
     private $groupRepository;
+    /**
+     * @var UserRepository
+     */
+    private $userRepository;
 
     /**
      * Initialize the controller's variables.
      * @param GroupRepository $groupRepository
+     * @param UserRepository $userRepository
      */
-    function __construct(GroupRepository $groupRepository)
+    function __construct(GroupRepository $groupRepository, UserRepository $userRepository)
     {
 
         $this->groupRepository = $groupRepository;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -37,7 +45,7 @@ class MemberController extends Controller
         $group = $this->groupRepository
             ->findGroupWithUsername($groupUsername);
         $members = $this->groupRepository
-            ->membersOfGroup($group);
+            ->membersOfGroup($group, 9);
 
         $title = $group->name. "'s Members";
 
@@ -83,9 +91,10 @@ class MemberController extends Controller
     {
         $group = $this->groupRepository
             ->findGroupWithUsername($groupUsername);
+        $member = $this->userRepository->findUser($userId);
 
         $title = 'Group  Member';
-        return view('ss.groups.member', compact('title', 'group'));
+        return view('ss.groups.member', compact('title', 'group', 'member'));
     }
 
     /**

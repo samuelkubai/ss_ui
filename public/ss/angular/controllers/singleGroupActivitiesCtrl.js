@@ -1,6 +1,7 @@
 var ssModule = angular.module('skoolspace');
 
-ssModule.controller('SingleGroupActivitiesController', ['$scope','activityService', function($scope, activityService){
+ssModule.controller('SingleGroupActivitiesController', ['$scope','activityService','fileService','toaster',
+    function($scope, activityService, fileService, toaster){
 
     //Controller variables.
     $scope.lastPage = 1;
@@ -12,6 +13,21 @@ ssModule.controller('SingleGroupActivitiesController', ['$scope','activityServic
     $scope.hasMoreActivities = true;
 
     //Controller functions
+    $scope.addToBackpack = function (file, index) {
+        $scope.addingIndex = index;
+        var fileId = file.id;
+        var backpackPromise = fileService.addToBackpack(fileId);
+        backpackPromise.success(function () {
+            $scope.addingIndex = null;
+            file.inBackpack = true;
+            toaster.pop("success", "", "The file was successfully added to you backpack.");
+        });
+        backpackPromise.error(function () {
+            $scope.addingIndex = null;
+            toaster.pop("errors", "", "The file is already in your backpack.");
+        });
+    };
+
     $scope.init = function() {
         $scope.loading = true;
         $scope.lastpage=1;

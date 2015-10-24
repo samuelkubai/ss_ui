@@ -4,10 +4,13 @@ ssModule.controller('SingleGroupFilesController', ['$scope','fileService', 'toas
     function($scope, fileService, toaster){
 
         //Controller variables.
+        $scope.search = {};
         $scope.pageSize = 12;
         $scope.allFiles = [];
+        $scope.loading = true;
         $scope.currentPage = 1;
-        $scope.search = {};
+        $scope.numberOfFiles = 9;
+
 
         $scope.moreIndex = null;
         $scope.topicIndex = null;
@@ -19,6 +22,10 @@ ssModule.controller('SingleGroupFilesController', ['$scope','fileService', 'toas
         $scope.fileToBeAddedToBagPack = {};
 
         //Controller functions
+        $scope.showMoreFiles = function(){
+            $scope.numberOfFiles += 6;
+        };
+
         $scope.deleteFile = function(file)
         {
             $scope.fileToBeDeleted = file;
@@ -65,9 +72,11 @@ ssModule.controller('SingleGroupFilesController', ['$scope','fileService', 'toas
         };
 
         $scope.fileInit = function() {
+            $scope.loading = true;
             var groupUsername = $('#group').data('name');
             fileService.getAllGroupFiles(groupUsername).success(function(data) {
                 $scope.allFiles = data.data;
+                $scope.loading = false;
             });
 
             fileService.getAllGroupTopics(groupUsername).success(function(data) {

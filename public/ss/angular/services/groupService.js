@@ -6,11 +6,13 @@ ssModule.factory('groupService', ['httpService',function(httpService){
         return httpService.get('all/groups')
     };
 
-    var getAllGroupMembers = function(groupUsername){
-        return httpService.get('/group/members/' + groupUsername)
+    var getGroupMemberActivities = function(groupUsername, userId, params){
+        var stringGroupUsername = String(groupUsername);
+        var stringUserId = String(userId);
+        return httpService.get('group/' + stringGroupUsername + '/member/' + stringUserId, params)
     };
     return{
         getAllGroups: getAllGroups,
-        getAllGroupMembers: getAllGroupMembers
+        getGroupMemberActivities: getGroupMemberActivities
     };
 }]);

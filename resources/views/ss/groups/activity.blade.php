@@ -17,7 +17,7 @@
                         <span class="pull-right">
                             <a href="#">
                                 <img
-                                        src="{{ asset('ss/img/p2.jpg') }}"
+                                        src="{{ asset($group->profilePictureSource()) }}"
                                         alt="Group class second 2013's picture"
                                         class="activity-group-pic">
                             </a>

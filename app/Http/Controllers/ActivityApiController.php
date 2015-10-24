@@ -54,7 +54,7 @@ class ActivityApiController extends Controller
     public function userActivities($userId = null)
     {
         $user = $this->userRepository->findUser($userId);
-        $activities = $this->activityRepository->getAllActivitiesFor($user, 5);
+        $activities = $this->activityRepository->getAllActivitiesFor($user, 8);
         return response([
             'data' => $this->transformer->transformCollection($activities->all()),
             'paginator' => [
@@ -72,9 +72,32 @@ class ActivityApiController extends Controller
      */
     public function groupActivities($groupUsername)
     {
-        sleep(5);
         $group = $this->groupRepository->findGroupWithUsername($groupUsername);
-        $activities = $this->activityRepository->getGroupActivitiesFor($group);
+        $activities = $this->activityRepository->getGroupActivitiesFor($group, 8);
+        return response([
+            'data' => $this->transformer->transformCollection($activities->all()),
+            'paginator' => [
+                'current_page' => $activities->currentPage(),
+                'has_more' => $activities->hasMorePages(),
+                'limit' => $activities->perPage(),
+            ]
+        ], 200, []);
+    }
+
+    /**
+     * Gets the activities of a  member of a specific group.
+     *
+     * @param $groupUsername
+     * @param $userId
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public function memberActivities($groupUsername, $userId)
+    {
+        $user = $this->userRepository->findUser($userId);
+        $group = $this->groupRepository->findGroupWithUsername($groupUsername);
+        $activities = $this->groupRepository
+            ->activitiesForMember($user, $group, 8);
+
         return response([
             'data' => $this->transformer->transformCollection($activities->all()),
             'paginator' => [

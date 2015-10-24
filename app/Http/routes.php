@@ -46,6 +46,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     post('/group/{group}/update', 'GroupController@update');
 
+    get('/group/{group}/update/administrator', 'GroupController@updateAdministrator');
+
     get('/group/{group}/delete', 'GroupController@destroy');
 
     /* 3. API */
@@ -60,7 +62,7 @@ Route::group(['middleware' => 'auth'], function () {
     /* 5. Group members */
     get('/group/{group}/members', 'MemberController@index');
 
-    get('/group/{group}/member/{user}', 'MemberController@show');
+    get('/{group}/{user}/member', 'MemberController@show');
 
 
     /*
@@ -229,7 +231,7 @@ Route::group(['prefix' => 'api/ss/'], function () {
     get('/all/backpack/topics', 'BackpackApiController@backpackTopics');
     get('/group/files/{groupUsername}', 'GroupApiController@groupFiles');
     get('/group/topics/{groupUsername}', 'GroupApiController@groupTopics');
-    get('/group/members/{groupUsername}', 'GroupApiController@groupMembers');
+    get('/group/{groupUsername}/member/{user}/', 'ActivityApiController@memberActivities');
     get('user/activities/{userId}', 'ActivityApiController@userActivities');
     get('group/activities/{groupId}', 'ActivityApiController@groupActivities');
     get('/share/file/{fileId}/group/{groupUsername}', 'BackpackApiController@shareFileToGroup');

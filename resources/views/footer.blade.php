@@ -11,7 +11,7 @@
 <script src="{{ asset('/ss/angular/vendor/angular/angular.min.js') }}"></script>
 <script src="{{ asset('/ss/js/jcs-auto-validate.min.js') }}"></script>
 <script src="{{ asset('ss/angular/vendor/pagination/dirPagination.js') }}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/TweenMax.min.js"></script>
+<script src="{{ asset('ss/angular/vendor/TweenMax/TweenMax.min.js') }}"></script>
 <script src="{{ asset('ss/angular/vendor/ngFx/ngFx.min.js') }}"></script>
 <script src="{{ asset('ss/angular/vendor/toaster-master/toaster.min.js') }}"></script>
 <script src="{{ asset('/ss/angular/vendor/animate/angular-animate.min.js') }}"></script>
@@ -32,7 +32,7 @@
     <script src="{{ asset('/ss/angular/controllers/noticeCtrl.js') }}"></script>
     <script src="{{ asset('/ss/angular/controllers/backpackCtrl.js') }}"></script>
     <script src="{{ asset('/ss/angular/controllers/singleGroupFilesCtrl.js') }}"></script>
-    <script src="{{ asset('/ss/angular/controllers/singleGroupMembersCtrl.js') }}"></script>
+    <script src="{{ asset('/ss/angular/controllers/singleGroupMemberCtrl.js') }}"></script>
     <script src="{{ asset('/ss/angular/controllers/singleGroupActivitiesCtrl.js') }}"></script>
 
 

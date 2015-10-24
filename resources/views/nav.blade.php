@@ -5,12 +5,6 @@
             <span class="fa fa-bars"></span>
         </button>
         <a href="{{ url('/') }}" class="navbar-brand">SS+</a>
-        <form role="search" class="navbar-form-custom" action="search_results.html">
-            <div class="form-group">
-                <input type="text" placeholder="Search your backpack..." class="top-search form-control" name="top-search" id="top-search">
-            </div>
-        </form>
-
     </div>
     <div class="navbar-collapse collapse" id="navbar">
 

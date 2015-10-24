@@ -36,6 +36,7 @@
             <i class="fa fa-users"></i>
         </a>
     </li>
+    @if($group->isAdministrator(\Auth::user()))
     <li class="">
         <a href="{{ url('group/'.$group->username.'/update') }}"
            class="btn btn-lg btn-rounded
@@ -48,6 +49,7 @@
             <i class="fa fa-edit"></i>
         </a>
     </li>
+    @endif
 @else
     <li class="">
         <a href="{{ url('group/' . $group->username . '/join') }}"
