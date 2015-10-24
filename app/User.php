@@ -168,23 +168,35 @@ class User extends Model implements AuthenticatableContract,
 
     /**
      * Checks if the file is in the user's backpack.
-     * @param $fileId
+     * @param File $file
      * @return bool
      */
-    public function inMyBackPack($fileId)
+    public function inMyBackPack(File $file)
     {
-        $myFilesIds = $this->myfiles()->lists('id');
+        $fileSources = $this->myFiles()->lists('source_id');
 
-        foreach ($myFilesIds as $myFileId)
+        foreach($fileSources as $fileSource)
         {
-            if($myFileId == $fileId)
-            {
+
+            if($file->source_id  == $fileSource && $file->source_id != null)
                 return true;
-            }
         }
         return false;
-
     }
+
+    /**
+     * Checks if the file is the user's.
+     *
+     * @param File $file
+     * @return bool
+     */
+    public function isMyFile(File $file)
+    {
+        if($file->user->id == $this->id)
+            return true;
+        return false;
+    }
+
     /**
      * Links to the notices the user has created.
      *

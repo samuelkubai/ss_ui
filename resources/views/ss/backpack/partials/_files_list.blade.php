@@ -1,20 +1,27 @@
 <div class="col-lg-9 animated fadeInRight">
     <div class="row">
-        <div class="col-lg-12">
-            <span  dir-paginate="file in allFiles | filter:search | itemsPerPage: pageSize">
-
-
-                <div class="file-box">
+        <div class="col-lg-12" ng-hide="loading == true">
+                <div class="file-box fx-zoom-down fx-speed-800"
+                     ng-repeat="file in filteredFiles = (searchedFiles = (allFiles | filter:search) | limitTo: numberOfFiles)">
                     <div class="file">
                         <a href="#">
                             <span class="corner"></span>
-
-                            <div class="image">
-                                <img ng-src="@{{ file.path }}" alt="@{{ file.name }}' image."
-                                     class="img-responsive">
-                            </div>
+                            <a href="@{{ file.path }}">
+                                <div class="icon" ng-show="file.icon">
+                                    <img ng-src="@{{ file.icon }}" alt="@{{ file.name }}' image.">
+                                </div>
+                            </a>
+                            <a href="@{{ file.path }}">
+                                <div class="image" ng-hide="file.icon">
+                                    <img ng-src="@{{ file.path }}" alt="@{{ file.name }}' image."
+                                         class="img-responsive">
+                                </div>
+                            </a>
                             <div class="file-name">
-                                @{{ file.name }}
+                                <a href="@{{ file.path }}">
+                                    @{{ file.name | cut:false:fileNameLength:' ....' }}
+                                </a>
+
                                 <br>
                                 <small>Topic: <b>@{{ file.topic }}</b></small>
                                 <br>
@@ -56,10 +63,25 @@
                         </a>
                     </div>
                 </div>
-
-            </span>
+            <h1 class="text-center" ng-show="filteredFiles.length == 0 && loading">No Files found</h1>
+            <h4 class="text-center" ng-show="filteredFiles.length == 0 && loading">...feel free to upload more files.</h4>
+        </div>
+        <div class="col-lg-12" ng-show="loading == true">
+                <h1 class="text-center">
+                    <img src="{{ asset('ss/icons/loading.GIF') }}" alt="LOADER" class="image-responsive">
+                    loading...
+                </h1>
         </div>
     </div>
-    <dir-pagination-controls boundary-links="true"
-                             template-url="/ss/angular/vendor/pagination/longPagination.tpl.html"></dir-pagination-controls>
+
+    <nav class="text-center" ng-hide="filteredFiles.length == 0">
+        <ul class="pager">
+            <li ng-hide="filteredFiles.length >= searchedFiles.length ">
+                <a href="" ng-click="showMoreFiles()"><i class="fa fa-spinner"></i> Load More Files</a>
+            </li>
+            <li ng-show="filteredFiles.length >= searchedFiles.length" class="disabled">
+                <a>No More Files </a>
+            </li>
+        </ul>
+    </nav>
 </div>

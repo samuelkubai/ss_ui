@@ -1,4 +1,4 @@
-<a href="/" class="pull-left">
+<a href="@{{ activity.user.url }}" class="pull-left">
     <img alt="image" class="img-circle" ng-src="@{{ activity.user.picture }}">
 </a>
 

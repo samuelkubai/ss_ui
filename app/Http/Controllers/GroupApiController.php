@@ -3,6 +3,7 @@
 use App\Api\BackPackTransformer;
 use App\Api\FileTransformer;
 use App\Api\GroupTransformer;
+use App\Api\MemberTransformer;
 use App\Api\TopicTransformer;
 use App\Repos\File\FileRepository;
 use App\Repos\Group\GroupRepository;
@@ -33,6 +34,10 @@ class GroupApiController extends Controller
      * @var TopicTransformer
      */
     private $topicTransformer;
+    /**
+     * @var MemberTransformer
+     */
+    private $memberTransformer;
 
     /**
      * Initializes all the controller variables.
@@ -42,16 +47,18 @@ class GroupApiController extends Controller
      * @param FileRepository $fileRepository
      * @param FileTransformer $fileTransformer
      * @param TopicTransformer $topicTransformer
+     * @param MemberTransformer $memberTransformer
      */
     function __construct(GroupRepository $groupRepository, GroupTransformer $transformer,
                          FileRepository $fileRepository, FileTransformer $fileTransformer,
-                         TopicTransformer $topicTransformer)
+                         TopicTransformer $topicTransformer, MemberTransformer $memberTransformer)
     {
         $this->transformer = $transformer;
         $this->fileRepository = $fileRepository;
         $this->fileTransformer = $fileTransformer;
         $this->groupRepository = $groupRepository;
         $this->topicTransformer = $topicTransformer;
+        $this->memberTransformer = $memberTransformer;
     }
     /**
      * Display a listing of the resource.
@@ -124,6 +131,23 @@ class GroupApiController extends Controller
         $topics = $this->fileRepository->getGroupTopicsForGroup($group);
         return response([
             'data' => $this->topicTransformer->transformCollection($topics->all()),
+        ], 200, []);
+    }
+
+    /**
+     * Gets the members of a specific group.
+     *
+     * @param $groupUsername
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public function groupMembers($groupUsername)
+    {
+        $group = $this->groupRepository->findGroupWithUsername($groupUsername);
+        $members = $this->groupRepository
+            ->membersOfGroup($group);
+
+        return response([
+            'data' => $this->memberTransformer->transform($members->toArray()),
         ], 200, []);
     }
 }

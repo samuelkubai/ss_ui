@@ -9,6 +9,7 @@
 namespace App\Traits;
 
 
+use App\ProfilePicture;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 trait Profilable
@@ -28,24 +29,42 @@ trait Profilable
      */
     public function saveProfilePicture($model, UploadedFile $file)
     {
-        //Save the document.
-        if($file->move($this->path, $file->getClientOriginalName()))
+        //Authenticate profile picture.
+        if($this->authenticateType($file->getClientOriginalExtension()))
         {
-            //Persist the record
-            if($model->profilePicture()->first())
+            //Save the document.
+            if($file->move($this->path, $file->getClientOriginalName()))
             {
-                $model->profilePicture()->update([
-                    'path' => $this->path. $file->getClientOriginalName(),
-                ]);
-            }else{
-                $model->profilePicture()->create([
-                    'path' => $this->path. $file->getClientOriginalName(),
-                ]);
+                //Persist the record
+                if($model->profilePicture()->first())
+                {
+                    $model->profilePicture()->update([
+                        'path' => $this->path. $file->getClientOriginalName(),
+                    ]);
+                }else{
+                    $model->profilePicture()->create([
+                        'path' => $this->path. $file->getClientOriginalName(),
+                    ]);
+                }
             }
         }
-
-
-
         return $model;
+    }
+
+    /**
+     * Authenticate the profile picture types.
+     *
+     * @param $itemType
+     * @return bool
+     */
+    protected function authenticateType($itemType)
+    {
+        foreach(ProfilePicture::$profileTypes as $type)
+        {
+            if((strtolower($itemType) == strtolower($type)))
+                return true;
+        }
+        return false;
+
     }
 }

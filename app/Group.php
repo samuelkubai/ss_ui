@@ -160,6 +160,25 @@ class Group extends Model
     }
 
     /**
+     * Checks if the group has the file.
+     *
+     * @param File $file
+     * @return bool
+     */
+    public function hasFile(File $file)
+    {
+        $fileSources = $this->files()->lists('source_id');
+
+        foreach($fileSources as $fileSource)
+        {
+            if($file->source->id  == $fileSource)
+                return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Links to the group's notices.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

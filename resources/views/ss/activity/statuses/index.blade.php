@@ -8,6 +8,11 @@
                 @include('ss.activity.statuses.add_notice')
             </span>
         </div>
+        <span ng-show="activities.length == 0">
+            <h2 class="text-center">No activities found, but</h2>
+            <h4 class="text-center">you can try out skoolspace features and enjoy various activities </h4>
+        </span>
+
     </div>
     <button
             class="btn btn-primary btn-block m more-posts-btn"

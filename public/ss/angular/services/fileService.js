@@ -2,6 +2,11 @@ var ssModule = angular.module('skoolspace');
 
 ssModule.factory('fileService', ['httpService',function(httpService){
 
+    var addToBackpack = function(fileId){
+        var stringFileId = String(fileId);
+        return httpService.get('add/file/' + stringFileId)
+    };
+
     var getAllBackPackFiles = function(){
         return httpService.get('all/backpack/files')
     };
@@ -20,13 +25,19 @@ ssModule.factory('fileService', ['httpService',function(httpService){
         return httpService.get('group/topics/' + stringGroupUsername)
     };
 
-    var shareFile = function(groupId, fileId)
+    var shareFileToGroup = function(groupId, fileId)
     {
-        return httpService.get('all/backpack/topics');
+        var stringFileId = String(fileId);
+        var stringGroupId = String(groupId);
+        return httpService.get('share/file/' + stringFileId + '/group/' + stringGroupId);
     };
+
+
+
     return{
-        shareFile: shareFile,
+        addToBackpack: addToBackpack,
         getAllGroupFiles: getAllGroupFiles,
+        shareFileToGroup: shareFileToGroup,
         getAllGroupTopics: getAllGroupTopics,
         getAllBackPackFiles: getAllBackPackFiles,
         getAllBackPackTopics: getAllBackPackTopics

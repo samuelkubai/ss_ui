@@ -243,7 +243,7 @@ class GroupRepository
      */
     public function membersOfGroup(Group $group, $howMany = 10)
     {
-        return $group->members()->orderBy('first_name')->simplePaginate($howMany);
+        return $group->members()->with('institution', 'course')->orderBy('first_name')->get();
     }
 
     /**

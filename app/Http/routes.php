@@ -224,10 +224,14 @@ Route::group(['prefix' => 'api/ss/'], function () {
     get('all/groups', 'GroupApiController@all');
     get('user/groups/{userId}', 'GroupApiController@userGroups');
     get('/all/board/notices', 'NoticeboardApiController@allNotices');
-    get('/group/files/{groupUsername}', 'GroupApiController@groupFiles');
-    get('/group/topics/{groupUsername}', 'GroupApiController@groupTopics');
+    get('/add/file/{fileId}', 'BackpackApiController@addToBackpack');
     get('/all/backpack/files', 'BackpackApiController@backpackFiles');
     get('/all/backpack/topics', 'BackpackApiController@backpackTopics');
+    get('/group/files/{groupUsername}', 'GroupApiController@groupFiles');
+    get('/group/topics/{groupUsername}', 'GroupApiController@groupTopics');
+    get('/group/members/{groupUsername}', 'GroupApiController@groupMembers');
     get('user/activities/{userId}', 'ActivityApiController@userActivities');
-    get('group/activities/{groupUsername}', 'ActivityApiController@groupActivities');
+    get('group/activities/{groupId}', 'ActivityApiController@groupActivities');
+    get('/share/file/{fileId}/group/{groupUsername}', 'BackpackApiController@shareFileToGroup');
+
 });

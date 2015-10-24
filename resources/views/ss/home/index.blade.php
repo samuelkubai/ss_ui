@@ -15,6 +15,9 @@
                         <h5 style="text-align: center">Activity Feed</h5>
                     </div>
                     <div class="ibox-content" ng-controller="HomeController">
+                        <input type="hidden"
+                               id="user"
+                               data-id="{{ \Auth::user()->id }}">
                         @include('ss.activity.statuses.index')
                     </div>
                 </div>

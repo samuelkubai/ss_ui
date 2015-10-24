@@ -109,6 +109,24 @@
     padding-bottom: 5px;
 }
 /* Backpack */
+.share-modal-header{
+    color: white;
+    background-color: #1ab394;
+}
+
+.share-modal-body{
+    background-color: whitesmoke;
+}
+
+.share-group-list {
+    list-style-type: none;
+    display: block;
+    margin-left: -53px;
+}
+.delete-modal-header{
+    color: white;
+    background-color: #1ab394;
+}
 .fileFilters li{
     list-style-type: none;
     display: inline !important;
@@ -142,7 +160,6 @@
     font-weight: 400;
 }
 .home-search-institution{
-
     font-size: x-small;
     padding-top: 0;
 }
@@ -169,7 +186,8 @@
     margin-bottom: 9px;
 }
 .pager{
-    margin-bottom: -15px;
+    margin-bottom: -20px;
+    margin-top: -2px;
 }
 .home-search-switch input[type="checkbox"]{
     width: 20px; /*Desired width*/
@@ -253,6 +271,23 @@
     background: #ffc;
 }
 /* General Styles */
+a.back-to-top {
+    display: none;
+    width: 60px;
+    height: 60px;
+    text-indent: -9999px;
+    position: fixed;
+    z-index: 999;
+    right: 20px;
+    bottom: 70px;
+    background: #27AE61 url("../icons/up-arrow.png") no-repeat center 43%;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+}
+a:hover.back-to-top {
+    background-color: #000;
+}
 .navbar{
     width: 100%;
     position: fixed!important;

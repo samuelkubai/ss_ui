@@ -2,19 +2,24 @@
     <div class="row">
         <div class="col-lg-12">
             <span  dir-paginate="file in allFiles | filter:search | itemsPerPage: pageSize">
-
-
                 <div class="file-box">
                     <div class="file">
                         <a href="#">
                             <span class="corner"></span>
 
-                            <div class="image">
-                                <img ng-src="@{{ file.path }}" alt="@{{ file.name }}' image."
-                                     class="img-responsive">
+                            <div class="icon" ng-show="file.icon">
+                                <a href="@{{ file.path }}">
+                                    <img ng-src="@{{ file.icon }}" alt="@{{ file.name }}' image.">
+                                </a>
+                            </div>
+                            <div class="image" ng-hide="file.icon">
+                                <a href="@{{ file.path }}">
+                                    <img ng-src="@{{ file.path }}" alt="@{{ file.name }}' image."
+                                         class="img-responsive">
+                                </a>
                             </div>
                             <div class="file-name">
-                                @{{ file.name }}
+                                @{{ file.name | cut:false:fileNameLength:' ....' }}
                                 <br>
                                 <small>Topic: <b>@{{ file.topic }}</b></small>
                                 <br>
@@ -40,13 +45,20 @@
                                 </small>
                                 <button type="button"
                                         data-toggle="modal"
+                                        ng-hide="file.inBackpack || addingIndex == $index"
+                                        ng-click="addToBackpack(file, $index)"
                                         data-target="#add_to_backpack"
-                                        ng-click="addToBacpack(file)"
                                         class="file-options-option btn btn-xs btn-white pull-right">
                                     <i class="fa fa-briefcase"></i>
                                 </button>
                                 <button type="button"
+                                        ng-show="addingIndex == $index"
+                                        class="file-options-option btn btn-xs btn-white pull-right">
+                                    <i class="fa fa-spinner fa-spin"></i>
+                                </button>
+                                <button type="button"
                                         data-toggle="modal"
+                                        ng-show="file.yourFile"
                                         data-target="#delete_file"
                                         ng-click="deleteFile(file)"
                                         class="file-options-option btn btn-xs btn-white pull-right">

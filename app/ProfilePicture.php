@@ -14,6 +14,14 @@ class ProfilePicture extends Model
     protected $fillable = ['path'];
 
     /**
+     * List of allowed types.
+     *
+     * @var array
+     */
+    static public $profileTypes = [
+        'png', 'jpg', 'jpeg', 'jpe'
+    ];
+    /**
      * Get all of the owning profilable models.
      */
     public function profilable()

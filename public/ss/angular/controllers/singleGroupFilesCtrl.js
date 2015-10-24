@@ -1,6 +1,6 @@
 var ssModule = angular.module('skoolspace');
 
-ssModule.controller('SingleGroupFilesController', ['$scope','fileService', 'groupService', 'toaster',
+ssModule.controller('SingleGroupFilesController', ['$scope','fileService', 'toaster',
     function($scope, fileService, toaster){
 
         //Controller variables.
@@ -9,8 +9,10 @@ ssModule.controller('SingleGroupFilesController', ['$scope','fileService', 'grou
         $scope.currentPage = 1;
         $scope.search = {};
 
-        $scope.topicIndex = null;
         $scope.moreIndex = null;
+        $scope.topicIndex = null;
+        $scope.addingIndex = null;
+        $scope.fileNameLength = 20;
         $scope.sharingIndex = null;
 
         $scope.fileToBeDeleted = {};
@@ -22,20 +24,31 @@ ssModule.controller('SingleGroupFilesController', ['$scope','fileService', 'grou
             $scope.fileToBeDeleted = file;
         };
 
-        $scope.addToBackpack = function(fileId, groupId, index)
-        {
-            $scope.sharingIndex = index;
-
+        $scope.addToBackpack = function(file, index){
+            $scope.addingIndex = index;
+            var fileId = file.id;
+            var backpackPromise = fileService.addToBackpack(fileId);
+            backpackPromise.success(function(){
+                $scope.addingIndex = null;
+                file.inBackpack = true;
+                toaster.pop("success","", "The file was successfully added to you backpack.");
+            });
+            backpackPromise.error(function(){
+                $scope.addingIndex = null;
+                toaster.pop("errors", "", "The file is already in your backpack.");
+            });
         };
 
         $scope.showMoreDetails = function(index)
         {
             $scope.moreIndex = index;
+            $scope.fileNameLength = 100;
         };
 
         $scope.showLessDetails = function()
         {
             $scope.moreIndex = null;
+            $scope.fileNameLength = 20;
         };
 
         $scope.filterWithTopic = function(topicName ,index) {

@@ -87,7 +87,7 @@ class FileController extends Controller
             Toastr::success('You have successfully uploaded your files.');
         } else {
 
-            Toastr::error('The was an error in the file uploading');
+            Toastr::error('The was an error in uploading the file, check that you are uploading a file with the right file extension');
         }
 
         return redirect()->back();

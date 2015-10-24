@@ -1,4 +1,4 @@
-var ssModule = angular.module('skoolspace');
+var ssModule = angular.module('registration', ['jcs-autoValidate', 'toaster']);
 
 ssModule.run([
     'bootstrap3ElementModifier',

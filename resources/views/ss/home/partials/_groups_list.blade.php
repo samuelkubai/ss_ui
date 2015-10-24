@@ -25,13 +25,13 @@
                            ng-model="search.group.$"
                            class="input-sm form-control">
                         <span class="input-group-btn">
-                            <button type="submit" class="btn btn-sm btn-primary"> <i class="fa fa-search"></i></button>
+                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-search"></i></button>
                         </span>
                 </div>
 
                 <ul class="home-search-list">
-                    <span dir-paginate="group in allGroups | filter:search | itemsPerPage: pageSize">
-                        <li >
+                    <span dir-paginate="group in filteredGroups = (allGroups | filter:search | itemsPerPage: pageSize)">
+                        <li>
                             <a href="@{{ group.group.url }}">
                                 <img class="home-search-pic col-md-4"
                                      ng-src="@{{ group.group.picture }}"
@@ -55,9 +55,19 @@
                         </li>
                         <div class="hr-line-dashed home-search-divider"></div>
                     </span>
+
                     <dir-pagination-controls boundary-links="true"
                                              template-url="/ss/angular/vendor/pagination/dirPagination.tpl.html"></dir-pagination-controls>
+                    <span ng-show="filteredGroups.length == 0">
+                        <div class="hr-line-dashed home-search-divider"></div>
+                        <li>
+                            <h3 class="text-center">No Groups found.</h3>
+                        </li>
+                        <div class="hr-line-dashed home-search-divider"></div>
+                    </span>
+
                 </ul>
+
             </div>
         </form>
     </div>

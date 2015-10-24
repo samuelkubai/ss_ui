@@ -17,7 +17,6 @@ class FileRepository
 {
     use StoreFile, Postable;
 
-
     /**
      * @var
      */
@@ -52,6 +51,7 @@ class FileRepository
 
         return false;
     }
+
 
     /**
      *
@@ -172,5 +172,27 @@ class FileRepository
         return Topic::whereIn('id',$topicIds )
             ->latest()
             ->get();
+    }
+
+    /**
+     * Gets the file's profile picture.
+     *
+     * @param File $file
+     * @return mixed|string
+     */
+    public function getFilePicture(File $file)
+    {
+        if($file->isDoc())
+            return '/ss/icons/word1.png';
+        elseif($file->isCompressedFile())
+            return 'ss/icons/compressed.png';
+        elseif($file->isExcel())
+            return 'ss/icons/excel.png';
+        elseif($file->isPdf())
+            return 'ss/icons/pdf.png';
+        elseif($file->isPpt())
+            return 'ss/icons/powerpoint1.png';
+        else
+            return false;
     }
 }

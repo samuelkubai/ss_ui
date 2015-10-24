@@ -1,4 +1,4 @@
-<html ng-app="skoolspace">
+<html ng-app="registration">
     <head >
 
         <meta charset="utf-8">
