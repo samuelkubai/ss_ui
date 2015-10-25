@@ -1,15 +1,20 @@
 <div class="ibox float-e-margins">
     <div class="ibox-title update-form">
         <h5>User Profile</h5>
-
+        <span class="pull-right">
+             <a href="#">
+                 <img
+                         src="{{ asset($user->profilePictureSource()) }}"
+                         alt="Group class second 2013's picture"
+                         class="activity-group-pic">
+             </a>
+         </span>
     </div>
     <div class="ibox-content">
 
-        <form action="http://app.skoolspace.com/profile/update" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="_token" value="SGRBWChxOYbjaqIF8RoWzIvb46mHlOdANnSJkhBR">
-
+        <form action="h{{ url('/profile/update') }}" method="post" enctype="multipart/form-data">
+            {!! csrf_field() !!}
             <div>
-
                 <div class=" row form-group ">
                     <div class="col-md-12">
                         <label class="">Change Profile Picture:</label>
@@ -19,24 +24,17 @@
 
                 <div class="row form-group">
                     <div class="col-md-12">
-                        <input name="email" type="email" class="form-control" placeholder="Email" disabled="true"
-                               value="kamausamuel11@gmail.com" required="required">
+                       <p class="form-control-static"><b>Email: </b> {{ $user->email }}</p>
                     </div>
                 </div>
                 <div class="row form-group">
                     <div class="col-md-6">
-                        <input name="firstName" type="text" class="form-control" placeholder="First Name" value="Samuel"
+                        <input name="firstName" type="text" class="form-control" placeholder="First Name" value="{{ $user->first_name }}"
                                required="required">
                     </div>
                     <div class="col-md-6">
-                        <input name="lastName" type="text" class="form-control" placeholder="Last Name" value="Kamau"
+                        <input name="lastName" type="text" class="form-control" placeholder="Last Name" value="{{ $user->last_name }}"
                                required="required">
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <div class="col-md-12">
-                        <input name="telNumber" type="text" class="form-control" placeholder="Telephone Number"
-                               value="0716296907" required="required">
                     </div>
                 </div>
 
@@ -49,7 +47,7 @@
                     <label class="col-sm-4 control-label">Mail Notification:</label>
 
                     <div class="col-sm-8">
-                        <input type="checkbox" class="js-switch home-search-switch" checked />
+                        <input type="checkbox" name="mail" class="js-switch home-search-switch" checked />
                     </div>
                 </div>
             </div>

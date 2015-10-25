@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Repos\Group\GroupRepository;
+use App\Repos\User\UserRepository;
+use App\Traits\UserMailerTrait;
 use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
@@ -22,22 +24,56 @@ class AuthController extends Controller
     |
     */
 
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+    use AuthenticatesAndRegistersUsers, ThrottlesLogins, UserMailerTrait;
     /**
      * @var GroupRepository
      */
     private $groupRepository;
+    /**
+     * @var UserRepository
+     */
+    private $userRepository;
 
     /**
      * Create a new authentication controller instance.
      *
      * @param GroupRepository $groupRepository
+     * @param UserRepository $userRepository
      */
-    public function __construct(GroupRepository $groupRepository)
+    public function __construct(GroupRepository $groupRepository, UserRepository $userRepository)
     {
         $this->middleware('guest', ['except' => 'getLogout']);
         $this->groupRepository = $groupRepository;
+        $this->userRepository = $userRepository;
     }
+
+    /**
+     * Gets the view for a not activated user.
+     *
+     * @param $userId
+     * @return \Illuminate\View\View
+     */
+    public function getNotActivated($userId)
+    {
+        $title = "Activate account";
+        $user = $this->userRepository->findUser($userId);
+        $this->sendConfirmationMailTo($user, $user->code);
+        return view('ss.auth.notActivated', compact('title', 'user'));
+    }
+
+    /**
+     * Activate the user.
+     * @param $userCode
+     * @return \Illuminate\View\View
+     */
+    public function activate($userCode)
+    {
+        $user = $this->userRepository->findUserWithCode($userCode);
+        $user = $this->userRepository->activateUser($user);
+        \Auth::login($user);
+        return redirect('/');
+    }
+
 
     /**
      * Get a validator for an incoming registration request.

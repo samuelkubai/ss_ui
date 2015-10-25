@@ -8,7 +8,7 @@
         </div>
         <div class="ibox-content profile-content">
             <h4><strong>{{ $member->first_name . ' ' . $member->last_name }}</strong></h4>
-            <p><i class="fa fa-map-marker"></i> {{ $member->institution->name }}</p>
+            <p><i class="fa fa-building-o"></i> {{ $member->institution->name }}</p>
             <h5>
                 Email: {{ $member->email }}
             </h5>

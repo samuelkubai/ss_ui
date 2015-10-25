@@ -8,9 +8,14 @@ ssModule.controller('NoticeController', ['$scope', 'noticeService', function($sc
     $scope.pageSize = 6;
     $scope.currentPage = 1;
     $scope.allNotices = [];
+    $scope.numberOfNotices = 6;
     $scope.noticeToBeDeleted = {};
 
     //Controller functions
+    $scope.showMoreNotices = function(){
+        $scope.numberOfNotices += 6;
+    };
+
     $scope.deleteNotice = function(notice){
       $scope.noticeToBeDeleted = notice;
     };

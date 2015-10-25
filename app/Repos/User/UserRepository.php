@@ -5,6 +5,7 @@ namespace App\Repos\User;
 
 
 use App\User;
+use Kamaln7\Toastr\Facades\Toastr;
 
 
 class UserRepository
@@ -148,5 +149,36 @@ class UserRepository
         return $user;
     }
 
+    /**
+     * Get a user with the following code.
+     *
+     * @param $userCode
+     * @return mixed
+     */
+    public function findUserWithCode($userCode)
+    {
+        return User::where('code', $userCode)->first();
+    }
+
+    /**
+     * Activate the user.
+     *
+     * @param User $user
+     * @return User $user
+     */
+    public function activateUser(User $user)
+    {
+        if($user->active == 1)
+        {
+            Toastr::info('Your account is are already activated');
+            return $user;
+        }
+        $user->update([
+            'code' => '',
+            'active' => '1'
+        ]);
+
+        return $user;
+    }
 
 }

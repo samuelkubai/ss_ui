@@ -1,4 +1,4 @@
-var ssModule = angular.module('registration', ['jcs-autoValidate', 'toaster']);
+var ssModule = angular.module('registration', ['jcs-autoValidate', 'toaster', 'ngAnimate', 'ngFx']);
 
 ssModule.run([
     'bootstrap3ElementModifier',
@@ -6,42 +6,51 @@ ssModule.run([
         bootstrap3ElementModifier.enableValidationStateIcons(true);
     }]);
 
-ssModule.controller('RegistrationCtrl', ['$scope','$http','toaster', function($scope, $http, toaster){
+ssModule.controller('RegistrationController', ['$scope','$http','toaster', function($scope, $http, toaster){
 
 
     //Controller Data attributes.
     var self = this;
     self.form = {};
-    $scope.stageOne = true;
-    $scope.loading = false;
-    $scope.registered = false;
+    $scope.step = 1;
+    $scope.loading = null;
+    $scope.registered = null;
+    $scope.errorMessage = '';
 
     //Controller Functions
-    self.toggleStages = function() {
-        $scope.stageOne = !$scope.stageOne;
+    $scope.nextStep = function() {
+        $scope.step += 1;
     };
 
+    $scope.prevStep = function() {
+        $scope.step -= 1;
+    };
+
+    $scope.backToTheForm = function(){
+        $scope.step = 5;
+    };
 
     $scope.onSubmit = function(){
 
-        if($scope.stageOne)
+        if($scope.step <= 4)
         {
-            self.toggleStages();
-        } else {
-            $scope.loading = true;
+            $scope.nextStep();
 
+        } else {
+            $scope.nextStep();
+            $scope.loading = true;
             var registrationPromise = $http.post('register', $scope.form);
 
             registrationPromise.success(function(status) {
                 $scope.loading = false;
                 toaster.pop("success","Welcome", "You have successfully created your account.");
-                $scope.registered = true;
+                $scope.step = 8;
             });
 
             registrationPromise.error(function(status, data){
                 $scope.loading = false;
                 toaster.pop("error","Ooops", "The email address has already been taken.");
-
+                $scope.step = 7;
             });
         }
     };

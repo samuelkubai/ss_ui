@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -262,5 +263,46 @@ class User extends Model implements AuthenticatableContract,
         return $this->hasMany('App\Activity');
     }
 
+    /**
+     * Checks to see if the user is activated.
+     *
+     * @return bool
+     */
+    public function isActive()
+    {
+        if($this->active == 1)
+        {
+            return true;
+        }
+
+        if($this->trialDays() <= 1)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Return number of days the user has been registered.
+     *
+     * @return mixed
+     */
+    public function trialDays()
+    {
+        $created = new Carbon($this->created_at);
+        $now = Carbon::now();
+        return $created->diff($now)->days;
+    }
+
+    /**
+     * Get the user's id.
+     *
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 }
 

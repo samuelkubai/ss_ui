@@ -157,10 +157,8 @@ Route::group(['middleware' => 'auth'], function () {
     get('/', 'HomeController@index');
 
     /* 2.User Profile */
-    get('/profile', function () {
-        $title = 'My Profile';
-        return view('ss.profile.index', compact('title'));
-    });
+    get('/profile', 'UserController@edit');
+    post('/profile/update', 'UserController@update');
 
     /* 2. Logout Routes */
     get('logout', 'Auth\AuthController@getLogout');
@@ -193,6 +191,8 @@ Route::group(['middleware' => 'guest'], function () {
     /* 1. Login Routes */
     get('login', 'Auth\AuthController@getLogin');
     post('login', 'Auth\AuthController@postLogin');
+    get('/notActivated/{user}', 'Auth\AuthController@getNotActivated');
+    get('/profile/activate/{code}', 'Auth\AuthController@activate');
 
     /* 2. Registration routes */
     get('register', 'Auth\AuthController@getRegister');
@@ -211,29 +211,35 @@ Route::group(['middleware' => 'guest'], function () {
    |
    | Actions to achieve are:
    |
-   | 1.User Activities
-   | 2.All Group
-   | 3.User Group
-   | 4.User Files
-   | 5.User NoticeBoard
-   | 6.Group Activities
-   | 7.Group Files
-   | 8.Group Members
+   | 1.Activities
+   | 2.Groups
+   | 3.NoticeBoard
+   | 4.Files
+   | 5.Members
    |
    */
 
 Route::group(['prefix' => 'api/ss/'], function () {
+
+    /* 1. Activities */
+    get('user/activities/{userId}', 'ActivityApiController@userActivities');
+    get('group/activities/{groupId}', 'ActivityApiController@groupActivities');
+
+    /* 2. Groups */
     get('all/groups', 'GroupApiController@all');
     get('user/groups/{userId}', 'GroupApiController@userGroups');
+
+    /* 3. Noticeboard */
     get('/all/board/notices', 'NoticeboardApiController@allNotices');
+
+    /* 4.Files */
     get('/add/file/{fileId}', 'BackpackApiController@addToBackpack');
     get('/all/backpack/files', 'BackpackApiController@backpackFiles');
     get('/all/backpack/topics', 'BackpackApiController@backpackTopics');
     get('/group/files/{groupUsername}', 'GroupApiController@groupFiles');
     get('/group/topics/{groupUsername}', 'GroupApiController@groupTopics');
-    get('/group/{groupUsername}/member/{user}/', 'ActivityApiController@memberActivities');
-    get('user/activities/{userId}', 'ActivityApiController@userActivities');
-    get('group/activities/{groupId}', 'ActivityApiController@groupActivities');
     get('/share/file/{fileId}/group/{groupUsername}', 'BackpackApiController@shareFileToGroup');
 
+    /* 5. Members */
+    get('/group/{groupUsername}/member/{user}/', 'ActivityApiController@memberActivities');
 });
