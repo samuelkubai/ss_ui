@@ -1,6 +1,6 @@
 <div class="ibox float-e-margins">
     <div class="ibox-content">
-        <div class="file-manager">
+        <div class="file-manager" id="noticeboardNav">
             <button class="btn btn-primary btn-block" id="nb-noticeCreatorShowBtn">
                 <i class="glyphicon glyphicon-pushpin"></i> Pin Notice
             </button>

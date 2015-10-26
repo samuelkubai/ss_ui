@@ -7,7 +7,7 @@
                     btn-white
                 @endif
             ">
-        <i class="fa fa-laptop"></i>
+        <i class="fa fa-home"></i>
     </a>
 </li>
 @if($group->isAMember(\Auth::user()))

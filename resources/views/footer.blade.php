@@ -2,10 +2,12 @@
 <!-- Mainly scripts -->
 <script src="{{ asset('/ss/js/jquery-2.1.1.js') }}"></script>
 <script src="{{ asset('/ss/js/bootstrap.js')}}"></script>
+<script src="{{ asset('/ss/js/hopscotch.min.js')}}"></script>
 <script src="{{ asset('/ss/js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
 <script src="{{ asset('/ss/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
 <script src="{{ asset('/ss/js/plugins/jeditable/jquery.jeditable.js') }}"></script>
 <script src="{{ asset('/ss/js/scripts/basic.js') }}"></script>
+<script src="{{ asset('/ss/js/scripts/tour.js') }}"></script>
 
 <!-- Angular -->
 <script src="{{ asset('/ss/angular/vendor/angular/angular.min.js') }}"></script>

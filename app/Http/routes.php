@@ -159,6 +159,7 @@ Route::group(['middleware' => 'auth'], function () {
     /* 2.User Profile */
     get('/profile', 'UserController@edit');
     post('/profile/update', 'UserController@update');
+    post('/profile/deactivate', 'UserController@deactivate');
 
     /* 2. Logout Routes */
     get('logout', 'Auth\AuthController@getLogout');
@@ -197,6 +198,14 @@ Route::group(['middleware' => 'guest'], function () {
     /* 2. Registration routes */
     get('register', 'Auth\AuthController@getRegister');
     post('register', 'Auth\AuthController@postRegister');
+
+    /* 3. Password reset link request routes. */
+    get('password/email', 'Auth\PasswordController@getEmail');
+    post('password/email', 'Auth\PasswordController@postEmail');
+
+    /* 4.Password reset routes. */
+    get('password/reset/{token}', 'Auth\PasswordController@getReset');
+    post('password/reset', 'Auth\PasswordController@postReset');
 
 
 });

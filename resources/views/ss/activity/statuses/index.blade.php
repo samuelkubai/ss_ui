@@ -36,7 +36,7 @@
             class="btn btn-primary btn-block m more-posts-btn"
             ladda="loadingPosts"
             data-style="expand-left"
-            ng-hide="hasMoreActivities">
+            ng-hide="hasMoreActivities || activities.length == 0">
         <span ng-hide="loadingPosts">
              No More Posts
         </span>

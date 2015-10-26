@@ -39,7 +39,9 @@ class User extends Model implements AuthenticatableContract,
         'year',
         'intake',
         'active',
-        'code'
+        'code',
+        'notice_notification',
+        'file_notification'
     ];
 
     /**
@@ -49,6 +51,15 @@ class User extends Model implements AuthenticatableContract,
      */
     protected $hidden = ['password', 'remember_token'];
 
+    /**
+     * Gets the user's full name.
+     *
+     * @return string
+     */
+    public function fullName()
+    {
+        return $this->first_name . ' ' .$this->last_name;
+    }
     /**
      * Returns the institution the user belongs to.
      *
@@ -130,9 +141,9 @@ class User extends Model implements AuthenticatableContract,
         $profile = $this->profilePicture()->first();
 
         if($profile != null)
-            return $profile->source;
+            return $profile->path;
 
-        return '/ss/img/a3.jpg';
+        return '/ss/icons/user_avatar.png';
     }
 
     /**
@@ -303,6 +314,19 @@ class User extends Model implements AuthenticatableContract,
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Checks is the user can receive mail notifications on new notices.
+     *
+     * @return bool
+     */
+    public function isMailable()
+    {
+        if($this->notice_notification == 1)
+            return true;
+        else
+            return false;
     }
 }
 

@@ -4,12 +4,32 @@
 namespace App\Repos\User;
 
 
+use App\Http\Requests\UpdateUserRequest;
+use App\Repos\Group\GroupRepository;
+use App\Traits\Profilable;
 use App\User;
 use Kamaln7\Toastr\Facades\Toastr;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
 class UserRepository
 {
+    use Profilable;
+    /**
+     * @var GroupRepository
+     */
+    private $groupRepository;
+
+    /**
+     * Initialize repository variables.
+     *
+     * @param GroupRepository $groupRepository
+     */
+    function __construct(GroupRepository $groupRepository)
+    {
+
+        $this->groupRepository = $groupRepository;
+    }
     /**
      * Finds the user with the specified id.
      *
@@ -107,16 +127,18 @@ class UserRepository
      * @param $user
      *
      * Update the details of a registered user who is logged in
+     * @return bool
      */
-    public  function updateUser($request, $user)
+    public  function updateUser($request, User $user)
     {
-        return $user->fill([
-            'password' => ($request->password)? bcrypt($request->password):$user->password,
-            'firstName' =>$request->firstName,
-            'lastName' => $request->lastName,
-            'telNumber' => $request->telNumber,
-            'pin_notification' => $request->pin_notification,
-        ])->save();
+        if(!$request->hasFile('profile_picture')) {
+
+            return $this->updateCredentialsForUser($user, $request);
+        } else {
+
+            $this->saveProfilePicture($user, $request->file('profile_picture'));
+            return $this->updateCredentialsForUser($user, $request);
+        }
     }
 
 
@@ -126,25 +148,17 @@ class UserRepository
      *
      * Deactivate a user account
      */
-    public function deactivateUser($user)
+    public function deactivateUser(User $user)
     {
-        $groups = $user->follows()->get();
-
-        $adminGroups = $user->administrates()->get();
-
-        foreach($adminGroups as $group)
-        {
-            $user->administrates()->detach($group->id);
-        }
+        $groups = $user->joinedGroups()->get();
 
         foreach($groups as $group)
         {
-            $user->follows()->detach($group->id);
+            $this->groupRepository->leaveGroup($group, $user);
         }
 
-
         $user->active = 0;
-        $user->code = str_random(90);
+        $user->code = str_random(25);
         $user->save();
         return $user;
     }
@@ -176,6 +190,29 @@ class UserRepository
         $user->update([
             'code' => '',
             'active' => '1'
+        ]);
+
+        return $user;
+    }
+
+    /**
+     * Update the user's credentials
+     *
+     * @param User $user
+     * @param $request
+     * @return User $user
+     */
+    protected function updateCredentialsForUser(User $user, $request)
+    {
+         $user->update([
+            'password' => ($request->password)? bcrypt($request->password):$user->password,
+            'first_name' =>$request->firstName,
+            'last_name' => $request->lastName,
+            'institution_id' => $request->institution,
+            'course_id' => $request->course,
+            'intake' => $request->intake,
+            'year' => $request->year,
+            'notice_notification' => ($request->notice_notification)? 1:0,
         ]);
 
         return $user;

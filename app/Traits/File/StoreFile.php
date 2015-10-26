@@ -6,13 +6,14 @@ use App\Group;
 use App\Http\Requests\UploadFileRequest;
 use App\Source;
 use App\Topic;
+use App\Traits\GroupMailerTrait;
 use App\Traits\Postable;
 use App\User;
 use App\Interfaces\File\FileModelInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 trait StoreFile {
-
+    use GroupMailerTrait;
     /**
      * Contains the path to the directory where the uploaded files are stored.
      *
@@ -122,6 +123,8 @@ trait StoreFile {
 
         $groupFile = $this->linkToSource($savedFile, $file->source->id);
         $this->post($groupFile, 'add_file', $group, $user);
+
+        $this->sendFileUploadNotification($groupFile, $group);
 
         return $groupFile;
     }

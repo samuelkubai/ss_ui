@@ -52,7 +52,7 @@ class Group extends Model
         if($profile != null)
             return $profile->path;
 
-        return '/ss/img/profile_big.jpg';
+        return '/ss/icons/group_avatar.png';
     }
 
     /**

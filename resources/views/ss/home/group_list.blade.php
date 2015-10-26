@@ -1,6 +1,6 @@
 <div class="ibox float-e-margins">
     <div class="ibox-title blue-skin" style="color: #ffffff;" data-toggle="tooltip"
-         data-placement="bottom" title="This are the groups you are currently part of.">
+         data-placement="bottom" title="This is quick access to the skoolspace groups.">
         <i class="fa fa-group"></i> Groups
     </div>
     <div class="ibox-content">

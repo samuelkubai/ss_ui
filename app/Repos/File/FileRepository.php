@@ -2,6 +2,7 @@
 
 namespace App\Repos\File;
 
+
 use App\User;
 use App\File;
 use App\Group;
@@ -90,6 +91,10 @@ class FileRepository
      */
     public function deleteFile(File $file)
     {
+        if($file->user->id != \Auth::user()->id)
+        {
+            return false;
+        }
         $file->activity()->delete();
         $file->delete();
         return true;

@@ -4,7 +4,7 @@
             <i class="fa fa-reorder"></i>
             <span class="fa fa-bars"></span>
         </button>
-        <a href="{{ url('/') }}" class="navbar-brand">SS+</a>
+        <a href="{{ url('/') }}" class="navbar-brand" id="navbar-brand">SS+</a>
     </div>
     <div class="navbar-collapse collapse" id="navbar">
 

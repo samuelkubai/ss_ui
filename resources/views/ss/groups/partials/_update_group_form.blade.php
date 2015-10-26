@@ -8,7 +8,7 @@
     </div>
 
     <div class="ibox-content">
-        <form action="{{ url('/group/'.$group->username.'/update/') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ url('/group/'.$group->username.'/update/') }}" method="POST" enctype="multipart/form-data" data-parsley-validate>
             {!! csrf_field() !!}
             <div>
                 <div class=" row form-group ">
@@ -60,7 +60,7 @@
     </div>
 
     <div class="ibox-content">
-        <form action="{{ url('/group/'.$group->username.'/update/administrator') }}" method="get">
+        <form action="{{ url('/group/'.$group->username.'/update/administrator') }}" method="get" data-parsley-validate>
             <div>
                 <div class="row form-group">
                     <div class="col-md-12">

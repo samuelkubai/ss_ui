@@ -15,6 +15,7 @@ class VerifyCsrfToken extends BaseVerifier
         'group/{group}/update/administrator',
         'noticeboard/create',
         'institution/create',
+        'profile/update',
         'group/create',
         'auth/register',
         'register',

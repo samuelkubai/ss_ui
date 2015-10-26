@@ -93,39 +93,6 @@ class FileController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  int  $id
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -137,7 +104,10 @@ class FileController extends Controller
     {
         $file = $this->fileRepository->findFileById($fileId);
 
-        $this->fileRepository->deleteFile($file);
+        if($this->fileRepository->deleteFile($file))
+        {
+            Toastr::error("You do not own the file you are deleting");
+        }
 
         Toastr::success('You have successfully deleted the file');
 

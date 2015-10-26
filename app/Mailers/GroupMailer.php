@@ -1,6 +1,9 @@
 <?php namespace App\Mailers;
 
 
+use App\File;
+use App\Group;
+use App\Notice;
 use Illuminate\Support\Facades\Mail;
 
 class GroupMailer
@@ -12,30 +15,27 @@ class GroupMailer
      * @param $file
      * @param $url
      */
-    public function sendFileUploadNotification($group,$file,$url)
+    public static function sendFileUploadNotification(Group $group,File $file,$url)
     {
         $counter = 5;
 
-        foreach($group->followers()->get() as $user)
+        foreach($group->members()->get() as $user)
         {
-            if(!$group->isSupervisedBy($user))
-            {
                 $data = [
                     'name' => $user->fullName(),
                     'fileName' => $file->name,
                     'groupName' => $group->name,
                     'link' => $url,
-                    'sender' => $file->user()->first()->fullName()
+                    'sender' => $file->user->fullName()
                 ];
 
-                Mail::later($counter, 'inspina.email.new_file', $data, function($message) use ($user)
+                Mail::later($counter, 'ss.email.new_file', $data, function($message) use ($user, $file)
                 {
-                    $message->to($user->email, $user->fullName())->subject('New File Uploaded.');
+                    $message->to($user->email, $user->fullName())->subject($file->user->fullName());
 
                 });
 
                 $counter++;
-            }
         }
 
     }
@@ -47,29 +47,24 @@ class GroupMailer
      * @param $notice
      * @param $url
      */
-    public function sendNewPinNotification($group, $notice ,$url)
+    public static function sendNewPinNotification(Group $group, Notice $notice ,$url)
     {
         $counter = 5;
 
-        foreach($group->followers()->get() as $user)
+        foreach($group->members()->get() as $user)
         {
-            if(!$group->isSupervisedBy($user) && $user->isMailable()) {
+            if($user->isMailable()) {
                 $data = [
                     'name' => $user->fullName(),
                     'groupName' => $group->name,
-                    'pinSender' => $notice->user()->first()->fullName(),
+                    'pinSender' => $notice->user->fullName(),
                     'pinTitle' => $notice->title,
                     'link' => $url,
                 ];
 
-                Mail::later($counter, 'inspina.email.new_pin', $data, function ($message) use ($user) {
-                    $message->to($user->email, $user->fullName())->subject('New Notice Pinned.');
-
+                Mail::later($counter, 'inspina.email.new_pin', $data, function ($message) use ($user, $notice) {
+                    $message->to($user->email, $user->fullName())->subject($notice->user->fullName());
                 });
-
-
-                $this->smsService->send($user->telNumber, 'A new notice has been pinned in skoolspace group: '.$group->name.'. Notice: '.$notice->title.' => '.$notice->message . ' Learn More: '. $url);
-
                 $counter++;
             }
         }

@@ -7,13 +7,14 @@ use App\Http\Requests\PinNoticeRequest;
 use App\Notice;
 use App\Repos\Group\GroupRepository;
 use App\Search\Search;
+use App\Traits\GroupMailerTrait;
 use App\Traits\Postable;
 use App\User;
 use Illuminate\Support\Facades\Input;
 
 class NoticeRepository
 {
-    use Postable;
+    use Postable, GroupMailerTrait;
     /**
      * @var GroupRepository
      */
@@ -52,7 +53,11 @@ class NoticeRepository
         // Pin the notice.
         $notice = $this->persistNotice($request->get('title'), $request->get('message'), $group);
 
+        //Post the activity.
         $this->post($notice, 'add_notice', $group, $user);
+
+        //Send email notification.
+        $this->sendNewPinNotification($group, $notice);
 
         return $notice;
 
@@ -113,9 +118,17 @@ class NoticeRepository
      */
     public function deleteNotice($noticeId)
     {
+        //Find the notice
         $notice = Notice::find($noticeId);
-        $notice->activity()->delete();
 
+        //Check if the user owns the notice.
+        if($notice->user->id == \Auth::user()->id)
+        {
+            return false;
+        }
+
+        //Deletes the notice.
+        $notice->activity()->delete();
         $notice->delete();
 
         return true;

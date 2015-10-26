@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Course;
 use App\Http\Requests\UpdateUserRequest;
+use App\Institution;
 use App\Repos\User\UserRepository;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -73,31 +75,36 @@ class UserController extends Controller
      */
     public function edit()
     {
+
         $user = \Auth::user();
         $title = 'My Profile';
-        return view('ss.profile.index', compact('title', 'user'));
+        $courses = Course::all();
+        $institutions = Institution::all();
+        return view('ss.profile.index', compact('title', 'user', 'courses', 'institutions'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param UpdateUserRequest|Request $request
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUserRequest $request, $id)
+    public function update(UpdateUserRequest $request)
     {
-        //
+        $user = \Auth::user();
+        $this->userRepository->updateUser($request, $user);
+        return redirect()->back();
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Deactivate the user's account.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function deactivate()
     {
-        //
+        $this->userRepository->deactivateUser(\Auth::user());
+        \Auth::logout();
+        return redirect('/login');
     }
 }

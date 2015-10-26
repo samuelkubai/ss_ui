@@ -6,10 +6,18 @@ use Illuminate\Http\Request;
 use Illuminate\Mail\Message;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
+use Kamaln7\Toastr\Facades\Toastr;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 trait ResetsPasswords
 {
+    /**
+     * Path for password redirect.
+     *
+     * @var string
+     */
+    protected $redirectTo = '/';
+
     /**
      * Display the form to request a password reset link.
      *
@@ -17,7 +25,7 @@ trait ResetsPasswords
      */
     public function getEmail()
     {
-        return view('auth.password');
+        return view('ss.auth.password');
     }
 
     /**
@@ -36,6 +44,7 @@ trait ResetsPasswords
 
         switch ($response) {
             case Password::RESET_LINK_SENT:
+                Toastr::success('The password email has been sent.');
                 return redirect()->back()->with('status', trans($response));
 
             case Password::INVALID_USER:

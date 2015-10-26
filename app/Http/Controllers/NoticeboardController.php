@@ -108,10 +108,13 @@ class NoticeboardController extends Controller
      */
     public function destroy($noticeId)
     {
-        $this->noticeRepository->deleteNotice($noticeId);
+        if($this->noticeRepository->deleteNotice($noticeId))
+        {
+            Toastr::error("You do not own the notice you are trying to delete");
+            return redirect()->back();
+        }
 
         Toastr::success('Pin successfully deleted');
-
         return redirect()->back();
     }
 }

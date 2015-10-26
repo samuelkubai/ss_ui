@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Welcome to skoolspace</title>
+    <title>Forgot your password?</title>
 
     <link href="{{ asset('ss/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('ss/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
@@ -25,11 +25,9 @@
             <h1 class="logo-name login-logo">SS+</h1>
 
         </div>
-        <h3>Welcome to SS+</h3>
-        <p>
-            Perfectly designed and precisely prepared platform for school groups management.
-        </p>
-        <p>Login in. To see it in action.</p>
+        <h3>Password reset</h3>
+
+        <p>Forgot you password, do not worry we just need the email you used for your account.</p>
         @if (count($errors) > 0)
             <ul>
                 @foreach ($errors->all() as $error)
@@ -37,23 +35,22 @@
                 @endforeach
             </ul>
         @endif
-        <form class="m-t" role="form" method="post" action="{{ url('/login') }}">
+        <form class="m-t" role="form" method="post" action="{{ url('/password/email') }}">
             {!! csrf_field() !!}
 
             <div class="form-group">
-                <input type="email" name="email" class="form-control" placeholder="Email" required="">
+                <label for="email" class="control-label">What email did you create the account with?</label>
+                <input type="email"
+                       class="form-control"
+                       placeholder="Email"
+                       name="email"
+                       ng-model="form.email"
+                       required>
             </div>
-            <div class="form-group">
-                <input type="password" name="password" class="form-control" placeholder="Password" required="">
-            </div>
-            <div class="form-group">
-                <div class="checkbox i-checks"><label> <input type="checkbox" name="remember"><i></i> Remember Me </label></div>
-            </div>
-            <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+            <button type="submit" class="btn btn-primary block full-width m-b">Send Password Reset Link</button>
 
-            <a href="{{ url('password/email') }}"><small>Forgot password?</small></a>
-            <p class="text-muted text-center"><small>Do not have an account?</small></p>
-            <a class="btn btn-sm btn-white btn-block" href="{{ url('/register') }}">Create an account</a>
+            <p class="text-muted text-center"><small>Cancel password reset?</small></p>
+            <a class="btn btn-sm btn-white btn-block" href="{{ url('/login') }}">Login</a>
         </form>
         <p class="m-t"> <small>The skoolspace app © 2015</small> </p>
     </div>

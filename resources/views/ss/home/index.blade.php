@@ -14,7 +14,7 @@
                          title="Compiled activities from all your groups.">
                         <h5 style="text-align: center">Activity Feed</h5>
                     </div>
-                    <div class="ibox-content" ng-controller="HomeController">
+                    <div class="ibox-content" id="homeActivities" ng-controller="HomeController" id="home-activities">
                         <input type="hidden"
                                id="user"
                                data-id="{{ \Auth::user()->id }}">

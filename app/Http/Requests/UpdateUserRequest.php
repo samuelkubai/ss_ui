@@ -9,7 +9,7 @@
 namespace App\Http\Requests;
 
 
-use Symfony\Component\HttpFoundation\Request;
+use App\Http\Requests\Request;
 
 class UpdateUserRequest extends Request
 {
@@ -33,8 +33,11 @@ class UpdateUserRequest extends Request
         return [
             'firstName' => 'required|max:255',
             'lastName' => 'required|max:255',
+            'institution' => 'required',
+            'course' => 'required',
+            'year' => 'required',
+            'intake' => 'required',
             'password' => 'min:5',
-
         ];
     }
 }
