@@ -28,12 +28,10 @@ $(document).ready(function() {
 
     $(".single-institution-select").select2({
         placeholder: 'Select your institutions.',
-        tokenSeparators: [',', ' ','    ']
     });
 
     $(".topic-selector").select2({
-        placeholder: 'Select or create a topic...',
+        placeholder: 'Create or select a topic...',
         tags: true,
-        tokenSeparators: [',', ' ','    ']
     });
 });

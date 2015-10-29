@@ -12,7 +12,7 @@
                     <div class="ibox-title activity-group-title"
                          data-toggle="tooltip"
                          data-placement="bottom"
-                         title="Compiled activities from all your groups.">
+                         title="Compiled activities for {{ $group->name }}.">
                         <h5 style="text-align: center">{{ $group->name }}</h5>
                         <span class="pull-right">
                             <a href="#">

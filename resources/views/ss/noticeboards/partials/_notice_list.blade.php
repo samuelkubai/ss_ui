@@ -9,6 +9,7 @@
                     <p>@{{ notice.message }}</p>
                     <span class="pull-left">- @{{ notice.user.name }}</span>
                     <a data-toggle="modal"
+                       ng-show="notice.yourNotice"
                        data-target="#delete_notice"
                        ng-click="deleteNotice(notice)">
                         <i class="fa fa-trash-o pull-left"></i>

@@ -45,12 +45,7 @@ class FileRepository
     {
         $group = $this->groupRepository->findGroupWithUsername($request->get('group'));
 
-        if($this->storeFile($request, $user, $group))
-        {
-            return true;
-        }
-
-        return false;
+        $this->storeFile($request, $user, $group);
     }
 
 
@@ -136,7 +131,7 @@ class FileRepository
      */
     public function getAllTopics()
     {
-        return Topic::all();
+        return Topic::latest()->get();
     }
 
     /**

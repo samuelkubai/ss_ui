@@ -1,4 +1,4 @@
-<div class="col-lg-3">
+<div class="col-lg-3 single-group-file-nav">
     <div class="ibox float-e-margins">
         <div class="ibox-content">
             <div class="file-manager">

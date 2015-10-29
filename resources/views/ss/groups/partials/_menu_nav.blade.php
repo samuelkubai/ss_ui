@@ -4,13 +4,17 @@
             <input type="hidden"
                    id="group"
                    data-name="{{ $group->username }}">
-            <ul class="group-navigation">
-                @include('ss.groups.partials._menu_nav_icons')
-            </ul>
+            <nav class="text-center">
+                <ul class="group-navigation">
+                    @include('ss.groups.partials._menu_nav_icons')
+                </ul>
+            </nav>
 
-            <ul class="mobile-group-navigation">
-                @include('ss.groups.partials._menu_nav_icons')
-            </ul>
+            <nav class="text-center">
+                <ul class="mobile-group-navigation tooltip-demo">
+                    @include('ss.groups.partials._menu_nav_icons')
+                </ul>
+            </nav>
         </div>
     </div>
 </div>

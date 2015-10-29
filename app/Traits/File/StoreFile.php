@@ -10,9 +10,11 @@ use App\Traits\GroupMailerTrait;
 use App\Traits\Postable;
 use App\User;
 use App\Interfaces\File\FileModelInterface;
+use Kamaln7\Toastr\Facades\Toastr;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 trait StoreFile {
+
     use GroupMailerTrait;
     /**
      * Contains the path to the directory where the uploaded files are stored.
@@ -36,7 +38,7 @@ trait StoreFile {
 
         foreach($files as $file)
         {
-            if($this->authenticateType($file->getClientOriginalExtension()))
+            if($this->authenticateType($file) && $this->checkFileSize($file))
             {
                 $type = $file->getClientOriginalExtension();
 
@@ -63,14 +65,12 @@ trait StoreFile {
                 if($group)
                 {
                     $this->shareFileToGroup($group, $savedFile, $user);
+                    Toastr::success('You have successfully uploaded and shared the file '. $file->getClientOriginalName());
+                } else {
+                    Toastr::success('You have successfully uploaded the file '. $file->getClientOriginalName());
                 }
             }
-            else {
-                return false;
-            }
         }
-
-        return true;
     }
 
     /**
@@ -124,7 +124,7 @@ trait StoreFile {
         $groupFile = $this->linkToSource($savedFile, $file->source->id);
         $this->post($groupFile, 'add_file', $group, $user);
 
-        $this->sendFileUploadNotification($groupFile, $group);
+        //$this->sendFileUploadNotification($groupFile, $group);
 
         return $groupFile;
     }
@@ -216,7 +216,7 @@ trait StoreFile {
      */
     protected function findOrCreateTopic($topicName, User $user)
     {
-        $name = ucfirst($topicName);
+        $name = ucfirst(strtolower($topicName));
 
         $topic = Topic::where('name', $name)->first();
 
@@ -234,17 +234,37 @@ trait StoreFile {
     /**
      * Authenticate the file types.
      *
-     * @param $itemType
+     * @param UploadedFile $file
      * @return bool
+     * @internal param $itemType
      */
-    protected function authenticateType($itemType)
+    protected function authenticateType(UploadedFile $file)
     {
         foreach(File::$allowedTypes as $type)
         {
-            if((strtolower($itemType) == strtolower($type)))
+            if((strtolower($file->getClientOriginalExtension()) == strtolower($type)))
                 return true;
         }
+        Toastr::error('The file '.$file->getClientOriginalName()." has an extension that is not allowed.");
         return false;
 
+    }
+
+    /**
+     * Check the file's file size.
+     *
+     * @param UploadedFile $file
+     * @return bool
+     * @internal param $fileSize
+     */
+    protected function checkFileSize(UploadedFile $file)
+    {
+        if($file->getClientSize() < 100000000)
+        {
+            return true;
+        }
+
+        Toastr::error('The file '.$file->getClientOriginalName().' should have a file size of under 100mb');
+        return false;
     }
 } 

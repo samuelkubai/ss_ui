@@ -7,7 +7,7 @@
     <strong>
         <a href="@{{ activity.user.url }}">@{{ activity.user.name }}</a>
     </strong>
-    added a new file on
+    added a new file to
     <strong>
         <a href="@{{ activity.group.url }}">@{{ activity.group.name }}</a>
     </strong>.

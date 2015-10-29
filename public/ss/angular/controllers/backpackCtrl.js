@@ -21,6 +21,7 @@ ssModule.controller('BackpackController', ['$scope', 'fileService', 'groupServic
 
         //Controller functions
         $scope.deleteFile = function (file) {
+            alert('Hi');
             $scope.fileToBeDeleted = file;
         };
 

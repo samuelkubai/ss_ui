@@ -1,7 +1,9 @@
 <div class="col-lg-12">
-    <div class="ibox float-e-margins group-list-container" ng-controller="GroupWidgetController">
+    <div class="ibox float-e-margins group-list-container" id="groupListContainer" ng-controller="GroupWidgetController">
         <form action="" method="get">
-            <div class="ibox-title">
+            <div class="ibox-title" data-toggle="tooltip"
+                 data-placement="bottom"
+                 title="Quick access to all groups.">
                 <h5>All Groups</h5>
 
                 <div class="ibox-tools">

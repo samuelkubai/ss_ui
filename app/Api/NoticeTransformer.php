@@ -17,6 +17,7 @@ class NoticeTransformer extends BaseTransformer
             'title' => $notice->title,
             'message' => $notice->message,
             'created_at' => $notice->created_at->diffForHumans(),
+            'yourNotice' => (bool) ($notice->user->id == \Auth::user()->id),
             'user' => [
                 'id' => $notice->user->id,
                 'name' => $notice->user->first_name . ' ' . $notice->user->last_name,

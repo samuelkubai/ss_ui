@@ -96,21 +96,6 @@ Route::group(['middleware' => 'auth'], function () {
     get('/backpack', 'FileController@backpack');
 
 
-    get('/discussions', function () {
-        $title = "Discussions";
-        return view('ss.discussions.index', compact('title'));
-    });
-
-    get('/discussion', function () {
-        $title = "Discussion";
-        return view('ss.discussions.discussion', compact('title'));
-    });
-
-    get('/share', function () {
-        $title = "Share 'specific file'";
-        return view('ss.groups.share', compact('title'));
-    });
-
     /*
     |--------------------------------------------------------------------------
     | Notice Routes
@@ -251,4 +236,7 @@ Route::group(['prefix' => 'api/ss/'], function () {
 
     /* 5. Members */
     get('/group/{groupUsername}/member/{user}/', 'ActivityApiController@memberActivities');
+
+    /* 6. User */
+    get('/mark/user/old', 'UserApiController@markUserAsOld');
 });

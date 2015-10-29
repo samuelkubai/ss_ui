@@ -323,10 +323,17 @@ class User extends Model implements AuthenticatableContract,
      */
     public function isMailable()
     {
-        if($this->notice_notification == 1)
-            return true;
-        else
-            return false;
+        return ($this->notice_notification == 1);
+    }
+
+    /**
+     * Check if the user is new to skoolspace.
+     *
+     * @return bool
+     */
+    public function isNew()
+    {
+        return ($this->new_user == 1);
     }
 }
 

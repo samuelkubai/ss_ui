@@ -45,7 +45,7 @@ class HomeController extends Controller
     {
         $title = 'Home';
         $groups = $this->searchGroups();
-        $topics = $this->fileRepository->getAllTopics();
+        $topics = $this->fileRepository->getBackpackTopicsForUser(\Auth::user());
         return view('ss.home.index', compact('title', 'groups', 'topics'));
     }
 

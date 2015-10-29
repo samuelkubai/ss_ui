@@ -11,16 +11,6 @@
     </div>
 @endsection
 
-@section('script')
-    <script>
-        $(document).ready(function(){
-            $('.file-box').each(function() {
-                animationHover(this, 'pulse');
-            });
-        });
-    </script>
-@endsection
-
 @section('jquery_scripts')
     <script src="{{ asset('/ss/js/scripts/backpack.js') }}"></script>
 @endsection

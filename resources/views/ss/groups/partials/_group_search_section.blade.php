@@ -1,7 +1,13 @@
-<h2 class="group-search-tagline">
+<h2 class="group-search-tagline" id="groupsPage">
     {{ $title }}
-    <span class="pull-right"><a data-toggle="modal" href="#" data-target="#createGroup" class="btn btn-sm btn-info"><i
-                    class="fa fa-plus"></i> Create Group</a></span>
+    <span class="pull-right">
+        <a href="#"
+           data-toggle="modal"
+           id="groupCreateButton"
+           data-target="#createGroup"
+           class="btn btn-sm btn-info">
+            <i class="fa fa-plus"></i> Create Group</a>
+    </span>
 </h2>
 <div class="search-form">
     <div class="input-group">

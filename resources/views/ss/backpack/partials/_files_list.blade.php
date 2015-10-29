@@ -53,9 +53,9 @@
                                     <i class="glyphicon glyphicon-share"></i>
                                 </button>
                                 <button type="button"
+                                        ng-click="deleteFile(file)"
                                         data-toggle="modal"
                                         data-target="#delete_file"
-                                        ng-click="deleteFile(file)"
                                         class="file-options-option btn btn-xs btn-white pull-right">
                                     <i class="glyphicon glyphicon-remove-circle"></i>
                                 </button>

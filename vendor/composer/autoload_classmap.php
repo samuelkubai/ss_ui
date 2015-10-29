@@ -6,9 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'AddNoticeNotificationToUsers' => $baseDir . '/database/migrations/2015_10_26_061848_add_notice_notification_to_users.php',
-    'AddSourceIdToFileTable' => $baseDir . '/database/migrations/2015_10_21_083258_add_source_id_to_file_table.php',
-    'AddTopicIdFieldToFiles' => $baseDir . '/database/migrations/2015_10_08_123747_add_topic_id_field_to_files.php',
+    'AddNewUserFieldToUsersTable' => $baseDir . '/database/migrations/2015_10_28_065728_add_new_user_field_to_users_table.php',
     'CoursesTableSeeder' => $baseDir . '/database/seeds/CoursesTableSeeder.php',
     'CreateActivitiesTable' => $baseDir . '/database/migrations/2015_09_17_123113_create_activities_table.php',
     'CreateCoursesTable' => $baseDir . '/database/migrations/2015_09_14_071147_create_courses_table.php',
