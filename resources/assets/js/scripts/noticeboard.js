@@ -1,0 +1,10 @@
+$(function(){
+    $("#nb-noticeCreatorShowBtn").click(function(){
+        $("#nb-noticeCreatorShowBtn").hide();
+        $("#createNoticeForm").fadeIn("normal");
+    });
+    $("#hideNoticeCreatorBtn").click(function(){
+        $("#createNoticeForm").hide();
+        $("#nb-noticeCreatorShowBtn").fadeIn("normal");
+    });
+});

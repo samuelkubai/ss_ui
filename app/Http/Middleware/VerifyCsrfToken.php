@@ -20,5 +20,6 @@ class VerifyCsrfToken extends BaseVerifier
         'auth/register',
         'register',
         'upload/file',
+        'login'
     ];
 }

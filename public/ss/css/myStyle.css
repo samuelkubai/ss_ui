@@ -246,8 +246,9 @@
 .activity-body{
     padding-left: 8px;
 }
-.activity-file-description-block{
-
+.activity-no-activities-label{
+    margin-bottom: 0;
+    margin-top: 15px;
 }
 .activity-file-block{
     padding-top: 10px;

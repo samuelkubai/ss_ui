@@ -183,11 +183,11 @@ class GroupRepository
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function allGroups($howMany = 5)
+    public function allGroups()
     {
         return Group::with('user','institution')
-            ->latest()
-            ->paginate($howMany);
+            ->orderBy('name')
+            ->get();
     }
 
     /**
@@ -296,15 +296,16 @@ class GroupRepository
      */
     protected function createGroupAssignmentFor(User $user)
     {
-        $name = $user->institution->slug.
-            $user->course->slug.
+        $name = $user->institution->slug. ': '.
+            $user->course->slug.' ('.
             $user->intake.
-            'Class of '.
-            $user->year;
+            ' Class of '.
+            $user->year.')';
         $username = $user->institution->slug.
             $user->course->slug.
             $user->intake.
-            $user->year;
+            $user->year.
+            $user->intake;
         $description = 'This is the group for the '.$name;
 
         $group = $user->groups()->create([

@@ -1,4 +1,5 @@
 <div class="col-lg-9 animated fadeInRight">
+
     <div class="row">
         <div class="col-lg-12" ng-hide="loading == true">
             <div class="file-box fx-zoom-down fx-speed-800"

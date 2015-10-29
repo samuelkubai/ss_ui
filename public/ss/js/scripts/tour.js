@@ -3,7 +3,7 @@ var tour = {
     steps: [
         {
             title: "Welcome to skoolspace",
-            content: "We have a few awesome features I would like to show you, Let's start?",
+            content: "We have a lot of  awesome features, and would like to show you some of them, Let's start?",
             target: "#navbar-brand",
             placement: "bottom",
             onNext: function() {
@@ -16,14 +16,15 @@ var tour = {
         },
         {
             title: "File sharing",
-            content: "You can upload files to skoolspace by selecting the file(s), creating a topic for the file(s) and selecting the group the file(s)" +
-            " should be shared to.",
+            content: "You can upload files to skoolspace by selecting a file or multiple files, then create or select a topic for the file(s) and if" +
+            " you would like to share the files in the process, you would just select the group to share the file to.",
             target: "#uploadFilesForm",
             placement: "right",
             onNext: function() {
                 $("#uploadFilesForm").hide();
                 $("#createNoticeForm").fadeIn("normal");
             },
+            showPrevButton: 'true',
             showNextButton: 'true',
             showCloseButton: 'true'
         },
@@ -37,6 +38,7 @@ var tour = {
                 $("#createNoticeForm").fadeOut("normal");
                 $("#creatorSpace").hide();
             },
+            showPrevButton: 'true',
             showNextButton: 'true',
             showCloseButton: 'true'
         },
@@ -47,15 +49,39 @@ var tour = {
             placement: "top",
             multipage: true,
             onNext: function() {
-                window.location = "backpack"
+                window.location = "groups"
             },
+            showPrevButton: 'true',
             showNextButton: 'true',
             showCloseButton: 'true'
         },
         {
+            title: "skoolspace Groups",
+            content: "You can manage all your groups here and browse through other skoolspace groups from here. " +
+            "Feel free to join more groups and contribute with more documents and information.",
+            target: "#groupsPage",
+            placement: "bottom",
+            showPrevButton: 'true',
+            wNextButton: 'true',
+            showCloseButton: 'true'
+        },
+        {
+            title: "Create new groups",
+            content: "You can create new groups in skoolspace and have your friends join and share documents and information from.",
+            target: "#groupCreateButton",
+            placement: "left",
+            multipage: true,
+            onNext: function() {
+                window.location = "backpack"
+            },
+            showNextButton: 'true',
+            showPrevButton: 'true',
+            showCloseButton: 'true'
+        },
+        {
             title: "Backpack",
-            content: "The backpack is your own personal storage where all your files " +
-            "are stored for future use or to share to other groups.",
+            content: "The backpack is your own personal storage where all your files are stored." +
+            " You can add files from various groups to your backpack for safe keeping and share files from your backpack to other groups.",
             target: "#backpackNav",
             placement: "right",
             multipage: true,
@@ -63,11 +89,13 @@ var tour = {
                 window.location = "noticeboard"
             },
             showNextButton: 'true',
+            showPrevButton: 'true',
             showCloseButton: 'true'
         },
         {
             title: "Noticeboard",
-            content: "Here you can view your notices and pin new ones to other groups of your choice.",
+            content: "This is your noticeboard where notices for all your groups are pinned. " +
+            "From here you can view all your notices and pin new ones to your groups.",
             target: "#noticeboardNav",
             placement: "right",
             multipage: true,
@@ -75,6 +103,7 @@ var tour = {
                 window.location = "/"
             },
             showNextButton: 'true',
+            showPrevButton: 'true',
             showCloseButton: 'true'
         },
         {
@@ -84,33 +113,17 @@ var tour = {
             target: "#navbar-brand",
             placement: "bottom",
             showNextButton: 'true',
+            showPrevButton: 'true',
             showCloseButton: 'true'
         }
     ],
     onEnd: function() {
-        setCookie("toured", "toured");
-
+        $.get("/api/ss/mark/user/old");
     },
     onClose: function() {
-        setCookie("toured", "toured");
-
+        $.get("/api/ss/mark/user/old");
     }
 };
 
-function setCookie(key, value) {
-    var expires = new Date();
-    expires.setTime(expires.getTime() + (24 * 60 * 60 * 1000));
-    document.cookie = key + '=' + value + ';path=/' + ';expires=' + expires.toUTCString();
-}
-
-function getCookie(key) {
-    var keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
-    return keyValue ? keyValue[2] : null;
-}
-
-
-
-// Initialize tour if it's the user's first time
-if (!getCookie("toured")) {
-    hopscotch.startTour(tour);
-}
+//Start Tour
+hopscotch.startTour(tour);

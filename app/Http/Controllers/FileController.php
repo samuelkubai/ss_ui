@@ -66,7 +66,7 @@ class FileController extends Controller
 
         $title = $group->name . "'s files";
         $topics = $this->fileRepository
-            ->getAllTopics();
+            ->getGroupTopicsForGroup($group);
 
         $files = $this->fileRepository
             ->groupFilesForGroup($group);
@@ -82,14 +82,7 @@ class FileController extends Controller
      */
     public function store(UploadFileRequest $request)
     {
-        if($this->fileRepository->store($request, \Auth::user()))
-        {
-            Toastr::success('You have successfully uploaded your files.');
-        } else {
-
-            Toastr::error('The was an error in uploading the file, check that you are uploading a file with the right file extension');
-        }
-
+        $this->fileRepository->store($request, \Auth::user());
         return redirect()->back();
     }
 

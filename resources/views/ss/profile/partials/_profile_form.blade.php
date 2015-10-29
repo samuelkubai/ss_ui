@@ -24,16 +24,18 @@
 
                 <div class="row form-group">
                     <div class="col-md-12">
-                       <p class="form-control-static"><b>Email: </b> {{ $user->email }}</p>
+                        <p class="form-control-static"><b>Email: </b> {{ $user->email }}</p>
                     </div>
                 </div>
                 <div class="row form-group">
                     <div class="col-md-6">
-                        <input name="firstName" type="text" class="form-control" placeholder="First Name" value="{{ $user->first_name }}"
+                        <input name="firstName" type="text" class="form-control" placeholder="First Name"
+                               value="{{ $user->first_name }}"
                                required="required">
                     </div>
                     <div class="col-md-6">
-                        <input name="lastName" type="text" class="form-control" placeholder="Last Name" value="{{ $user->last_name }}"
+                        <input name="lastName" type="text" class="form-control" placeholder="Last Name"
+                               value="{{ $user->last_name }}"
                                required="required">
                     </div>
                 </div>
@@ -43,12 +45,12 @@
                             name="institution"
                             id="institution"
                             class="single-group-selector" style="width: 100%"
-                            required = "required">
+                            required="required">
                         <option value="">Please select your univeristy...</option>
                         @foreach($institutions as $institution)
                             <option value="{{ $institution->id }}"
                                     @if($user->institution->id == $institution->id)
-                                        selected = "selected"
+                                    selected="selected"
                                     @endif>
                                 {{ $institution->name }}
                             </option>
@@ -68,7 +70,7 @@
                         @foreach($courses as $course)
                             <option value="{{ $course->id }}"
                                     @if($user->course->id == $course->id)
-                                    selected = "selected"
+                                    selected="selected"
                                     @endif>{{ $course->name }}</option>
                         @endforeach
                     </select>
@@ -80,24 +82,43 @@
                             id="year"
                             class="single-year-selector"
                             style="width: 100%;"
-                            required = "required">
+                            required="required">
                         <option value="">Please select the year of your intake...</option>
+                        <option value="2009"
+                                @if($user->year == 2009)
+                                selected="selected"
+                                @endif>2009
+                        </option>
+                        <option value="2010"
+                                @if($user->year == 2010)
+                                selected="selected"
+                                @endif>2010
+                        </option>
+                        <option value="2011"
+                                @if($user->year == 2011)
+                                selected="selected"
+                                @endif>2011
+                        </option>
+                        <option value="2012"
+                                @if($user->year == 2012)
+                                selected="selected"
+                                @endif>2012
+                        </option>
                         <option value="2013"
                                 @if($user->year == 2013)
-                                selected = "selected"
-                                @endif>2013</option>
+                                selected="selected"
+                                @endif>2013
+                        </option>
                         <option value="2014"
                                 @if($user->year == 2014)
-                                selected = "selected"
-                                @endif>2014</option>
+                                selected="selected"
+                                @endif>2014
+                        </option>
                         <option value="2015"
                                 @if($user->year == 2015)
-                                selected = "selected"
-                                @endif>2015</option>
-                        <option value="2016"
-                                @if($user->year == 2016)
-                                selected = "selected"
-                                @endif>2016</option>
+                                selected="selected"
+                                @endif>2015
+                        </option>
                     </select>
                 </div>
 
@@ -108,20 +129,23 @@
                             id="intake"
                             class="single-intake-selector"
                             style="width: 100%;"
-                            required = "required">
+                            required="required">
                         <option value="">Please select your intake...</option>
                         <option value="1st"
                                 @if($user->intake == '1st')
-                                selected = "selected"
-                                @endif>January Intake</option>
+                                selected="selected"
+                                @endif>January Intake
+                        </option>
                         <option value="2nd"
                                 @if($user->intake == '2nd')
-                                selected = "selected"
-                                @endif>March Intake</option>
+                                selected="selected"
+                                @endif>March Intake
+                        </option>
                         <option value="3rd"
                                 @if($user->intake == '3rd')
-                                selected = "selected"
-                                @endif>September Intake</option>
+                                selected="selected"
+                                @endif>September Intake
+                        </option>
                     </select>
                 </div>
 
@@ -137,8 +161,8 @@
                         <input type="checkbox"
                                name="notice_notification"
                                class="js-switch home-search-switch"
-                                @if($user->notice_notification == 1)
-                                    checked
+                               @if($user->notice_notification == 1)
+                               checked
                                 @endif/>
                     </div>
                 </div>

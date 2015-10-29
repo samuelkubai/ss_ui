@@ -83,14 +83,9 @@ class GroupApiController extends Controller
     public function all()
     {
         $groups = $this->groupRepository
-            ->allGroups(100);
+            ->allGroups();
         return response([
             'data' => $this->transformer->transformCollection($groups->all()),
-            'paginator' => [
-                'current_page' => $groups->currentPage(),
-                'has_more' => $groups->hasMorePages(),
-                'limit' => $groups->perPage(),
-            ]
         ], 200, []);
     }
 

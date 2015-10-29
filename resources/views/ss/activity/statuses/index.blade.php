@@ -31,14 +31,10 @@
         </span>
 
     </button>
-    <button
-            disabled
-            class="btn btn-primary btn-block m more-posts-btn"
-            ladda="loadingPosts"
-            data-style="expand-left"
-            ng-hide="hasMoreActivities || activities.length == 0">
-        <span ng-hide="loadingPosts">
-             No More Posts
-        </span>
-    </button>
+    <span ng-hide="hasMoreActivities || activities.length == 0">
+        <h3 class="text-center activity-no-activities-label">
+            No More activities
+        </h3>
+    </span>
+
 </div>

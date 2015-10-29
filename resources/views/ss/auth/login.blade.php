@@ -25,9 +25,9 @@
             <h1 class="logo-name login-logo">SS+</h1>
 
         </div>
-        <h3>Welcome to SS+</h3>
+        <h3>Welcome to skoolspace</h3>
         <p>
-            Perfectly designed and precisely prepared platform for school groups management.
+            Where we help you get and share files and notifications to your fellow students easily.
         </p>
         <p>Login in. To see it in action.</p>
         @if (count($errors) > 0)

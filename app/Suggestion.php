@@ -11,7 +11,7 @@ class Suggestion extends Model
      *
      * @var array
      */
-    protected $fillable = ['intake_year', 'intake_type', 'course_id', 'user_id'];
+    protected $fillable = ['intake','year', 'institution_id', 'course_id', 'group_id'];
 
     /**
      * Returns the course the suggestion points to.

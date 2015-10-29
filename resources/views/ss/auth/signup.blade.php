@@ -30,7 +30,7 @@
         </div>
         <h3>Hi</h3>
         <p>
-            To make your experience of skoolspace memorable, we would like to ask a few questions
+            To make your experience of skoolspace easy and memorable, we would like to ask a few questions
         </p>
         <p>This will be fast, I promise.</p>
         <br>
@@ -109,7 +109,7 @@
                 <select
                         name="institution"
                         id="institution"
-                        class="single-group-selector" style="width: 100%"
+                        class="single-university-selector" style="width: 100%"
                         ng-model="form.institution"
                         disable-valid-styling="true"
                         required>
@@ -147,10 +147,13 @@
                         disable-valid-styling="true"
                         required>
                     <option value="">Please select the year of your intake...</option>
+                    <option value="2013">2009</option>
+                    <option value="2013">2010</option>
+                    <option value="2013">2011</option>
+                    <option value="2013">2012</option>
                     <option value="2013">2013</option>
                     <option value="2014">2014</option>
                     <option value="2015">2015</option>
-                    <option value="2016">2016</option>
                 </select>
             </div>
 
@@ -205,7 +208,6 @@
                        name="password"
                        ng-model="form.password"
                        ng-minlength= "5"
-                       ng-maxlength= "12"
                        required>
             </div>
             <div class="form-group">
@@ -216,7 +218,6 @@
                        ng-model="form.password_confirmation"
                        placeholder="Confirm Password"
                        ng-minlength= "5"
-                       ng-maxlength= "12"
                        confirm-password="form.password"
                        required>
             </div>
@@ -292,17 +293,18 @@
 
         </div>
         <h3>All done!</h3>
-
+        <h4>A few pointers though...</h4>
         <p>
-            Remember to verify your email address, @{{ form.firstName }} within 7 days.
+            Remember to verify your email address within 7 days.
         </p>
-        <p> Please try out various skoolspace features, feel free to pin notices ,share files and join other groups</p>
-        <p> You have successfully joined your class group automatically.</p>
+        <p>
+            <b>We have successfully joined you to your class group.</b>
+        </p>
         <br>
         <p>
         <h2>Welcome to skoolspace</h2>
         <a href="{{ url('/') }}"
-                class="btn btn-primary block full-width m-b">Continue</a>
+                class="btn btn-primary block full-width m-b"><i class="fa fa-sign-in"></i> Go In</a>
         </p>
 
         <p class="m-t"> <small>The skoolspace app © 2015</small> </p>
@@ -340,7 +342,7 @@
 <!-- Angular -->
 <script src="{{ asset('/ss/angular/vendor/angular/angular.min.js') }}"></script>
 <script src="{{ asset('/ss/angular/vendor/animate/angular-animate.min.js') }}"></script>
-<script src="{{ asset('/ss/js/jcs-auto-validate.min.js') }}"></script>
+<script src="{{ asset('/ss/angular/vendor/validate/jcs-auto-validate.min.js') }}"></script>
 <script src="{{ asset('ss/angular/vendor/TweenMax/TweenMax.min.js') }}"></script>
 <script src="{{ asset('ss/angular/vendor/ngFx/ngFx.min.js') }}"></script>
 
