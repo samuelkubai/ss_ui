@@ -17,7 +17,7 @@
         @include('partials._single_required_group_selector')
 
         <button type="submit" class="btn btn-sm btn-primary pull-right"><i
-                    class="glyphicon glyphicon-pushpin"></i> Pin
+                    class="glyphicon glyphicon-pushpin" id="createNoticeFormButton"></i> Pin
         </button>
         <button type="button" class="btn btn-sm btn-white" id="hideNoticeCreatorBtn">
             <i class="fa fa-times-circle"></i> Close

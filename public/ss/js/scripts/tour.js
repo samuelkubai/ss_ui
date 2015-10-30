@@ -19,7 +19,7 @@ var tour = {
             content: "You can upload files to skoolspace by selecting a file or multiple files, then create or select a topic for the file(s) and if" +
             " you would like to share the files in the process, you would just select the group to share the file to.",
             target: "#uploadFilesForm",
-            placement: "right",
+            placement: "bottom",
             onNext: function() {
                 $("#uploadFilesForm").hide();
                 $("#createNoticeForm").fadeIn("normal");
@@ -33,7 +33,7 @@ var tour = {
             content: "You can pin a notice to a specific group, by filling in the notice title and message and selecting the group the notice is for, " +
             "after which every member will be notified accordingly of it.",
             target: "#createNoticeForm",
-            placement: "right",
+            placement: "bottom",
             onNext: function() {
                 $("#createNoticeForm").fadeOut("normal");
                 $("#creatorSpace").hide();
@@ -83,7 +83,7 @@ var tour = {
             content: "The backpack is your own personal storage where all your files are stored." +
             " You can add files from various groups to your backpack for safe keeping and share files from your backpack to other groups.",
             target: "#backpackNav",
-            placement: "right",
+            placement: "bottom",
             multipage: true,
             onNext: function() {
                 window.location = "noticeboard"
@@ -97,7 +97,7 @@ var tour = {
             content: "This is your noticeboard where notices for all your groups are pinned. " +
             "From here you can view all your notices and pin new ones to your groups.",
             target: "#noticeboardNav",
-            placement: "right",
+            placement: "bottom",
             multipage: true,
             onNext: function() {
                 window.location = "/"

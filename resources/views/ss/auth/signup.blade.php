@@ -4,8 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Join skoolspace</title>
-
+    <title>Create Account</title>
+    <link  rel="icon" href="{{ asset('ss/icons/main.png') }}" type="image/icon"/>
+    <link  rel="shortcut icon" href="{{ asset('ss/icons/main.png') }}" type="image/icon"/>
     <link href="{{ asset('ss/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('ss/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
     <link href="{{ asset('ss/select/css/select2.min.css') }}" rel="stylesheet" />
@@ -335,28 +336,13 @@
     </div>
 </div>
 
-<!--Vendor libraries -->
+<!--Compiled scripts -->
+<script src="{{ asset('/js/registration.js') }}"></script>
 
-<!-- Jquery -->
-<script src="{{ asset('/ss/js/jquery-2.1.1.js') }}"></script>
-<!-- Angular -->
-<script src="{{ asset('/ss/angular/vendor/angular/angular.min.js') }}"></script>
-<script src="{{ asset('/ss/angular/vendor/animate/angular-animate.min.js') }}"></script>
-<script src="{{ asset('/ss/angular/vendor/validate/jcs-auto-validate.min.js') }}"></script>
-<script src="{{ asset('ss/angular/vendor/TweenMax/TweenMax.min.js') }}"></script>
-<script src="{{ asset('ss/angular/vendor/ngFx/ngFx.min.js') }}"></script>
 
-<!-- select2 -->
-<script src="{{ asset('/ss/select/js/select2.min.js') }}"></script>
-<script src="{{ asset('/ss/js/select_init_elements.js') }}"></script>
-
-<!--Angular scripts -->
-<script src="{{ asset('/ss/angular/controllers/registration.js') }}"></script>
 <script>
     angular.module("registration").constant("CSRF_TOKEN", '{{ csrf_token() }}');
 </script>
 
-<!-- Toastr -->
-<script src="{{ asset('ss/angular/vendor/toaster-master/toaster.min.js') }}"></script>
 </body>
 </html>

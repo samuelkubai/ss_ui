@@ -12,31 +12,45 @@ var elixir = require('laravel-elixir');
  */
 
 elixir(function(mix) {
+    //Registration files
+    mix.scripts([
+        'jquery-2.1.1.js',
+        //Angular vendor files
+        '/angular/vendor/angular/angular.min.js',
+        '/angular/vendor/toaster-master/toaster.min.js',
+        '/angular/vendor/animate/angular-animate.min.js',
+        '/angular/vendor/TweenMax/TweenMax.min.js',
+        '/angular/vendor/validate/jcs-auto-validate.min.js',
+        '/angular/vendor/ngFx/ngFx.min.js',
+        '/angular/vendor/toaster-master/toaster.min.js',
+        //Angular my files
+        '/angular/controllers/registration.js',
+        //Select2 files
+        '/select/js/select2.min.js',
+        '/scripts/select_init_elements.js'
+    ], './public/js/registration.js');
+
     mix.scripts([
         '/scripts/switchery_init.js',
         '/scripts/select_init_elements.js',
-        '/scripts/i-check_initialization.js',
-        '/scripts/basic.js',
-        '/scripts/backpack.js'
+        '/scripts/i-check_initialization.js'
     ], './public/js/my.js');
     mix.scripts([
-        'jquery-2.1.1.js',
-        '/plugins/jquery-ui/jquery-ui.min.js',
+        'jquery.js',
         'bootstrap.js',
         'hopscotch.min.js',
         'inspinia.js',
         '/plugins/pace/pace.min.js',
         'moment.js',
         '/plugins/switchery/switchery.js',
-        '/select/js/select2.min.js',
-        '/inspinia.js',
-        '/plugins/pace/pace.min.js',
+        '/select/js/select2.js',
         '/plugins/iCheck/icheck.min.js',
         'toastr.min.js',
         'parsley.min.js',
         '/plugins/metisMenu/jquery.metisMenu.js',
         '/plugins/slimscroll/jquery.slimscroll.min.js',
         '/plugins/jeditable/jquery.jeditable.js'
+
     ], './public/js/vendor.js');
     mix.scripts([
         '/angular/vendor/angular/angular.min.js',
@@ -60,6 +74,7 @@ elixir(function(mix) {
         '/angular/controllers/singleGroupFilesCtrl.js',
         '/angular/controllers/singleGroupMemberCtrl.js',
         '/angular/controllers/singleGroupActivitiesCtrl.js'
+
     ], './public/js/angular.js');
     mix.styles([
         '/bootstrap.min.css',

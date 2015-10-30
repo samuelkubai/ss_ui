@@ -12,7 +12,7 @@
 
         @include('partials._single_group_selector')
         <button type="submit" class="btn btn-sm btn-primary pull-right"><i
-                    class="fa fa-upload"></i> Upload
+                    class="fa fa-upload" id="uploadFilesFormButton"></i> Upload
         </button>
         <button type="button" class="btn btn-sm btn-white" id="hideFileCreatorBtn">
             <i class="fa fa-times-circle"></i> Close

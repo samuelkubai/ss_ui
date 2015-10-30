@@ -1,4 +1,3 @@
-$(document).ready(function() {
     $(".single-university-selector").select2({
         placeholder: 'Please select your university..',
         tokenSeparators: [',', ' ','    ']
@@ -27,11 +26,10 @@ $(document).ready(function() {
     });
 
     $(".single-institution-select").select2({
-        placeholder: 'Select your institutions.',
+        placeholder: 'Select your institutions.'
     });
 
     $(".topic-selector").select2({
         placeholder: 'Create or select a topic...',
-        tags: true,
+        tags: true
     });
-});

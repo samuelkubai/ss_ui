@@ -12,7 +12,7 @@
                          data-toggle="tooltip"
                          data-placement="bottom"
                          title="Compiled activities from all your groups.">
-                        <h5>John Doe's Activities</h5>
+                        <h5>{{ $member->fullName() }}'s Activities</h5>
                         <span class="pull-right">
                             <a href="#">
                                 <img

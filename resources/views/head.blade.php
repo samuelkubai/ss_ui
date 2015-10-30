@@ -6,5 +6,7 @@
     <link  rel="icon" href="{{ asset('ss/icons/main.png') }}" type="image/icon"/>
     <link  rel="shortcut icon" href="{{ asset('ss/icons/main.png') }}" type="image/icon"/>
     <link href="{{ asset('css/all.css') }}" rel="stylesheet">
+    <!-- Angular -->
+    <script src="{{ asset('/js/angular.js') }}"></script>
     @yield('styles')
 </head>
