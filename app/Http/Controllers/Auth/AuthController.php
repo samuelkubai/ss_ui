@@ -6,6 +6,7 @@ use App\Repos\Group\GroupRepository;
 use App\Repos\User\UserRepository;
 use App\Traits\UserMailerTrait;
 use App\User;
+use Kamaln7\Toastr\Facades\Toastr;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -42,7 +43,7 @@ class AuthController extends Controller
      */
     public function __construct(GroupRepository $groupRepository, UserRepository $userRepository)
     {
-        $this->middleware('guest', ['except' => 'getLogout']);
+        $this->middleware('guest', ['except' => 'getLogout', 'activate']);
         $this->groupRepository = $groupRepository;
         $this->userRepository = $userRepository;
     }
@@ -71,6 +72,7 @@ class AuthController extends Controller
         $user = $this->userRepository->findUserWithCode($userCode);
         $user = $this->userRepository->activateUser($user);
         \Auth::login($user);
+        Toastr::success('Your email has been successfully verified. Thank you '.$user->fullName());
         return redirect('/');
     }
 

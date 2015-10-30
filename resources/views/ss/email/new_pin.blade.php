@@ -296,10 +296,14 @@
                                 </tr>
                                 <tr>
                                     <td class="content-block">
-                                        Hey there skoolspace user a new notice has been pinned to the <b>{{ $groupName }}</b> skoolspace group.
-                                        The pin is from <em>{{ $pinSender }}</em> about <em>{{ $pinTitle }}</em>
+                                        A new notice has been pinned on <b>{{ $groupName }}</b>.
+                                        The pin is from <em>{{ $pinSender }}</em>.
                                         <br>
-
+                                        It reads:
+                                        <br>
+                                        <h4>{{ $pinTitle }}</h4>
+                                        <p>{{ $pinMessage }}</p>
+                                        <br>
                                     </td>
                                 </tr>
 

@@ -42,7 +42,7 @@
                 </ul>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
+                <button type="button" class="btn btn-info" data-dismiss="modal">Done</button>
             </div>
         </div>
     </div>

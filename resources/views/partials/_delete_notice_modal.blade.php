@@ -11,7 +11,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-white" data-dismiss="modal">Cancel</button>
-                <a href="@{{ noticeToBeDeleted.url.delete }}" type="button" class="btn btn-danger">Delete File</a>
+                <a href="@{{ noticeToBeDeleted.url.delete }}" type="button" class="btn btn-danger">Delete Notice</a>
             </div>
         </div>
     </div>

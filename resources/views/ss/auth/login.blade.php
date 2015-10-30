@@ -32,11 +32,9 @@
         </p>
         <p>Login in. To see it in action.</p>
         @if (count($errors) > 0)
-            <ul>
                 @foreach ($errors->all() as $error)
-                    <li class="alert alert-danger">{{ $error }}</li>
+                    <p class="alert alert-danger">{{ $error }}</p>
                 @endforeach
-            </ul>
         @endif
         <form class="m-t" role="form" method="post" action="{{ url('/login') }}">
             {!! csrf_field() !!}

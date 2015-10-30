@@ -97,13 +97,13 @@ class FileController extends Controller
     {
         $file = $this->fileRepository->findFileById($fileId);
 
-        if($this->fileRepository->deleteFile($file))
+        if(!$this->fileRepository->deleteFile($file))
         {
             Toastr::error("You do not own the file you are deleting");
+            return redirect()->back();
         }
 
         Toastr::success('You have successfully deleted the file');
-
         return redirect()->back();
 
     }

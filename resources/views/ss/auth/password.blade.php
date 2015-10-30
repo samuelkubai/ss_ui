@@ -6,6 +6,9 @@
 
     <title>Forgot your password?</title>
 
+    <link  rel="icon" href="{{ asset('ss/icons/main.png') }}" type="image/icon"/>
+    <link  rel="shortcut icon" href="{{ asset('ss/icons/main.png') }}" type="image/icon"/>
+
     <link href="{{ asset('ss/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('ss/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
     <link href="{{ asset('ss/css/plugins/iCheck/custom.css') }}" rel="stylesheet">
@@ -13,6 +16,7 @@
     <link href="{{ asset('ss/css/animate.css') }}" rel="stylesheet">
     <link href="{{ asset('ss/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('ss/css/login.css') }}" rel="stylesheet">
+    <link href="{{ asset('ss/css/toastr.min.css') }}" rel="stylesheet">
 
 </head>
 
@@ -62,16 +66,10 @@
 
 <!-- iCheck -->
 <script src="{{ asset('ss/js/plugins/iCheck/icheck.min.js') }}"></script>
-<script>
-    $(document).ready(function(){
-        $('.i-checks').iCheck({
-            checkboxClass: 'icheckbox_square-green',
-            radioClass: 'iradio_square-green',
-        });
-    });
-</script>
 
-
+<!-- Toastr -->
+<script src="{{ asset('ss/js/toastr.min.js') }}"></script>
+{!! Toastr::render() !!}
 
 </body>
 </html>

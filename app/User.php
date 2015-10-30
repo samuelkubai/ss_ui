@@ -323,7 +323,7 @@ class User extends Model implements AuthenticatableContract,
      */
     public function isMailable()
     {
-        return ($this->notice_notification == 1);
+        return ($this->notice_notification == 1 || $this->notice_notification == '1' );
     }
 
     /**

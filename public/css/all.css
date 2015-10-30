@@ -9724,6 +9724,10 @@ a:hover.back-to-top {
 }
 @media only screen and (max-width: 989px){
 
+    .activity-group-pic{
+        display: none;
+    }
+
     .feed-actions-list li{
         display: inline;
         margin-left: 3px;

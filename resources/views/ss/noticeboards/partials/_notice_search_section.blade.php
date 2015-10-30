@@ -12,5 +12,14 @@
     </div>
     <div class="hr-line-dashed notice-group-filter"></div>
     <h5 class="notice-group-filter">Filter by:</h5>
-    @include('partials._single_group_filter')
+    <div class="form-group">
+        <select  ng-model="search.group.username">
+            <option value="">All Groups Combined.</option>
+            @foreach(\Auth::user()->joinedGroups as $group)
+                <option value="{{ $group->username }}">
+                    {{ $group->name }}
+                </option>
+            @endforeach
+        </select>
+    </div>
 </form>

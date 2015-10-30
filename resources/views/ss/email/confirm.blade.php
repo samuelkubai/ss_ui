@@ -297,7 +297,7 @@
                                 <tr><td class="content-block"><br/></td></tr>
                                 <tr>
                                     <td class="content-block">
-                                        We may need to send you critical information about our service and it is important that we have an accurate email address.
+                                        We may need to send you critical information about our service and it is important that we have the right email address.
                                     </td>
                                 </tr>
                                 <tr><td class="content-block"><br/></td></tr>

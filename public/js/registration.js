@@ -513,9 +513,8 @@ $(".single-group-selector").select2({
     tokenSeparators: [',', ' ','    ']
 });
 
-$(".single-group-filter").select2({
-    placeholder: 'Select group to filter by',
-    tokenSeparators: [',', ' ','    ']
+$("#single-group-filter").select2({
+    placeholder: 'Select group to filter by'
 });
 
 $(".single-institution-select").select2({

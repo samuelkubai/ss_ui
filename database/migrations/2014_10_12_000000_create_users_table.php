@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->integer('course_id');
             $table->integer('year');
             $table->integer('intake');
-            $table->integer('notice_notification')->default('1');
+            $table->integer('notice_notification')->default(1);
             $table->integer('new_user')->default(1);
             $table->rememberToken();
             $table->timestamps();

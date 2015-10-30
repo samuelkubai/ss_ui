@@ -12,7 +12,7 @@ ssModule.controller('BackpackController', ['$scope', 'fileService', 'groupServic
 
         $scope.moreIndex = null;
         $scope.topicIndex = null;
-        this.myGroups = [];
+        $scope.myGroups = [];
         $scope.fileNameLength = 20;
         $scope.sharingIndex = null;
 
@@ -24,7 +24,8 @@ ssModule.controller('BackpackController', ['$scope', 'fileService', 'groupServic
             $scope.fileToBeDeleted = file;
         };
 
-        $scope.shareFile = function (groupId) {
+        $scope.shareFile = function (groupId, index) {
+            $scope.sharingIndex= index;
             var fileId = $scope.fileToBeShared.id;
             var filePromise = fileService.shareFileToGroup(groupId, fileId);
             filePromise.success(function (data) {

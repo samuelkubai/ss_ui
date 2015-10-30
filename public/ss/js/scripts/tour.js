@@ -18,7 +18,7 @@ var tour = {
             title: "File sharing",
             content: "You can upload files to skoolspace by selecting a file or multiple files, then create or select a topic for the file(s) and if" +
             " you would like to share the files in the process, you would just select the group to share the file to.",
-            target: "#uploadFilesForm",
+            target: "#showFilesCreatorBtn",
             placement: "bottom",
             onNext: function() {
                 $("#uploadFilesForm").hide();
@@ -32,7 +32,7 @@ var tour = {
             title: "Pin Notice",
             content: "You can pin a notice to a specific group, by filling in the notice title and message and selecting the group the notice is for, " +
             "after which every member will be notified accordingly of it.",
-            target: "#createNoticeForm",
+            target: "#showNoticeCreatorBtn",
             placement: "bottom",
             onNext: function() {
                 $("#createNoticeForm").fadeOut("normal");

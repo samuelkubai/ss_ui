@@ -115,14 +115,13 @@ class GroupController extends Controller
      * Update the group's administrator.
      *
      * @param $groupUsername
-     * @param UpdateAdministratorRequest $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function updateAdministrator($groupUsername, UpdateAdministratorRequest $request)
+    public function updateAdministrator($groupUsername)
     {
         if(Input::get('email') == '')
         {
-            Toastr::success("Please fill in the email of the member you want to be administrator.");
+            Toastr::error("Please fill in the email of the member you want to be administrator.");
             return redirect()->back();
         }
         $targetGroup = $this->groupRepository

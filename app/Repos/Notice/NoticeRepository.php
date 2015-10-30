@@ -122,7 +122,7 @@ class NoticeRepository
         $notice = Notice::find($noticeId);
 
         //Check if the user owns the notice.
-        if($notice->user->id == \Auth::user()->id)
+        if($notice->user->id != \Auth::user()->id)
         {
             return false;
         }

@@ -12,7 +12,11 @@
                          data-toggle="tooltip"
                          data-placement="bottom"
                          title="Compiled activities from all your groups.">
-                        <h5>{{ $member->fullName() }}'s Activities</h5>
+                        @if($member->id != \Auth::user()->id)
+                            <h5>{{ $member->fullName() }}'s Activities</h5>
+                        @else
+                            <h5>Your Activities</h5>
+                        @endif
                         <span class="pull-right">
                             <a href="#">
                                 <img

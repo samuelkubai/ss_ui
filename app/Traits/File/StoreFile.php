@@ -42,7 +42,7 @@ trait StoreFile {
             {
                 $type = $file->getClientOriginalExtension();
 
-                $name = $file->getClientOriginalName();
+                $name = $this->clean($file->getClientOriginalName());
 
                 $mime = $file->getClientMimeType();
 
@@ -124,7 +124,7 @@ trait StoreFile {
         $groupFile = $this->linkToSource($savedFile, $file->source->id);
         $this->post($groupFile, 'add_file', $group, $user);
 
-        //$this->sendFileUploadNotification($groupFile, $group);
+        $this->sendFileUploadNotification($groupFile, $group);
 
         return $groupFile;
     }

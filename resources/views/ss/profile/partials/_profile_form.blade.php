@@ -132,17 +132,17 @@
                             required="required">
                         <option value="">Please select your intake...</option>
                         <option value="1st"
-                                @if($user->intake == '1st')
+                                @if($user->intake == '1')
                                 selected="selected"
                                 @endif>January Intake
                         </option>
                         <option value="2nd"
-                                @if($user->intake == '2nd')
+                                @if($user->intake == '2')
                                 selected="selected"
                                 @endif>March Intake
                         </option>
                         <option value="3rd"
-                                @if($user->intake == '3rd')
+                                @if($user->intake == '3')
                                 selected="selected"
                                 @endif>September Intake
                         </option>

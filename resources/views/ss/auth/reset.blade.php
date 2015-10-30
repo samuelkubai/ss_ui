@@ -6,6 +6,9 @@
 
     <title>Forgot your password?</title>
 
+    <link  rel="icon" href="{{ asset('ss/icons/main.png') }}" type="image/icon"/>
+    <link  rel="shortcut icon" href="{{ asset('ss/icons/main.png') }}" type="image/icon"/>
+
     <link href="{{ asset('ss/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('ss/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
     <link href="{{ asset('ss/css/plugins/iCheck/custom.css') }}" rel="stylesheet">
@@ -37,6 +40,7 @@
         @endif
         <form class="m-t" role="form" method="post" action="{{ url('/password/reset') }}">
             {!! csrf_field() !!}
+            <input type="hidden" name="token" value="{{ $token }}">
 
             <div class="form-group">
                 <label for="email" class="control-label">What email did you create the account with?</label>

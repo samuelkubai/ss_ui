@@ -1,6 +1,7 @@
 <?php namespace App\Mailers;
 
 
+use App\User;
 use Illuminate\Support\Facades\Mail;
 
 class UserMailer
@@ -12,10 +13,10 @@ class UserMailer
      * @param $code
      * @return mixed
      */
-    public static function sendConfirmationMailTo($user, $code)
+    public static function sendConfirmationMailTo(User $user, $code)
     {
         $data = [
-            'name' => $user->firstName. ' ' . $user->lastName,
+            'name' => $user->fullName(),
             'link' => url('/profile/activate/'. $code),
         ];
 

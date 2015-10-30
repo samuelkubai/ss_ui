@@ -23,7 +23,7 @@ class GroupRepository
     {
         $group =  $user->groups()->create([
             'name' => $request->name,
-            'username' => $request->username,
+            'username' => $this->clean($request->username),
             'description' => $request->description,
             'institution_id' => $request->institution_id
         ]);
@@ -310,7 +310,7 @@ class GroupRepository
 
         $group = $user->groups()->create([
             'name' => $name,
-            'username' => $username,
+            'username' => $this->clean($username),
             'description' => $description,
             'institution_id' => $user->institution->id
         ]);
@@ -335,14 +335,34 @@ class GroupRepository
     public function updateAdministratorOf(Group $group, $email)
     {
         $user = User::where('email', $email)->first();
-        if($group->isAMember($user))
+
+        if($user != null)
         {
-            $group->update([
-                'user_id' => $user->id,
-            ]);
-            return true;
+            if($group->isAMember($user))
+            {
+                $group->update([
+                    'user_id' => $user->id,
+                ]);
+                return true;
+            }
         }
+
         Toastr::error('The user is not a member of the group.');
         return false;
+    }
+
+    /**
+     * Clean the group username of special characters,
+     * spaces and uppercase letters.
+     * @param $string
+     * @return mixed
+     */
+    protected function clean($string) {
+
+        $string = strtolower($string); //Lower the capital letters
+        $string = str_replace(' ', '-', $string); // Replaces all spaces with hyphens.
+        $string = preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
+
+        return preg_replace('/-+/', '-', $string); // Replaces multiple hyphens with single one.
     }
 } 

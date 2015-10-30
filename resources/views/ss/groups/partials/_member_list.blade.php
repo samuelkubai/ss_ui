@@ -12,7 +12,12 @@
                         </div>
                     </div>
                     <div class="col-sm-8">
-                        <h3><strong>{{ $member->first_name }} {{ $member->last_name }}</strong></h3>
+                        @if($member->id != \Auth::user()->id)
+                            <h3><strong>{{ $member->first_name }} {{ $member->last_name }}</strong></h3>
+                        @else
+                            <h3><strong>You</strong></h3>
+                        @endif
+
                         <p><i class="fa fa-building-o"></i> {{ $member->institution->name }}</p>
                         <p><i class="fa fa-bookmark"></i> {{ $member->course->name }}</p>
                         <address>

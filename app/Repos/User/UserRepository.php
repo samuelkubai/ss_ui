@@ -182,7 +182,7 @@ class UserRepository
      */
     public function activateUser(User $user)
     {
-        if($user->active == 1)
+        if($user->active == 1 || $user == null)
         {
             Toastr::info('Your account is are already activated');
             return $user;

@@ -15,12 +15,14 @@ class GroupMailer
      * @param $file
      * @param $url
      */
-    public static function sendFileUploadNotification(Group $group,File $file,$url)
+    public static function sendFileUploadNotification(Group $group, File $file,$url)
     {
         $counter = 5;
 
         foreach($group->members()->get() as $user)
         {
+            if($user->id != $file->user->id)
+            {
                 $data = [
                     'name' => $user->fullName(),
                     'fileName' => $file->name,
@@ -31,11 +33,12 @@ class GroupMailer
 
                 Mail::later($counter, 'ss.email.new_file', $data, function($message) use ($user, $file)
                 {
-                    $message->to($user->email, $user->fullName())->subject($file->user->fullName());
+                    $message->to($user->email, $user->fullName())->subject($file->user->fullName(). 'added a file.');
 
                 });
 
                 $counter++;
+            }
         }
 
     }
@@ -53,17 +56,19 @@ class GroupMailer
 
         foreach($group->members()->get() as $user)
         {
-            if($user->isMailable()) {
+            if($user->isMailable() && $user->id != $notice->user->id)
+            {
                 $data = [
                     'name' => $user->fullName(),
                     'groupName' => $group->name,
                     'pinSender' => $notice->user->fullName(),
                     'pinTitle' => $notice->title,
+                    'pinMessage' => $notice->message,
                     'link' => $url,
                 ];
 
-                Mail::later($counter, 'inspina.email.new_pin', $data, function ($message) use ($user, $notice) {
-                    $message->to($user->email, $user->fullName())->subject($notice->user->fullName());
+                Mail::later($counter, 'ss.email.new_pin', $data, function ($message) use ($user, $notice) {
+                    $message->to($user->email, $user->fullName())->subject($notice->user->fullName(). 'pinned a notice.');
                 });
                 $counter++;
             }

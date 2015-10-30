@@ -178,7 +178,6 @@ Route::group(['middleware' => 'guest'], function () {
     get('login', 'Auth\AuthController@getLogin');
     post('login', 'Auth\AuthController@postLogin');
     get('/notActivated/{user}', 'Auth\AuthController@getNotActivated');
-    get('/profile/activate/{code}', 'Auth\AuthController@activate');
 
     /* 2. Registration routes */
     get('register', 'Auth\AuthController@getRegister');
@@ -240,3 +239,5 @@ Route::group(['prefix' => 'api/ss/'], function () {
     /* 6. User */
     get('/mark/user/old', 'UserApiController@markUserAsOld');
 });
+
+get('/profile/activate/{code}', 'Auth\AuthController@activate');

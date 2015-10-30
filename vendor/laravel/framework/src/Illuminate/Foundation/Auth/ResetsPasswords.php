@@ -48,6 +48,7 @@ trait ResetsPasswords
                 return redirect()->back()->with('status', trans($response));
 
             case Password::INVALID_USER:
+                Toastr::error('The email you entered has no account in skoolspace.');
                 return redirect()->back()->withErrors(['email' => trans($response)]);
         }
     }
@@ -74,7 +75,7 @@ trait ResetsPasswords
             throw new NotFoundHttpException;
         }
 
-        return view('auth.reset')->with('token', $token);
+        return view('ss.auth.reset')->with('token', $token);
     }
 
     /**
