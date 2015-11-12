@@ -4,7 +4,7 @@
             <input type="hidden"
                    id="group"
                    data-name="{{ $group->username }}">
-            <nav class="text-center">
+            <nav class="text-center tooltip-demo">
                 <ul class="group-navigation">
                     @include('ss.groups.partials._menu_nav_icons')
                 </ul>

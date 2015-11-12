@@ -15,7 +15,7 @@ ssModule.controller('SingleGroupFilesController', ['$scope','fileService', 'toas
         $scope.moreIndex = null;
         $scope.topicIndex = null;
         $scope.addingIndex = null;
-        $scope.fileNameLength = 20;
+        $scope.fileNameLength = 18;
         $scope.sharingIndex = null;
 
         $scope.fileToBeDeleted = {};

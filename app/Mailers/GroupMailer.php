@@ -33,7 +33,7 @@ class GroupMailer
 
                 Mail::later($counter, 'ss.email.new_file', $data, function($message) use ($user, $file)
                 {
-                    $message->to($user->email, $user->fullName())->subject($file->user->fullName(). 'added a file.');
+                    $message->to($user->email, $user->fullName())->subject($file->user->fullName(). ' added a file.');
 
                 });
 
@@ -68,7 +68,7 @@ class GroupMailer
                 ];
 
                 Mail::later($counter, 'ss.email.new_pin', $data, function ($message) use ($user, $notice) {
-                    $message->to($user->email, $user->fullName())->subject($notice->user->fullName(). 'pinned a notice.');
+                    $message->to($user->email, $user->fullName())->subject($notice->user->fullName(). ' pinned a notice.');
                 });
                 $counter++;
             }

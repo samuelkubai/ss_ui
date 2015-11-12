@@ -28,13 +28,20 @@ elixir(function(mix) {
         //Select2 files
         '/select/js/select2.min.js',
         '/scripts/select_init_elements.js'
-    ], './public/js/registration.js');
+    ], './public/js/registration.min.js');
+
+    mix.scripts([
+        'jquery-2.1.1.js',
+        'bootstrap.js',
+        '/plugins/iCheck/icheck.min.js'
+    ], './public/js/login.min.js');
+
 
     mix.scripts([
         '/scripts/switchery_init.js',
         '/scripts/select_init_elements.js',
         '/scripts/i-check_initialization.js'
-    ], './public/js/my.js');
+    ], './public/js/my.min.js');
     mix.scripts([
         'jquery.js',
         'bootstrap.js',
@@ -51,7 +58,7 @@ elixir(function(mix) {
         '/plugins/slimscroll/jquery.slimscroll.min.js',
         '/plugins/jeditable/jquery.jeditable.js'
 
-    ], './public/js/vendor.js');
+    ], './public/js/vendor.min.js');
     mix.scripts([
         '/angular/vendor/angular/angular.min.js',
         '/angular/vendor/validate/jcs-auto-validate.min.js',
@@ -75,7 +82,7 @@ elixir(function(mix) {
         '/angular/controllers/singleGroupMemberCtrl.js',
         '/angular/controllers/singleGroupActivitiesCtrl.js'
 
-    ], './public/js/angular.js');
+    ], './public/js/angular.min.js');
     mix.styles([
         '/bootstrap.min.css',
         '/font-awesome/css/font-awesome.css',
@@ -89,7 +96,26 @@ elixir(function(mix) {
         '/animate.css',
         '/style.css',
         '/myStyle.css',
-        '/plugins/jasny/jasny-bootstrap.min.css',
-    ])
+        '/plugins/jasny/jasny-bootstrap.min.css'
+    ], './public/css/all.min.css')
 
+    mix.styles([
+        '/bootstrap.min.css',
+        '/font-awesome/css/font-awesome.css',
+        '/plugins/iCheck/custom.css',
+        '/animate.css',
+        '/style.css',
+        '/login.css'
+    ], './public/css/login.min.css');
+
+    mix.styles([
+        '/bootstrap.min.css',
+        '/font-awesome/css/font-awesome.css',
+        '/angular/toaster/toaster.min.css',
+        '/select/css/select2.min.css',
+        '/plugins/iCheck/custom.css',
+        '/animate.css',
+        '/style.css'
+
+    ], './public/css/register.min.css');
 });

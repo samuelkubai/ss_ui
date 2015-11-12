@@ -7,18 +7,12 @@
     <title>Create Account</title>
     <link  rel="icon" href="{{ asset('ss/icons/main.png') }}" type="image/icon"/>
     <link  rel="shortcut icon" href="{{ asset('ss/icons/main.png') }}" type="image/icon"/>
-    <link href="{{ asset('ss/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('ss/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
-    <link href="{{ asset('ss/select/css/select2.min.css') }}" rel="stylesheet" />
-
-    <link href="{{ asset('ss/css/animate.css') }}" rel="stylesheet">
-    <link href="{{ asset('ss/css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('ss/angular/vendor/toaster-master/toaster.min.css') }}" rel="stylesheet">
-
+    <link href="{{ asset('css/register.min.css') }}" rel="stylesheet">
+    <!--Compiled scripts -->
 
 </head>
 
-<body class="gray-bg"   ng-controller="RegistrationController">
+<body class="gray-bg"   ng-controller="RegistrationController" ng-cloak>
 <toaster-container toaster-options="{'close-button': true, 'progress-bar': true}"></toaster-container>
 
 <div class="middle-box text-center loginscreen  animated fadeInDown">
@@ -335,10 +329,7 @@
         <p class="m-t"> <small>The skoolspace app © 2015</small> </p>
     </div>
 </div>
-
-<!--Compiled scripts -->
-<script src="{{ asset('/js/registration.js') }}"></script>
-
+<script src="{{ asset('/js/registration.min.js') }}"></script>
 
 <script>
     angular.module("registration").constant("CSRF_TOKEN", '{{ csrf_token() }}');

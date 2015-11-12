@@ -13,8 +13,8 @@
     <div class="hr-line-dashed notice-group-filter"></div>
     <h5 class="notice-group-filter">Filter by:</h5>
     <div class="form-group">
-        <select  ng-model="search.group.username">
-            <option value="">All Groups Combined.</option>
+        <select  ng-model="search.group.username" class="form-control">
+            <option value="">All Groups</option>
             @foreach(\Auth::user()->joinedGroups as $group)
                 <option value="{{ $group->username }}">
                     {{ $group->name }}

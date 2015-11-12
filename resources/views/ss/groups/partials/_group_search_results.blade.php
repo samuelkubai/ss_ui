@@ -1,4 +1,4 @@
-<span dir-paginate="group in allGroups | filter:search | itemsPerPage: pageSize">
+<span ng-show="filteredGroups.length > 0 && !loading" dir-paginate="group in filteredGroups = (allGroups | filter:search) | itemsPerPage: pageSize">
     <div class="hr-line-dashed"></div>
     <div class="search-result">
         <h3 class="group-search-title"><a href="@{{ group.group.url }}">@{{ group.group.name }}</a></h3>
@@ -30,7 +30,13 @@
         </ul>
     </div>
 </span>
-<div class="hr-line-dashed"></div>
+<div class="hr-line-dashed" ></div>
+<span ng-show="loading">
+    @include('partials._circular_loader')
+</span>
+<span ng-show="filteredGroups.length == 0 && !loading">
+    <h2 class="text-center">No Groups Found</h2>
+</span>
 <dir-pagination-controls boundary-links="true"
                          template-url="/ss/angular/vendor/pagination/longPagination.tpl.html"></dir-pagination-controls>
 

@@ -102,9 +102,11 @@ trait ResetsPasswords
 
         switch ($response) {
             case Password::PASSWORD_RESET:
+                Toastr::success('Your password has been successfully reset.');
                 return redirect($this->redirectPath())->with('status', trans($response));
 
             default:
+                Toastr::error('There was a problem resetting your password.');
                 return redirect()->back()
                             ->withInput($request->only('email'))
                             ->withErrors(['email' => trans($response)]);

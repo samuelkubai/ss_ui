@@ -245,7 +245,7 @@ trait StoreFile {
             if((strtolower($file->getClientOriginalExtension()) == strtolower($type)))
                 return true;
         }
-        Toastr::error('The file '.$file->getClientOriginalName()." has an extension that is not allowed.");
+        Toastr::error('The file '.$file->getClientOriginalName()." is a file type we do not support.");
         return false;
 
     }

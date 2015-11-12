@@ -1188,11 +1188,15 @@ ssModule.controller('GroupWidgetController', ['$scope','groupService', function(
     $scope.allGroups = [];
     $scope.currentPage = 1;
     $scope.search = {'group': {'joined': true}};
+    $scope.loading = true;
 
     //Controller functions
     $scope.groupInit = function() {
+        $scope.loading = true;
+
         groupService.getAllGroups().success(function(data) {
             $scope.allGroups = data.data;
+            $scope.loading = false;
         });
     };
 
@@ -1208,10 +1212,14 @@ ssModule.controller('GroupController', ['$scope','groupService', function($scope
     $scope.allGroups = [];
     $scope.currentPage = 1;
     $scope.search = {'group': {}};
+    $scope.loading = true;
 
     //Controller functions
     $scope.groupInit = function() {
+        $scope.loading = true;
         groupService.getAllGroups().success(function(data) {
+
+            $scope.loading = false;
             $scope.allGroups = data.data;
         });
     };
@@ -1364,7 +1372,7 @@ ssModule.controller('SingleGroupFilesController', ['$scope','fileService', 'toas
         $scope.moreIndex = null;
         $scope.topicIndex = null;
         $scope.addingIndex = null;
-        $scope.fileNameLength = 20;
+        $scope.fileNameLength = 18;
         $scope.sharingIndex = null;
 
         $scope.fileToBeDeleted = {};

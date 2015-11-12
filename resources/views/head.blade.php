@@ -5,8 +5,8 @@
     <title> | {{ $title}}</title>
     <link  rel="icon" href="{{ asset('ss/icons/main.png') }}" type="image/icon"/>
     <link  rel="shortcut icon" href="{{ asset('ss/icons/main.png') }}" type="image/icon"/>
-    <link href="{{ asset('css/all.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/all.min.css') }}" rel="stylesheet">
     <!-- Angular -->
-    <script src="{{ asset('/js/angular.js') }}"></script>
+    <script src="{{ asset('/js/angular.min.js') }}"></script>
     @yield('styles')
 </head>

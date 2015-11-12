@@ -1,7 +1,6 @@
 
-
 <!-- Mainly scripts -->
-<script src="{{ asset('/js/vendor.js') }}"></script>
+    <script src="{{ asset('/js/vendor.min.js') }}"></script>
 
 
 @if(\Auth::user()->isNew())
@@ -13,6 +12,6 @@
 {!! Toastr::render() !!}
 
 
-<script src="{{ asset('/js/my.js') }}"></script>
+<script src="{{ asset('/js/my.min.js') }}"></script>
 
 @yield('script')

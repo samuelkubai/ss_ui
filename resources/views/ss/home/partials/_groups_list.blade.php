@@ -4,7 +4,7 @@
             <div class="ibox-title" data-toggle="tooltip"
                  data-placement="bottom"
                  title="Quick access to all groups.">
-                <h5>All Groups</h5>
+                <h5>Groups</h5>
 
                 <div class="ibox-tools">
                     <div class="home-search-switch checkbox">
@@ -14,7 +14,6 @@
                             <input type="checkbox" ng-model="search.group.joined"
                                    ng-true-value="true" ng-false-value="">
                         </label>
-
                     </div>
                 </div>
             </div>
@@ -31,7 +30,7 @@
                         </span>
                 </div>
 
-                <ul class="home-search-list">
+                <ul class="home-search-list" ng-hide="loading">
                     <span dir-paginate="group in filteredGroups = (allGroups | filter:search | itemsPerPage: pageSize)">
                         <li>
                             <a href="@{{ group.group.url }}">
@@ -69,7 +68,9 @@
                     </span>
 
                 </ul>
-
+                <div ng-show="loading">
+                    <h3 class="text-center">Fetching groups <i class="fa fa-spinner fa-spin"></i></h3>
+                </div>
             </div>
         </form>
     </div>

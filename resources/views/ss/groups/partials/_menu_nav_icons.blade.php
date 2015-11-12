@@ -1,4 +1,4 @@
-<li class="" data-toggle="tooltip" data-placement="left" title="Group Activities">
+<li class="" data-toggle="tooltip" data-placement="right" title="Group Activities">
     <a href="{{ url('group/'.$group->username) }}"
        class="btn btn-lg btn-rounded
                 @if($title == $group->name)
@@ -11,7 +11,7 @@
     </a>
 </li>
 @if($group->isAMember(\Auth::user()))
-    <li class="" data-toggle="tooltip" data-placement="left" title="Group Files">
+    <li class="" data-toggle="tooltip" data-placement="right" title="Group Files">
         <a href="{{ url('group/'.$group->username.'/files') }}"
            class="btn btn-lg btn-rounded
             @if($title == $group->name . "'s files")
@@ -24,7 +24,7 @@
             <i class="fa fa-folder"></i>
         </a>
     </li>
-    <li class="" data-toggle="tooltip" data-placement="left" title="Group Members">
+    <li class="" data-toggle="tooltip" data-placement="right" title="Group Members">
         <a href="{{ url('group/'.$group->username.'/members') }}"
            class="btn btn-lg btn-rounded
             @if($title == 'Group  Members' || $title == $group->name. "'s Members")
@@ -37,7 +37,7 @@
         </a>
     </li>
     @if($group->isAdministrator(\Auth::user()))
-    <li class="" data-toggle="tooltip" data-placement="left" title="Edit group">
+    <li class="" data-toggle="tooltip" data-placement="right" title="Edit group">
         <a href="{{ url('group/'.$group->username.'/update') }}"
            class="btn btn-lg btn-rounded
             @if($title == $group->name. ' Update')

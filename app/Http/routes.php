@@ -144,7 +144,7 @@ Route::group(['middleware' => 'auth'], function () {
     /* 2.User Profile */
     get('/profile', 'UserController@edit');
     post('/profile/update', 'UserController@update');
-    post('/profile/deactivate', 'UserController@deactivate');
+    //get('/profile/deactivate', 'UserController@deactivate');
 
     /* 2. Logout Routes */
     get('logout', 'Auth\AuthController@getLogout');

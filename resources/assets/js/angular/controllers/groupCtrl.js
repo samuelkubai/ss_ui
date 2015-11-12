@@ -7,10 +7,14 @@ ssModule.controller('GroupController', ['$scope','groupService', function($scope
     $scope.allGroups = [];
     $scope.currentPage = 1;
     $scope.search = {'group': {}};
+    $scope.loading = true;
 
     //Controller functions
     $scope.groupInit = function() {
+        $scope.loading = true;
         groupService.getAllGroups().success(function(data) {
+
+            $scope.loading = false;
             $scope.allGroups = data.data;
         });
     };

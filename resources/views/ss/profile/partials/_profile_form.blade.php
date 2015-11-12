@@ -174,7 +174,8 @@
 
     </div>
 </div>
-@include('partials._deactivate_profile_modal')
+<!--
+include('partials._deactivate_profile_modal')
 <div class="col-md-12">
     <button type="button"
             data-toggle="modal"
@@ -183,3 +184,4 @@
         <i class="fa fa-exclamation-circle"></i> Deactivate skoolspace profile
     </button>
 </div>
+-->

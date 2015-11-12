@@ -7,13 +7,7 @@
     <title>Welcome to skoolspace</title>
     <link  rel="icon" href="{{ asset('ss/icons/main.png') }}" type="image/icon"/>
     <link  rel="shortcut icon" href="{{ asset('ss/icons/main.png') }}" type="image/icon"/>
-    <link href="{{ asset('ss/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('ss/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
-    <link href="{{ asset('ss/css/plugins/iCheck/custom.css') }}" rel="stylesheet">
-
-    <link href="{{ asset('ss/css/animate.css') }}" rel="stylesheet">
-    <link href="{{ asset('ss/css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('ss/css/login.css') }}" rel="stylesheet">
+    <link href="{{ asset('js/login.min.css') }}" rel="stylesheet">
 
 </head>
 
@@ -30,7 +24,7 @@
         <p>
             Where we help you get and share files and notifications to your fellow students easily.
         </p>
-        <p>Login in. To see it in action.</p>
+        <p><a href="{{ url('/register') }}">Create an account,</a> To see it in action.</p>
         @if (count($errors) > 0)
                 @foreach ($errors->all() as $error)
                     <p class="alert alert-danger">{{ $error }}</p>
@@ -48,22 +42,19 @@
             <div class="form-group">
                 <div class="checkbox i-checks"><label> <input type="checkbox" name="remember"><i></i> Remember Me </label></div>
             </div>
-            <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+            <button type="submit"
+                    class="btn btn-primary block full-width m-b">Login</button>
 
             <a href="{{ url('password/email') }}"><small>Forgot password?</small></a>
             <p class="text-muted text-center"><small>Do not have an account?</small></p>
-            <a class="btn btn-sm btn-white btn-block" href="{{ url('/register') }}">Create an account</a>
+            <a class="btn btn-sm btn-info btn-block" href="{{ url('/register') }}">Create an account</a>
         </form>
         <p class="m-t"> <small>The skoolspace app © 2015</small> </p>
     </div>
 </div>
 
 <!-- Mainly scripts -->
-<script src="{{ asset('ss/js/jquery-2.1.1.js') }}"></script>
-<script src="{{ asset('ss/js/bootstrap.min.js') }}"></script>
-
-<!-- iCheck -->
-<script src="{{ asset('ss/js/plugins/iCheck/icheck.min.js') }}"></script>
+<script src="{{ asset('js/login.min.js') }}"></script>
 <script>
     $(document).ready(function(){
         $('.i-checks').iCheck({

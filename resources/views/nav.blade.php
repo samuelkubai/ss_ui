@@ -51,8 +51,24 @@
                 </a>
             </li>
 
-            <li class="dropdown">
-                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="tabs_panels.html#" aria-expanded="false">
+            <li>
+                <a class="mobile-show
+                @if($title == 'My Profile')
+                        nav-active
+                 @endif
+                        nav-icon" aria-expanded="false" role="button" href="{{ url("/profile ") }}">
+                    <i class="fa fa-cogs"></i> Profile
+                </a>
+            </li>
+
+            <li>
+                <a class=" mobile-show nav-icon" aria-expanded="false" role="button" href="{{ url("/logout ") }}">
+                    <i class="fa fa-sign-out"></i> Logout
+                </a>
+            </li>
+
+            <li class="dropdown mobile-hide">
+                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" aria-expanded="false">
                     <i class="fa fa-ellipsis-v fa-lg"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
