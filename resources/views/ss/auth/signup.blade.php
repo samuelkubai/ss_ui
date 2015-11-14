@@ -35,7 +35,7 @@
 
             <p class="text-muted text-center"><small>Do not have an account?</small></p>
             <a class="btn btn-sm btn-white btn-block" href="{{ url('/login') }}">Login</a>
-        <p class="m-t"> <small>The skoolspace app © 2015</small> </p>
+        <p class="m-t"> <small>The skoolspace app &copy; 2015</small> </p>
     </div>
     <div ng-show="step == 2" class="fx-bounce-right fx-speed-20">
         <div>
@@ -81,7 +81,7 @@
                     ng-click="prevStep()"
                     class="btn btn-sm btn-white btn-block">Back</button>
         </form>
-        <p class="m-t"> <small>The skoolspace app © 2015</small> </p>
+        <p class="m-t"> <small>The skoolspace app &copy; 2015</small> </p>
     </div>
     <div ng-show="step == 3" class="fx-bounce-right fx-speed-20">
         <div>
@@ -164,7 +164,7 @@
                         required>
                     <option value="">Please select your intake...</option>
                     <option value="1st">January Intake</option>
-                    <option value="2nd">March Intake</option>
+                    <option value="2nd">May Intake</option>
                     <option value="3rd">September Intake</option>
                 </select>
             </div>
@@ -177,7 +177,7 @@
                     ng-click="prevStep()"
                     class="btn btn-sm btn-white btn-block">Back</button>
         </form>
-        <p class="m-t"> <small>The skoolspace app © 2015</small> </p>
+        <p class="m-t"> <small>The skoolspace app &copy; 2015</small> </p>
     </div>
     <div ng-show="step == 4" class="fx-bounce-right fx-speed-20">
         <div>
@@ -225,7 +225,7 @@
                     ng-click="prevStep()"
                     class="btn btn-sm btn-white btn-block">Back</button>
         </form>
-        <p class="m-t"> <small>The skoolspace app © 2015</small> </p>
+        <p class="m-t"> <small>The skoolspace app &copy; 2015</small> </p>
     </div>
     <div ng-show="step == 5" class="fx-bounce-right fx-speed-20">
         <div>
@@ -260,7 +260,7 @@
                     ng-click="prevStep()"
                     class="btn btn-sm btn-white btn-block">Back</button>
         </form>
-        <p class="m-t"> <small>The skoolspace app © 2015</small> </p>
+        <p class="m-t"> <small>The skoolspace app &copy; 2015</small> </p>
     </div>
     <div ng-show="step == 6" class="fx-bounce-right fx-speed-20">
         <div>
@@ -279,7 +279,7 @@
             @include('partials._circular_loader')
         </p>
 
-        <p class="m-t"> <small>The skoolspace app © 2015</small> </p>
+        <p class="m-t"> <small>The skoolspace app &copy; 2015</small> </p>
     </div>
     <div ng-show="step == 8" class="fx-rotate-counterclock fx-speed-20">
         <div>
@@ -289,20 +289,21 @@
         </div>
         <h3>All done!</h3>
         <h4>A few pointers though...</h4>
-        <p>
-            Remember to verify your email address within 7 days.
-        </p>
-        <p>
-            <b>We have successfully joined you to your class group.</b>
-        </p>
+        <ol style="padding: 0; ">
+            <li>
+                Remember to verify your email address within 7 days.
+            </li>
+            <li>
+                <b>We have successfully joined you to your class group.</b>
+            </li>
+        </ol>
+
         <br>
         <p>
         <h2>Welcome to skoolspace</h2>
         <a href="{{ url('/') }}"
                 class="btn btn-primary block full-width m-b"><i class="fa fa-sign-in"></i> Go In</a>
-        </p>
-
-        <p class="m-t"> <small>The skoolspace app © 2015</small> </p>
+        <p class="m-t"> <small>The skoolspace app &copy; 2015</small> </p>
     </div>
     <div ng-show="step == 7" class="fx-bounce-right fx-speed-20">
         <div>
@@ -326,7 +327,7 @@
                 class="btn btn-sm btn-info btn-block">Back</button>
         </p>
 
-        <p class="m-t"> <small>The skoolspace app © 2015</small> </p>
+        <p class="m-t"> <small>The skoolspace app &copy; 2015</small> </p>
     </div>
 </div>
 <script src="{{ asset('/js/registration.min.js') }}"></script>

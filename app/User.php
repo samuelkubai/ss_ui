@@ -143,7 +143,7 @@ class User extends Model implements AuthenticatableContract,
         if($profile != null)
             return $profile->path;
 
-        return '/ss/icons/user_avatar.png';
+        return '/icons/user_avatar.png';
     }
 
     /**

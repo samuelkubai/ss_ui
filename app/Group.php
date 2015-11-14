@@ -52,7 +52,7 @@ class Group extends Model
         if($profile != null)
             return $profile->path;
 
-        return '/ss/icons/group_avatar.png';
+        return $this->randomProfilePicture();
     }
 
     /**
@@ -229,6 +229,16 @@ class Group extends Model
     public static function scopeSearchFor($query, $field, $value)
     {
         return $query->where($field, 'LIKE', "%$value%");
+    }
+
+    /**
+     * Generating random profile picture.
+     *
+     * @return string
+     */
+    public function randomProfilePicture()
+    {
+        return '/icons/group_avatar.jpg';
     }
 }
 

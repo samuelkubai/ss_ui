@@ -67,7 +67,7 @@
             <h4 class="text-center" ng-show="filteredFiles.length == 0 && loading == false">...feel free to upload more files.</h4>
         </div>
         <div class="col-lg-12" ng-show="loading == true">
-                @include('partials._colorful_loader')
+                @include('partials._backup_loader')
         </div>
     </div>
 
