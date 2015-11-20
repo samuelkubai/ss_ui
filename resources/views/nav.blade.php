@@ -131,7 +131,12 @@
                 </a>
             </li>
 
-            <li class="dropdown mobile-hide ">
+            <li>
+                <a class="nav-icon" aria-expanded="false" role="button" href="{{ url("/logout") }}">
+                    <i class="fa fa-sign-out"></i>
+                </a>
+            </li>
+           <!-- <li class="dropdown mobile-hide ">
                 <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" aria-expanded="false">
                     <i class="fa fa-ellipsis-v fa-lg"></i>
                 </a>
@@ -145,7 +150,7 @@
                         </a>
                     </li>
                 </ul>
-            </li>
+            </li> -->
         </ul>
     </div>
 </nav>

@@ -22,8 +22,8 @@ class MigrateUsers extends Migration
             {
                 DB::table('users')->insert([
                     'id' => $user->id,
-                    'first_name' => $user->first_name,
-                    'last_name' => $user->last_name,
+                    'first_name' => $user->firstName,
+                    'last_name' => $user->lastName,
                     'code' => $user->code,
                     'active' => $user->active,
                     'email' => $user->email,

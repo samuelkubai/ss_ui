@@ -38,5 +38,5 @@
     <h2 class="text-center">No Groups Found</h2>
 </span>
 <dir-pagination-controls boundary-links="true"
-                         template-url="/ss/angular/vendor/pagination/longPagination.tpl.html"></dir-pagination-controls>
+                         template-url="/templates/longPagination.tpl.html"></dir-pagination-controls>
 
