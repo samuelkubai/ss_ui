@@ -6,13 +6,8 @@
 
     <title>{{ $title }}</title>
 
-    <link href="{{ asset('ss/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('ss/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
-    <link href="{{ asset('ss/css/plugins/iCheck/custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('js/login.min.css') }}" rel="stylesheet">
 
-    <link href="{{ asset('ss/css/animate.css') }}" rel="stylesheet">
-    <link href="{{ asset('ss/css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('ss/css/login.css') }}" rel="stylesheet">
 
 </head>
 
@@ -35,20 +30,16 @@
 
         <p>
 
-        <a href="{{ url('notActivated/'.$user->id) }}"
-                class="btn btn-sm btn-info btn-block">Resend the confirmation email.</a>
+            <a href="{{ url('notActivated/'.$user->id) }}"
+               class="btn btn-sm btn-info btn-block">Resend the confirmation email.</a>
         </p>
 
-        <p class="m-t"> <small>The skoolspace app © 2015</small> </p>
+        <p class="m-t"> <small>The skoolspace app &copy; 2015</small> </p>
     </div>
 </div>
 
-<!-- Mainly scripts -->
-<script src="{{ asset('ss/js/jquery-2.1.1.js') }}"></script>
-<script src="{{ asset('ss/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/login.min.js') }}"></script>
 
-<!-- iCheck -->
-<script src="{{ asset('ss/js/plugins/iCheck/icheck.min.js') }}"></script>
 <script>
     $(document).ready(function(){
         $('.i-checks').iCheck({

@@ -30,7 +30,7 @@ class File extends Model Implements PostableInterface
      */
     public function picture()
     {
-        return 'ss/icons/excel1.png';
+        return 'ss/icons/excel.png';
     }
     /**
      * Links to the object's activity.
@@ -220,6 +220,20 @@ class File extends Model Implements PostableInterface
     }
 
     /**
+     * Checks if file is a text file.
+     *
+     * @return bool
+     */
+    public function isText()
+    {
+        if($this->type == 'txt')
+        {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * List of allowed types.
      *
      * @var array
@@ -228,4 +242,6 @@ class File extends Model Implements PostableInterface
         'txt', 'pdf', 'docx', 'jpg', 'png', 'jpeg', 'jpe', 'ppt','pptx','pptm','pot','potx', 'doc',
         'zip', 'tar', 'rar', '7z', 'iso','xls', 'xlsm', 'xlsx', 'xlsb', 'xlt',
     ];
+
+
 }

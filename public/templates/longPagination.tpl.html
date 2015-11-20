@@ -1,0 +1,25 @@
+<div class="text-center">
+    <div class="btn-group" ng-if="1 < pages.length || !autoHide">
+        <button class="btn btn-white"
+                type="button"
+                ng-if="directionLinks"
+                ng-click="setCurrent(pagination.current - 1)"
+                ng-class="{ disabled : pagination.current == 1 }">
+            <i class="fa fa-chevron-left"></i>
+        </button>
+        <button class="btn btn-white"
+                ng-repeat="pageNumber in pages track by tracker(pageNumber, $index)"
+                ng-class="{ active : pagination.current == pageNumber, disabled : pageNumber == '...' }"
+                ng-click="setCurrent(pageNumber)">
+            {{ pageNumber }}
+        </button>
+
+        <button class="btn btn-white"
+                type="button"
+                ng-if="directionLinks"
+                ng-click="setCurrent(pagination.current + 1)"
+                ng-class="{ disabled : pagination.current == pagination.last }">
+            <i class="fa fa-chevron-right"></i>
+        </button>
+    </div>
+</div>

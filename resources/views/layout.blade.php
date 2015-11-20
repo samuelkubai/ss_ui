@@ -15,10 +15,13 @@
         </div>
         <div class="footer">
             <div class="pull-right">
-                Share, notify, be informed, This is <b>skoolspace</b>.
+                <strong>Copyright</strong> skoolspace &copy; 2015
             </div>
             <div>
-                <strong>Copyright</strong> skoolspace &copy; 2015
+                <a href="{{ 'https://www.facebook.com/skoolspace' }}"><i class="fa fa-facebook-square fa-lg"></i></a>
+                <a href="{{ 'https://twitter.com/skoolspace1' }}"><i class="fa fa-twitter-square fa-lg"></i></a>
+                <a href="{{ 'https://www.linkedin.com/company/skoolspace?trk=top_nav_home' }}"><i class="fa fa-linkedin-square fa-lg"></i></a>
+                <a href="{{ 'https://plus.google.com/communities/112482468990525759162' }}"><i class="fa fa-google-plus-square fa-lg"></i></a>
             </div>
         </div>
     </div>

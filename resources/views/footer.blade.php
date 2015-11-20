@@ -4,7 +4,7 @@
 
 
 @if(\Auth::user()->isNew())
-    <script src="{{ asset('/ss/js/scripts/tour.js') }}"></script>
+    <script src="{{ asset('/js/tour.js') }}"></script>
 @endif
 
 @yield('jquery_scripts')

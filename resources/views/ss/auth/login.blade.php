@@ -47,9 +47,11 @@
 
             <a href="{{ url('password/email') }}"><small>Forgot password?</small></a>
             <p class="text-muted text-center"><small>Do not have an account?</small></p>
-            <a class="btn btn-sm btn-info btn-block" href="{{ url('/register') }}">Create an account</a>
+            <a class="btn btn-sm btn-info btn-block"
+               href="{{ url('/register') }}"
+                style="background-color: #1dc4a2!important;">Create an account</a>
         </form>
-        <p class="m-t"> <small>The skoolspace app © 2015</small> </p>
+        <p class="m-t"> <small>The skoolspace app &copy; 2015</small> </p>
     </div>
 </div>
 

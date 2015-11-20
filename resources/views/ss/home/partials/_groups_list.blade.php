@@ -58,7 +58,7 @@
                     </span>
 
                     <dir-pagination-controls boundary-links="true"
-                                             template-url="/ss/angular/vendor/pagination/dirPagination.tpl.html"></dir-pagination-controls>
+                                             template-url="/templates/dirPagination.tpl.html"></dir-pagination-controls>
                     <span ng-show="filteredGroups.length == 0">
                         <div class="hr-line-dashed home-search-divider"></div>
                         <li>

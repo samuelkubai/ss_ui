@@ -15,5 +15,5 @@
 @endsection
 
 @section('jquery_scripts')
-	<script src="{{ asset('ss/js/scripts/noticeboard.js') }}"></script>
+	<script src="{{ asset('/js/noticeboard.js') }}"></script>
 @endsection

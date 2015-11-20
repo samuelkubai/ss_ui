@@ -206,7 +206,7 @@
                        required>
             </div>
             <div class="form-group">
-                <label for="password_confirmation" class="control-label">Kindly, type it again to be secure.</label>
+                <label for="password_confirmation" class="control-label">Retype you password again to be sure.</label>
                 <input type="password"
                        class="form-control"
                        name="password_confirmation"

@@ -11,7 +11,7 @@
         <div class="activity-file-block">
             <a href="{{ url('#') }}">
                 <img class="activity-file-pic col-md-4"
-                     src="{{ asset('/ss/icons/excel1.png') }}"
+                     src="{{ asset('excel.png') }}"
                      alt={{ 'My' }}"'s profile picture">
             </a>
             <div class="activity-file-description-block col-md-8">

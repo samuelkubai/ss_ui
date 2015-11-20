@@ -12,5 +12,5 @@
 @endsection
 
 @section('jquery_scripts')
-    <script src="{{ asset('/ss/js/scripts/backpack.js') }}"></script>
+    <script src="{{ asset('/js/backpack.js') }}"></script>
 @endsection

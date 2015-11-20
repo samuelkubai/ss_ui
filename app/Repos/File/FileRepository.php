@@ -183,7 +183,7 @@ class FileRepository
     public function getFilePicture(File $file)
     {
         if($file->isDoc())
-            return '/icons/word1.png';
+            return '/icons/word.png';
         elseif($file->isCompressedFile())
             return '/icons/compressed.png';
         elseif($file->isExcel())
@@ -191,9 +191,11 @@ class FileRepository
         elseif($file->isPdf())
             return '/icons/pdf.png';
         elseif($file->isPpt())
-            return '/icons/powerpoint1.png';
-        else
+            return '/icons/powerpoint.png';
+        elseif($file->isText())
             return '/icons/text.png';
+        else
+            return false;
     }
 
     /**

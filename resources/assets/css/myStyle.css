@@ -272,20 +272,22 @@
 /* General Styles */
 a.back-to-top {
     display: none;
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     text-indent: -9999px;
     position: fixed;
     z-index: 999;
     right: 20px;
-    bottom: 70px;
-    background: #27AE61 url("../icons/up-arrow.png") no-repeat center 43%;
+    bottom: 52px;
+    background:#1ab394 url("../icons/up-arrow.png") no-repeat center 43%;
     -webkit-border-radius: 30px;
     -moz-border-radius: 30px;
     border-radius: 30px;
+    opacity: 0.5;
 }
 a:hover.back-to-top {
-    background-color: #000;
+    background-color: #1ab394;
+    opacity: 1;
 }
 .navbar{
     width: 100%;
@@ -344,13 +346,17 @@ a:hover.back-to-top {
 .mobile-show {
     display: none!important;
 }
+/*Tablet media query*/
+@media (min-width: 769px) and (max-width: 989px){
 
-@media only screen and (max-width: 989px){
     .mobile-show{
-        display: block!important;
+    /*display: block!important;*/
     }
 
     .mobile-hide{
+        /*display: none!important;*/
+    }
+    .mobile-nav{
         display: none!important;
     }
     .activity-group-pic{
@@ -403,6 +409,56 @@ a:hover.back-to-top {
     .discussion-group-profile{
         display: none;
     }
+}
+/*Mobile media query*/
+@media  only screen and (max-width: 768px){
+    .user-profile{
+        display: none;
+    }
+
+    .desktop-nav {
+        display: none!important;
+    }
+    .mobile-nav {
+        display: block;
+    }
+    .brand {
+        height: auto;
+    }
+    .group-list-container{
+        display: none;
+    }
+    .navbar-brand {
+        display: block;
+        height:100%;
+    }
+    .center-nav {
+        width: 100%;
+    }
+    .mobile-hide {
+        float: right;
+    }
+    .mobile-nav ul {
+        width: 100%;
+    }
+    .mobile-nav li {
+        width: 14%;
+    }
+    .group-navigation{
+        display: none;
+    }
+    .mobile-group-navigation{
+        padding-left: 10px!important;
+        display: inline;
+    }
+    .mobile-group-navigation li{
+        list-style-type: inline;
+        display: inline;
+        padding-bottom: 5px!important;
+        padding-right: 1px!important;
+        font-size: larger;
+    }
+
 }
 
 /** Pre-defined styles for Inspina **/

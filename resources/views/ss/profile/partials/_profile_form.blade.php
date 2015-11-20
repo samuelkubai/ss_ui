@@ -29,11 +29,13 @@
                 </div>
                 <div class="row form-group">
                     <div class="col-md-6">
+                        <label for="firstName" class="control-label">First Name</label>
                         <input name="firstName" type="text" class="form-control" placeholder="First Name"
                                value="{{ $user->first_name }}"
                                required="required">
                     </div>
                     <div class="col-md-6">
+                        <label for="lastName" class="control-label">Last Name</label>
                         <input name="lastName" type="text" class="form-control" placeholder="Last Name"
                                value="{{ $user->last_name }}"
                                required="required">
@@ -139,7 +141,7 @@
                         <option value="2nd"
                                 @if($user->intake == '2')
                                 selected="selected"
-                                @endif>March Intake
+                                @endif>May Intake
                         </option>
                         <option value="3rd"
                                 @if($user->intake == '3')
@@ -151,6 +153,7 @@
 
                 <div class="row form-group">
                     <div class="col-md-12">
+                        <label for="password" class="control-label">Would you like to change your password?</label>
                         <input name="password" type="password" class="form-control" placeholder="New Password">
                     </div>
                 </div>

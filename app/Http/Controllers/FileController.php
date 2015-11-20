@@ -43,6 +43,7 @@ class FileController extends Controller
      */
     public function backpack()
     {
+
         $title = 'BackPack';
         $files = $this->fileRepository
             ->getBackpackFilesForUser(Auth::user());

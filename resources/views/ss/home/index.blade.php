@@ -32,5 +32,5 @@
 @stop
 
 @section('jquery_scripts')
-    <script src="{{ asset('ss/js/scripts/home.js') }}"></script>
+    <script src="{{ asset('/js/home.js') }}"></script>
 @stop
