@@ -66,15 +66,15 @@
                     <i class="fa fa-sign-out"></i> Logout
                 </a>
             </li>
-
             <li class="dropdown mobile-hide">
                 <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" aria-expanded="false">
-                    <i class="fa fa-ellipsis-v fa-lg"></i>
+                    <img alt="image" class="img-circle nav-prof-pic" src="{{ asset(\Auth::user()->profilePictureSource()) }}">
+                    <i class="fa fa-angle-down fa-lg"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
                     <li>
                         <a class="nav-icon" aria-expanded="false" role="button" href="{{ url("/profile ") }}">
-                            <i class="fa fa-cogs"></i> Profile
+                            <i class="fa fa-user"></i> Profile
                         </a>
                         <a class="nav-icon" aria-expanded="false" role="button" href="{{ url("/logout ") }}">
                             <i class="fa fa-sign-out"></i> Logout
@@ -88,7 +88,6 @@
 
 <nav class="mobile-nav navbar navbar-static-top">
     <div class=" centre-nav " id="navbar">
-            <a href="{{ url('/') }}" class="navbar-brand" id="navbar-brand">SS+</a>
         <ul class="nav navbar-top-links ">
             <li>
                 <a class="
@@ -131,9 +130,14 @@
                 </a>
             </li>
 
-            <li>
+            <li class="pull-right">
                 <a class="nav-icon" aria-expanded="false" role="button" href="{{ url("/logout") }}">
-                    <i class="fa fa-sign-out"></i>
+                    <i class="fa fa-sign-out fa-lg"></i>
+                </a>
+            </li>
+            <li class="pull-right">
+                <a class="nav-icon" aria-expanded="false" role="button" href="{{ url("/profile ") }}">
+                    <i class="fa fa-user fa-lg"></i>
                 </a>
             </li>
            <!-- <li class="dropdown mobile-hide ">

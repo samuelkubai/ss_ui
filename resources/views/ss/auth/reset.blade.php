@@ -6,16 +6,10 @@
 
     <title>Forgot your password?</title>
 
-    <link  rel="icon" href="{{ asset('ss/icons/main.png') }}" type="image/icon"/>
-    <link  rel="shortcut icon" href="{{ asset('ss/icons/main.png') }}" type="image/icon"/>
+    <link  rel="icon" href="{{ asset('icons/main.png') }}" type="image/icon"/>
+    <link  rel="shortcut icon" href="{{ asset('icons/main.png') }}" type="image/icon"/>
 
-    <link href="{{ asset('ss/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('ss/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
-    <link href="{{ asset('ss/css/plugins/iCheck/custom.css') }}" rel="stylesheet">
-
-    <link href="{{ asset('ss/css/animate.css') }}" rel="stylesheet">
-    <link href="{{ asset('ss/css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('ss/css/login.css') }}" rel="stylesheet">
+    <link href="{{ asset('js/login.min.css') }}" rel="stylesheet">
 
 </head>
 
@@ -72,16 +66,12 @@
             <p class="text-muted text-center"><small>Cancel password reset?</small></p>
             <a class="btn btn-sm btn-white btn-block" href="{{ url('/login') }}">Login</a>
         </form>
-        <p class="m-t"> <small>The skoolspace app © 2015</small> </p>
+        <p class="m-t"> <small>The skoolspace app ï¿½ 2015</small> </p>
     </div>
 </div>
 
-<!-- Mainly scripts -->
-<script src="{{ asset('ss/js/jquery-2.1.1.js') }}"></script>
-<script src="{{ asset('ss/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/login.min.js') }}"></script>
 
-<!-- iCheck -->
-<script src="{{ asset('ss/js/plugins/iCheck/icheck.min.js') }}"></script>
 <script>
     $(document).ready(function(){
         $('.i-checks').iCheck({

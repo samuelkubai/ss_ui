@@ -6,6 +6,9 @@
 
     <title>{{ $title }}</title>
 
+    <link  rel="icon" href="{{ asset('icons/main.png') }}" type="image/icon"/>
+    <link  rel="shortcut icon" href="{{ asset('icons/main.png') }}" type="image/icon"/>
+
     <link href="{{ asset('js/login.min.css') }}" rel="stylesheet">
 
 

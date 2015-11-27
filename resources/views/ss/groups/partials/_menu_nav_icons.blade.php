@@ -24,7 +24,7 @@
             <i class="fa fa-folder"></i>
         </a>
     </li>
-    <li class="" data-toggle="tooltip" data-placement="right" title="Group Members">
+    <li class="" data-toggle="tooltip" data-placement="right" title="{{ $group->members->count() }} Members">
         <a href="{{ url('group/'.$group->username.'/members') }}"
            class="btn btn-lg btn-rounded
             @if($title == 'Group  Members' || $title == $group->name. "'s Members")

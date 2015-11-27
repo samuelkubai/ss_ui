@@ -11,7 +11,6 @@
         <div class="wrapper wrapper-content" style="padding-right: 0px; padding-left: 0px; margin-right: 0px;">
              <!-- include('flash::message') -->
                 @yield('content')
-
         </div>
         <div class="footer">
             <div class="pull-right">

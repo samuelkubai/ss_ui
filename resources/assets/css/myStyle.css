@@ -463,10 +463,12 @@ a:hover.back-to-top {
 
 /** Pre-defined styles for Inspina **/
 .nav-prof-pic{
-    width: 25px;
-    height: 25px;
+    width: 31px;
+    height: 30px;
     padding-bottom: 0;
     padding-top: 0;
+    margin-top: -3px;
+    margin-bottom: -2px;
 }
 .navbar-top-links .navbar-right li a{
     padding-bottom: 0;

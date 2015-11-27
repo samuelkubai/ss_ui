@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Create Account</title>
-    <link  rel="icon" href="{{ asset('ss/icons/main.png') }}" type="image/icon"/>
-    <link  rel="shortcut icon" href="{{ asset('ss/icons/main.png') }}" type="image/icon"/>
+    <link  rel="icon" href="{{ asset('icons/main.png') }}" type="image/icon"/>
+    <link  rel="shortcut icon" href="{{ asset('icons/main.png') }}" type="image/icon"/>
     <link href="{{ asset('css/register.min.css') }}" rel="stylesheet">
     <!--Compiled scripts -->
 
